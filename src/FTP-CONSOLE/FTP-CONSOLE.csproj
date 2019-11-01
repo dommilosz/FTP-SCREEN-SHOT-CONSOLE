@@ -75,6 +75,10 @@
       <Project>{71094452-e2b4-47aa-ab05-411be1447a7c}</Project>
       <Name>CANVAS</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GUI\GUI.csproj">
+      <Project>{46ca3b42-db20-411e-9bea-b7d4245bc75c}</Project>
+      <Name>GUI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\Fody.6.0.0\build\Fody.targets" Condition="Exists('..\..\packages\Fody.6.0.0\build\Fody.targets')" />

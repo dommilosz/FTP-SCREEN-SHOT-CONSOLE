@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WikipediaNet;
+using GUI;
 
 namespace FTP_CONSOLE
 {
@@ -132,6 +133,7 @@ namespace FTP_CONSOLE
 
                 else Program.WriteTxt($"&9PASSWORD :: &b*********");
 
+                Program.WriteTxt("&bUSAGE : credentials setpass|setlogin|sethost|reset|test");
                 Program.WriteTxt("&e::CREDENTIALS::");
                 return "";
             }
@@ -250,6 +252,24 @@ namespace FTP_CONSOLE
                 }
                 Program.WriteTxt("&e::LISTING::");
 
+                return "";
+            }
+        }
+        public static class GUI
+        {
+            public static string Run(List<string> args)
+            {
+                if (args.Count < 2)
+                {
+                    Program.WriteTxt("&bUSAGE : gui open <file patch>");
+                    return "";
+                }
+                if (Program.GetArgs(args, 1, 1).ToLower() == "open")
+                {
+                    string patch = Program.GetArgs(args, 2, -1, "/");
+                    var img = FTPHandle.DownloadImage(patch);
+                    PREVIEW.Open().Show(img);
+                }
                 return "";
             }
         }

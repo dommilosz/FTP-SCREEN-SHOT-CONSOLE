@@ -76,27 +76,22 @@ namespace FTP_CONSOLE
                     list2.Add(item);
                     Program.WriteTxt("&eListing : " + patch2);
                     if (item.Type == FtpFileSystemObjectType.Directory)
-                        GetList(item.FullName,list2);
+                        GetList(item.FullName, list2);
 
                 }
                 return list2;
             }
             List<FtpListItem> list = new List<FtpListItem>();
-            return GetList(patch,list) ;
+            return GetList(patch, list);
         }
         public static Image DownloadImage(string patch)
         {
-            try
-            {
-                Image img;
-                MemoryStream stream = new MemoryStream();
-                ftp.Download(stream, patch);
-                img = Image.FromStream(stream);
-                ftp.Disconnect();
-                return img;
-            }
-            catch { }
-            return null;
+            Image img;
+            MemoryStream stream = new MemoryStream();
+            ftp.Download(stream, patch);
+            img = Image.FromStream(stream);
+            ftp.Disconnect();
+            return img;
         }
 
         public static void UploadFile(string localpatch, string dirname, string filename)

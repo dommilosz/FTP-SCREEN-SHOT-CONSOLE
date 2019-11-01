@@ -97,6 +97,7 @@ namespace FTP_CONSOLE
                         case "clcode": Commands.CLCODE.Run(argsl); break;
                         case "screenshot": Commands.SCREENSHOT.Run(argsl); break;
                         case "tree": Commands.TREE.Run(argsl); break;
+                        case "gui": Commands.GUI.Run(argsl); break;
                         default:throw new Exception("Unknown Command");
                     }
 

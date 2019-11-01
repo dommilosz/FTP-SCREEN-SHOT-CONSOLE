@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTP-CONSOLE", "src\FTP-CONS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CANVAS", "src\CANVAS\CANVAS.csproj", "{71094452-E2B4-47AA-AB05-411BE1447A7C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "src\GUI\GUI.csproj", "{46CA3B42-DB20-411E-9BEA-B7D4245BC75C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{71094452-E2B4-47AA-AB05-411BE1447A7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71094452-E2B4-47AA-AB05-411BE1447A7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71094452-E2B4-47AA-AB05-411BE1447A7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46CA3B42-DB20-411E-9BEA-B7D4245BC75C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46CA3B42-DB20-411E-9BEA-B7D4245BC75C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46CA3B42-DB20-411E-9BEA-B7D4245BC75C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46CA3B42-DB20-411E-9BEA-B7D4245BC75C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
