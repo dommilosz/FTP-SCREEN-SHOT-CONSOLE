@@ -40,10 +40,10 @@ namespace CANVAS
         {
             return new Canvas();
         }
-        
+
         private void Canvas_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape && !drawing&&!preview)
+            if (e.KeyCode == Keys.Escape && !drawing && !preview)
             {
                 this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
                 this.Close();
@@ -55,7 +55,7 @@ namespace CANVAS
                 this.Invalidate();
                 return;
             }
-            if (preview&&e.KeyCode == Keys.Enter)
+            if (preview && e.KeyCode == Keys.Enter)
             {
                 this.DialogResult = System.Windows.Forms.DialogResult.OK;
                 this.Close();
@@ -154,8 +154,8 @@ namespace CANVAS
                 Pen alphapen = new Pen(Color.FromArgb(128, Color.Black), 100);
                 e.Graphics.FillRectangle(alphapen.Brush, 0, 0, rmem.X, bounds.Height);
                 e.Graphics.FillRectangle(alphapen.Brush, rmem.X, 0, bounds.Width, rmem.Y);
-                e.Graphics.FillRectangle(alphapen.Brush, rmem.X+1 + rmem.Width, rmem.Y, bounds.Width, bounds.Height);
-                e.Graphics.FillRectangle(alphapen.Brush, rmem.X, rmem.Y+1 + rmem.Height, rmem.Width+1, bounds.Height);
+                e.Graphics.FillRectangle(alphapen.Brush, rmem.X + 1 + rmem.Width, rmem.Y, bounds.Width, bounds.Height);
+                e.Graphics.FillRectangle(alphapen.Brush, rmem.X, rmem.Y + 1 + rmem.Height, rmem.Width + 1, bounds.Height);
                 return;
             }
             if (!drawing)

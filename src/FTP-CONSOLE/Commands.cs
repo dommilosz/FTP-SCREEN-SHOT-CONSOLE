@@ -1,10 +1,10 @@
-﻿using System;
+﻿using GUI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WikipediaNet;
-using GUI;
 
 namespace FTP_CONSOLE
 {
@@ -165,8 +165,8 @@ namespace FTP_CONSOLE
             {
                 Program.WriteTxt($"&eTesting...");
                 FTPHandle.ftp.Connect();
-                if(FTPHandle.ftp.IsConnected)
-                FTPHandle.ftp.Disconnect();
+                if (FTPHandle.ftp.IsConnected)
+                    FTPHandle.ftp.Disconnect();
                 Program.WriteTxt($"&2Test Passed!");
                 return "";
             }
@@ -216,7 +216,7 @@ namespace FTP_CONSOLE
             {
                 string name = Program.GetArgs(args, 2, -1);
                 var canvas = CANVAS.Canvas.Open();
-                FTPHandle.FTPSend(canvas.ScreenS(),name);
+                FTPHandle.FTPSend(canvas.ScreenS(), name);
                 canvas.Dispose();
                 return "";
             }
@@ -224,8 +224,8 @@ namespace FTP_CONSOLE
             {
                 string name = Program.GetArgs(args, 2, -1);
                 var canvas = CANVAS.Canvas.Open();
-                if(canvas.ShowDialog()==System.Windows.Forms.DialogResult.OK)
-                FTPHandle.FTPSend(canvas.image, name);
+                if (canvas.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    FTPHandle.FTPSend(canvas.image, name);
                 canvas.Dispose();
                 return "";
             }
@@ -236,7 +236,7 @@ namespace FTP_CONSOLE
             {
                 Program.WriteTxt("&e::LISTING::");
                 var list = FTPHandle.GetItemsList();
-                
+
                 foreach (var item in list)
                 {
                     CLEAR.ClearOneLine();
@@ -244,7 +244,7 @@ namespace FTP_CONSOLE
                 foreach (var item in list)
                 {
                     string tmp = "";
-                    for (int i = 0; i < item.FullName.Split("/"[0]).Length-1; i++)
+                    for (int i = 0; i < item.FullName.Split("/"[0]).Length - 1; i++)
                     {
                         tmp += "---";
                     }

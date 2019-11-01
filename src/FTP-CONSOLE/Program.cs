@@ -8,7 +8,7 @@ namespace FTP_CONSOLE
 {
     class Program
     {
-        public static string GetArgs(List<string> args, int fromindex, int toindex = -2,string add = " ")
+        public static string GetArgs(List<string> args, int fromindex, int toindex = -2, string add = " ")
         {
             string rn = "";
             List<string> arg = args;
@@ -39,9 +39,10 @@ namespace FTP_CONSOLE
                             else { Console.ForegroundColor = DecodeCode(txt[i + 1]); txt = txt.Remove(i, 1); }
                         }
                         else { Console.ForegroundColor = DecodeCode(txt[i + 1]); txt = txt.Remove(i, 1); }
-                        
-                        
-                    }else if(txt[i]!=@"\"[0])Console.Write(txt[i]);
+
+
+                    }
+                    else if (txt[i] != @"\"[0]) Console.Write(txt[i]);
                 }
                 else if (txt[i] != @"\"[0]) Console.Write(txt[i]);
             }
@@ -98,7 +99,7 @@ namespace FTP_CONSOLE
                         case "screenshot": Commands.SCREENSHOT.Run(argsl); break;
                         case "tree": Commands.TREE.Run(argsl); break;
                         case "gui": Commands.GUI.Run(argsl); break;
-                        default:throw new Exception("Unknown Command");
+                        default: throw new Exception("Unknown Command");
                     }
 
                 }
