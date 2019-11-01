@@ -196,5 +196,62 @@ namespace FTP_CONSOLE
                 return "";
             }
         }
+        public static class SCREENSHOT
+        {
+            public static string Run(List<string> args)
+            {
+                if (Program.GetArgs(args, 1, 1).ToLower() == "full")
+                {
+                    Full(args);
+                }
+                if (Program.GetArgs(args, 1, 1).ToLower() == "selection")
+                {
+                    Selection(args);
+                }
+                return "";
+            }
+            public static string Full(List<string> args)
+            {
+                string name = Program.GetArgs(args, 2, -1);
+                var canvas = CANVAS.Canvas.Open();
+                FTPHandle.FTPSend(canvas.ScreenS(),name);
+                canvas.Dispose();
+                return "";
+            }
+            public static string Selection(List<string> args)
+            {
+                string name = Program.GetArgs(args, 2, -1);
+                var canvas = CANVAS.Canvas.Open();
+                if(canvas.ShowDialog()==System.Windows.Forms.DialogResult.OK)
+                FTPHandle.FTPSend(canvas.image, name);
+                canvas.Dispose();
+                return "";
+            }
+        }
+        public static class TREE
+        {
+            public static string Run(List<string> args)
+            {
+                Program.WriteTxt("&e::LISTING::");
+                var list = FTPHandle.GetItemsList();
+                
+                foreach (var item in list)
+                {
+                    CLEAR.ClearOneLine();
+                }
+                foreach (var item in list)
+                {
+                    string tmp = "";
+                    for (int i = 0; i < item.FullName.Split("/"[0]).Length-1; i++)
+                    {
+                        tmp += "---";
+                    }
+                    Program.WriteTxt($"&8{tmp}&2{item.FullName.Trim('/')}");
+                }
+                Program.WriteTxt("&e::LISTING::");
+
+                return "";
+            }
+        }
     }
 }

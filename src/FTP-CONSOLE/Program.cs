@@ -8,7 +8,7 @@ namespace FTP_CONSOLE
 {
     class Program
     {
-        public static string GetArgs(List<string> args, int fromindex, int toindex = -2)
+        public static string GetArgs(List<string> args, int fromindex, int toindex = -2,string add = " ")
         {
             string rn = "";
             List<string> arg = args;
@@ -16,7 +16,7 @@ namespace FTP_CONSOLE
             if (toindex == -2) toindex = fromindex;
             for (int i = fromindex; i <= toindex; i++)
             {
-                rn += arg[i] + " ";
+                rn += arg[i] + add;
             }
             return rn.Trim();
         }
@@ -95,6 +95,8 @@ namespace FTP_CONSOLE
                         case "write":
                         case "echo": Commands.WRITECMD.Run(argsl); break;
                         case "clcode": Commands.CLCODE.Run(argsl); break;
+                        case "screenshot": Commands.SCREENSHOT.Run(argsl); break;
+                        case "tree": Commands.TREE.Run(argsl); break;
                         default:throw new Exception("Unknown Command");
                     }
 

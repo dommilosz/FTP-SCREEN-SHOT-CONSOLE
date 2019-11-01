@@ -19,7 +19,7 @@ namespace FTP_CONSOLE
         public static string haslo = "ej5W83QjJHHXaaJB";
         public static string adres = "ftp://www.mkwk018.cba.pl";
         public static string adresfactory = "ftp://www.mkwk018.cba.pl";
-        static string dir = "";
+        static string dir = "ScreenShot";
         static int index = 0;
         public static NetworkCredential credential = new NetworkCredential(login, haslo);
         public static FtpClient ftp = new FtpClient()
@@ -28,53 +28,61 @@ namespace FTP_CONSOLE
             Host = adres
         };
 
-        public static void FTPSend(Image img)
+        public static void FTPSend(Image img, string name = "{auto}")
         {
-            try
+            string patch = "";
+
+            ftp.Connect();
+            if (name == "{auto}")
+                patch = "ScreenShot/" + index.ToString();
+            if (name != "{auto}")
+                patch = "ScreenShot/" + name;
+            patch += ".jpg";
+            MemoryStream stream = new MemoryStream();
+            stream.Position = 0;
+            img.Save(stream, ImageFormat.Jpeg);
+
+            List<string> dirs = patch.Split('/').ToList();
+            for (int i = 0; i < dirs.Count - 1; i++)
             {
-                string ftpfilename = index.ToString();
-                MemoryStream stream = new MemoryStream();
-                stream.Position = 0;
-                img.Save(stream, ImageFormat.Jpeg);
-                ftp.Upload(stream, dir + "/" + ftpfilename + ".jpg");
-                index++;
-                ftp.Disconnect();
+                string ddir = Program.GetArgs(dirs, 0, i, "/");
+                if (!ftp.DirectoryExists(ddir)) CreateDir(ddir);
             }
-            catch { }
+
+            ftp.Upload(stream, patch);
+            index++;
+            ftp.Disconnect();
+
+
         }
         public static void CreateDir(string patch = "", bool issaveloc = false)
         {
-            try
-            {
-                ftp.CreateDirectory(patch);
-                if (issaveloc) dir = patch;
-                ftp.Disconnect();
-            }
-            catch { }
+
+            ftp.Connect();
+            ftp.CreateDirectory(patch);
+            if (issaveloc) dir = patch;
+            ftp.Disconnect();
+
+
         }
         public static List<FtpListItem> GetItemsList(string patch = "")
         {
-            try
+            List<FtpListItem> GetList(string patch2, List<FtpListItem> list2)
             {
-                List<FtpListItem> list = new List<FtpListItem>();
-                if (patch != "")
+                foreach (FtpListItem item in ftp.GetListing(patch2))
                 {
-                    foreach (FtpListItem item in ftp.GetListing(patch))
-                    {
-                        list.Add(item);
-                    }
-                    ftp.Disconnect();
-                    return list;
+
+
+                    list2.Add(item);
+                    Program.WriteTxt("&eListing : " + patch2);
+                    if (item.Type == FtpFileSystemObjectType.Directory)
+                        GetList(item.FullName,list2);
+
                 }
-                foreach (FtpListItem item in ftp.GetListing())
-                {
-                    list.Add(item);
-                }
-                ftp.Disconnect();
-                return list;
+                return list2;
             }
-            catch { }
-            return null;
+            List<FtpListItem> list = new List<FtpListItem>();
+            return GetList(patch,list) ;
         }
         public static Image DownloadImage(string patch)
         {
@@ -117,4 +125,5 @@ namespace FTP_CONSOLE
             ftp.Credentials = credential;
             ftp.Host = adres;
         }
-    } }
+    }
+}
