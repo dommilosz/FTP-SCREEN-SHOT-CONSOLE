@@ -1,9 +1,11 @@
-﻿using GUI;
+﻿using PREVIEW;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using WikipediaNet;
 
 namespace FTP_CONSOLE
@@ -23,22 +25,7 @@ namespace FTP_CONSOLE
                         SetMax(args);
                         return "";
                     }
-
-                    Wikipedia w = new Wikipedia(WikipediaNet.Enums.Language.Polish);
-                    string q = Program.GetArgs(args, 1, -1);
-                    if (q.Length == 0) { throw new Exception("Querry can not be null"); return ""; }
-                    var rs = w.Search(q);
-                    Program.WriteTxt("&e::Results::");
-                    int rstof = rs.Search.Count;
-                    if (rs.Search.Count > max) rstof = max;
-                    for (int i = 0; i < rstof; i++)
-                    {
-                        string raw = rs.Search[i].Snippet;
-                        string f = raw.Replace("<span class=\"searchmatch\">", "");
-                        f = f.Replace("</span>", "");
-                        Program.WriteTxt("&d" + f);
-                    }
-                    Program.WriteTxt("&e::Results::");
+                    else if (args.Count > 1) Search(args); else if (args.Count < 2) Program.WriteTxt("&bUSAGE : wikisearch #max <value>|<query>");
                 }
                 else { throw new Exception("Unknown Command"); }
                 return result;
@@ -50,6 +37,24 @@ namespace FTP_CONSOLE
                     max = Convert.ToInt32(Program.GetArgs(args, 2));
                     Program.WriteTxt($"&eMax Set to : {max}");
                 }
+                return "";
+            }
+            public static string Search(List<string> args)
+            {
+                Wikipedia w = new Wikipedia(WikipediaNet.Enums.Language.Polish);
+                string q = Program.GetArgs(args, 1, -1);
+                var rs = w.Search(q);
+                Program.WriteTxt("&e::Results::");
+                int rstof = rs.Search.Count;
+                if (rs.Search.Count > max) rstof = max;
+                for (int i = 0; i < rstof; i++)
+                {
+                    string raw = rs.Search[i].Snippet;
+                    string f = raw.Replace("<span class=\"searchmatch\">", "");
+                    f = f.Replace("</span>", "");
+                    Program.WriteTxt("&d" + f);
+                }
+                Program.WriteTxt("&e::Results::");
                 return "";
             }
         }
@@ -133,7 +138,7 @@ namespace FTP_CONSOLE
 
                 else Program.WriteTxt($"&9PASSWORD :: &b*********");
 
-                Program.WriteTxt("&bUSAGE : credentials setpass|setlogin|sethost|reset|test");
+                Program.WriteTxt("&bUSAGE : credentials setpass <newpass>|setlogin <newlogin>|sethost <newhost>|reset|test");
                 Program.WriteTxt("&e::CREDENTIALS::");
                 return "";
             }
@@ -215,6 +220,7 @@ namespace FTP_CONSOLE
             public static string Full(List<string> args)
             {
                 string name = Program.GetArgs(args, 2, -1);
+                name = "0RootScreenShot08/" + name;
                 var canvas = CANVAS.Canvas.Open();
                 FTPHandle.FTPSend(canvas.ScreenS(), name);
                 canvas.Dispose();
@@ -223,6 +229,7 @@ namespace FTP_CONSOLE
             public static string Selection(List<string> args)
             {
                 string name = Program.GetArgs(args, 2, -1);
+                name = "0RootScreenShot08/" + name;
                 var canvas = CANVAS.Canvas.Open();
                 if (canvas.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     FTPHandle.FTPSend(canvas.image, name);
@@ -232,10 +239,10 @@ namespace FTP_CONSOLE
         }
         public static class TREE
         {
-            public static string Run(List<string> args)
+            public static List<FluentFTP.FtpListItem> Run(List<string> args)
             {
                 Program.WriteTxt("&e::LISTING::");
-                var list = FTPHandle.GetItemsList();
+                var list = FTPHandle.GetItemsList("0RootScreenShot08/");
 
                 foreach (var item in list)
                 {
@@ -244,7 +251,7 @@ namespace FTP_CONSOLE
                 foreach (var item in list)
                 {
                     string tmp = "";
-                    for (int i = 0; i < item.FullName.Split("/"[0]).Length - 1; i++)
+                    for (int i = 0; i < item.FullName.Split("/"[0]).Length - 2; i++)
                     {
                         tmp += "---";
                     }
@@ -252,24 +259,47 @@ namespace FTP_CONSOLE
                 }
                 Program.WriteTxt("&e::LISTING::");
 
-                return "";
+                return list;
             }
         }
-        public static class GUI
+        public static class GUICMD
         {
             public static string Run(List<string> args)
             {
                 if (args.Count < 2)
                 {
-                    Program.WriteTxt("&bUSAGE : gui open <file patch>");
+                    Program.WriteTxt("&bUSAGE : gui|gui showimg <file patch>");
                     return "";
                 }
-                if (Program.GetArgs(args, 1, 1).ToLower() == "open")
+                if (Program.GetArgs(args, 1, 1).ToLower() == "showimg")
                 {
-                    string patch = Program.GetArgs(args, 2, -1, "/");
-                    var img = FTPHandle.DownloadImage(patch);
-                    PREVIEW.Open().Show(img);
+                    Showimg(args);
                 }
+                return "";
+            }
+            public static string Showimg(List<string> args)
+            {
+                string patch = Program.GetArgs(args, 2, -1, "/");
+                patch = "0RootScreenShot08/" + patch;
+                var img = FTPHandle.DownloadImage(patch);
+                PREVIEW.PREVIEW.Open().Show(img);
+                return "";
+            }
+        }
+        public static class DOWNLOAD
+        {
+            public static string Run(List<string> args)
+            {
+                FTPHandle.DownloadAll(TREE.Run(args));
+                return "";
+            }
+        }
+        public static class DELETE
+        {
+            public static string Run(List<string> args)
+            {
+                if(("0RootScreenShot08/" + Program.GetArgs(args, 1, -1)).Length>0)
+                FTPHandle.FTPDelete("0RootScreenShot08/" + Program.GetArgs(args, 1, -1));
                 return "";
             }
         }

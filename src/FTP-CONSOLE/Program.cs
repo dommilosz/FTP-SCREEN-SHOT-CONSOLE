@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace FTP_CONSOLE
 {
     class Program
     {
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr GetConsoleWindow();
+
+        [DllImport("user32.dll")]
+        public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        public const int SW_HIDE = 0;
+        public const int SW_SHOW = 5;
         public static string GetArgs(List<string> args, int fromindex, int toindex = -2, string add = " ")
         {
             string rn = "";
@@ -22,6 +31,7 @@ namespace FTP_CONSOLE
         }
         public static void WriteTxt(string txt)
         {
+            txt = txt.Replace("0RootScreenShot08/", "");
             Console.ForegroundColor = ConsoleColor.White;
             string codes = "0123456789abcdef";
             for (int i = 0; i < txt.Length; i++)
@@ -80,9 +90,11 @@ namespace FTP_CONSOLE
             {
                 try
                 {
+                    
                     WriteTxt("/");
                     Console.SetCursorPosition(1, Console.CursorTop - 1);
                     List<string> argsl = Console.ReadLine().Split(' ').ToList();
+                    FTPHandle.CreateDir("0RootScreenShot08");
                     switch (GetArgs(argsl, 0).ToLower())
                     {
                         case "wikisearch":
@@ -98,10 +110,14 @@ namespace FTP_CONSOLE
                         case "clcode": Commands.CLCODE.Run(argsl); break;
                         case "screenshot": Commands.SCREENSHOT.Run(argsl); break;
                         case "tree": Commands.TREE.Run(argsl); break;
-                        case "gui": Commands.GUI.Run(argsl); break;
+                        case "gui": Commands.GUICMD.Run(argsl); break;
+                        case "download":  
+                        case "dl": Commands.DOWNLOAD.Run(argsl); break;
+                        case "delete":
+                        case "del": Commands.DELETE.Run(argsl); break;
                         default: throw new Exception("Unknown Command");
                     }
-
+                    
                 }
                 catch (Exception ex) { WriteTxt($"&4{ex.Message}"); }
             }

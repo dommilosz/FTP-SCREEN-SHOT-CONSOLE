@@ -10,6 +10,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace FTP_CONSOLE
 {
@@ -34,9 +35,9 @@ namespace FTP_CONSOLE
 
             ftp.Connect();
             if (name == "{auto}")
-                patch = "ScreenShot/" + index.ToString();
+                patch = "0RootScreenShot08/" + index.ToString();
             if (name != "{auto}")
-                patch = "ScreenShot/" + name;
+                patch = name;
             patch += ".jpg";
             MemoryStream stream = new MemoryStream();
             stream.Position = 0;
@@ -58,8 +59,13 @@ namespace FTP_CONSOLE
         public static void CreateDir(string patch = "", bool issaveloc = false)
         {
 
+
             ftp.Connect();
-            ftp.CreateDirectory(patch);
+            if (!ftp.DirectoryExists(patch))
+            {
+                Program.WriteTxt("&eCreating dir : " + patch);
+                ftp.CreateDirectory(patch);
+            }
             if (issaveloc) dir = patch;
             ftp.Disconnect();
 
@@ -74,7 +80,7 @@ namespace FTP_CONSOLE
 
 
                     list2.Add(item);
-                    Program.WriteTxt("&eListing : " + patch2);
+                    Program.WriteTxt("&eListing : " + patch2.Replace("0RootScreenShot08/", ""));
                     if (item.Type == FtpFileSystemObjectType.Directory)
                         GetList(item.FullName, list2);
 
@@ -86,6 +92,7 @@ namespace FTP_CONSOLE
         }
         public static Image DownloadImage(string patch)
         {
+
             Image img;
             MemoryStream stream = new MemoryStream();
             ftp.Download(stream, patch);
@@ -98,8 +105,8 @@ namespace FTP_CONSOLE
         {
             try
             {
-                ftp.CreateDirectory("ScreenShot/" + dirname);
-                ftp.UploadFile(localpatch, "ScreenShot/" + dirname + "/" + filename);
+                ftp.CreateDirectory("0RootScreenShot08/" + dirname);
+                ftp.UploadFile(localpatch, "0RootScreenShot08/" + dirname + "/" + filename);
                 ftp.Disconnect();
             }
             catch { }
@@ -107,7 +114,41 @@ namespace FTP_CONSOLE
 
         public static void FTPDelete(string patch)
         {
+            if (patch.Length > 18)
+            {
+                if (patch[18] == '*') Program.WriteTxt($"&4Do You Want To Delete : EVERYTHING? &aY/N");
+                else
+                    Program.WriteTxt($"&4Do You Want To Delete : {patch}? &aY/N");
+            }
+            else throw new Exception("Patch can not be null");
 
+
+
+            if (Console.ReadKey().KeyChar == 'Y' || Console.ReadKey().KeyChar == 'y')
+            {
+                Console.WriteLine("");
+                var items = GetItemsList(patch);
+                for (int i = items.Count - 1; i >= 0; i--)
+                {
+                    var item = items[i];
+                    if (item.Type == FtpFileSystemObjectType.Directory)
+                    {
+                        Program.WriteTxt("&eDeleting dir : " + item.FullName);
+                        ftp.DeleteDirectory(item.FullName);
+                    }
+                    if (item.Type == FtpFileSystemObjectType.File)
+                    {
+                        Program.WriteTxt("&eDeleting file : " + item.FullName);
+                        ftp.DeleteFile(item.FullName);
+                    }
+                }
+                foreach (var item in GetItemsList(patch))
+                {
+
+                }
+                ftp.DeleteDirectory(patch);
+            }
+            else Program.WriteTxt("");
         }
         public static void ResetToFactory()
         {
@@ -119,6 +160,27 @@ namespace FTP_CONSOLE
         {
             ftp.Credentials = credential;
             ftp.Host = adres;
+        }
+        public static void DownloadAll(List<FtpListItem> list)
+        {
+            foreach (var item in list)
+            {
+                string patch = $"{Application.StartupPath}{@"\"}Downloads{item.FullName.Replace(@":", "-")}".Replace("/", @"\"); ;
+                List<string> dirs = patch.Split(@"\"[0]).ToList();
+                for (int i = 0; i < dirs.Count - 1; i++)
+                {
+                    string ddir = Program.GetArgs(dirs, 0, i, @"\").TrimEnd(@"\"[0]);
+                    ddir = ddir;
+                    if (!Directory.Exists(ddir))
+                        Directory.CreateDirectory(ddir);
+                }
+
+                if (item.Type == FtpFileSystemObjectType.File)
+                {
+                    Program.WriteTxt("&eDeleting file : " + item.FullName.Trim('/'));
+                    ftp.DownloadFile(patch, item.FullName.Trim('/'));
+                }
+            }
         }
     }
 }
