@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8D1127A8-7900-4CC2-81D6-5028506CF918}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>FTPScreenShot</RootNamespace>
+    <AssemblyName>FTPScreenShot</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\dommi\OneDrive\Pulpit\a\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.5\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="ChineseTraditional, Version=4.0.0.20746, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronOcr.Languages.ChineseTraditional.4.4.4.1\lib\net40\ChineseTraditional.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentFTP, Version=27.0.2.0, Culture=neutral, PublicKeyToken=f4af092b1d8df44f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentFTP.27.0.2\lib\net45\FluentFTP.dll</HintPath>
+    </Reference>
+    <Reference Include="IronOcr, Version=4.4.0.21181, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronOcr.4.4.0\lib\net40\IronOcr.dll</HintPath>
+    </Reference>
+    <Reference Include="IronOcr.Arabic, Version=4.4.4.18393, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronOcr.Languages.Arabic.4.4.4.11\lib\net40\IronOcr.Arabic.dll</HintPath>
+    </Reference>
+    <Reference Include="IronOcr.ChineseSimplified, Version=4.0.0.20746, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronOcr.Languages.ChineseSimplified.4.4.4.1\lib\net40\IronOcr.ChineseSimplified.dll</HintPath>
+    </Reference>
+    <Reference Include="IronOcr.Danish, Version=4.0.0.20749, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronOcr.Languages.Danish.4.4.4.1\lib\net40\IronOcr.Danish.dll</HintPath>
+    </Reference>
+    <Reference Include="IronOcr.Finnish, Version=4.0.0.20748, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronOcr.Languages.Finnish.4.4.4.1\lib\net40\IronOcr.Finnish.dll</HintPath>
+    </Reference>
+    <Reference Include="IronOcr.French, Version=4.0.0.20747, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronOcr.Languages.French.4.4.4.1\lib\net40\IronOcr.French.dll</HintPath>
+    </Reference>
+    <Reference Include="IronOcr.German, Version=4.0.0.20745, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronOcr.Languages.German.4.4.4.1\lib\net40\IronOcr.German.dll</HintPath>
+    </Reference>
+    <Reference Include="IronOcr.Hebrew, Version=4.0.0.20748, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronOcr.Languages.Hebrew.4.4.4.1\lib\net40\IronOcr.Hebrew.dll</HintPath>
+    </Reference>
+    <Reference Include="IronOcr.International, Version=4.4.4.22148, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ocr.4.4.4.11\lib\net40\IronOcr.International.dll</HintPath>
+    </Reference>
+    <Reference Include="IronOcr.Italian, Version=4.0.0.20748, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronOcr.Languages.Italian.4.4.4.1\lib\net40\IronOcr.Italian.dll</HintPath>
+    </Reference>
+    <Reference Include="IronOcr.Japanese, Version=4.0.0.20747, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronOcr.Languages.Japanese.4.4.4.1\lib\net40\IronOcr.Japanese.dll</HintPath>
+    </Reference>
+    <Reference Include="IronOcr.Korean, Version=4.0.0.20746, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronOcr.Languages.Korean.4.4.4.1\lib\net40\IronOcr.Korean.dll</HintPath>
+    </Reference>
+    <Reference Include="IronOcr.Norwegian, Version=4.0.0.20748, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronOcr.Languages.Norwegian.4.4.4.1\lib\net40\IronOcr.Norwegian.dll</HintPath>
+    </Reference>
+    <Reference Include="IronOcr.Polish, Version=4.3.0.20078, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronOcr.Languages.Polish.4.4.4.1\lib\net40\IronOcr.Polish.dll</HintPath>
+    </Reference>
+    <Reference Include="IronOcr.Portuguese, Version=4.0.0.15217, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronOcr.Languages.Portuguese.4.4.4.1\lib\net40\IronOcr.Portuguese.dll</HintPath>
+    </Reference>
+    <Reference Include="IronOcr.Russian, Version=4.0.0.20748, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronOcr.Languages.Russian.4.4.4.1\lib\net40\IronOcr.Russian.dll</HintPath>
+    </Reference>
+    <Reference Include="IronOcr.Spanish, Version=4.0.0.20747, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronOcr.Languages.Spanish.4.4.4.1\lib\net40\IronOcr.Spanish.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.6.10.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.6.10\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WikipediaNet, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WikipediaNet.2.0.0\lib\netstandard2.0\WikipediaNet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\ActionBarScreenShot.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ActionBarScreenShot.Designer.cs">
+      <DependentUpon>ActionBarScreenShot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FTPImage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\FTPImage.designer.cs">
+      <DependentUpon>FTPImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DevConsole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DevConsole.Designer.cs">
+      <DependentUpon>DevConsole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImageString.cs" />
+    <Compile Include="ImgMem.cs" />
+    <Compile Include="ProgressReporter\ProgressReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProgressReporter\ProgressReport.Designer.cs">
+      <DependentUpon>ProgressReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FTPActions\FTPDownload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FTPActions\FTPDownload.Designer.cs">
+      <DependentUpon>FTPDownload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProgressReporter\ProgressBarDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProgressReporter\ProgressBarDialog.Designer.cs">
+      <DependentUpon>ProgressBarDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ScreenShot\Canvas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FTPActions\FTPActions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FTPActions\FTPActions.Designer.cs">
+      <DependentUpon>FTPActions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FTPActions\FTPDelete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FTPActions\FTPDelete.Designer.cs">
+      <DependentUpon>FTPDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FTPActions\FTPExplorer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FTPActions\FTPExplorer.Designer.cs">
+      <DependentUpon>FTPExplorer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FTPHandle.cs" />
+    <Compile Include="PasswordDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PasswordDialog.Designer.cs">
+      <DependentUpon>PasswordDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResultsList.cs" />
+    <Compile Include="FTPActions\FTPUpload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FTPActions\FTPUpload.Designer.cs">
+      <DependentUpon>FTPUpload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FTPActions\Tree.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FTPActions\Tree.Designer.cs">
+      <DependentUpon>Tree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FTPActions\ZoomImageWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FTPActions\ZoomImageWindow.Designer.cs">
+      <DependentUpon>ZoomImageWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ScreenShot\ImagePreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScreenShot\ImagePreview.Designer.cs">
+      <DependentUpon>ImagePreview.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Controls\ActionBarScreenShot.resx">
+      <DependentUpon>ActionBarScreenShot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DevConsole.resx">
+      <DependentUpon>DevConsole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FTPActions\FTPDownload.resx">
+      <DependentUpon>FTPDownload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\FTPImage.resx">
+      <DependentUpon>FTPImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProgressReporter\ProgressBarDialog.resx">
+      <DependentUpon>ProgressBarDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProgressReporter\ProgressReport.resx">
+      <DependentUpon>ProgressReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScreenShot\Canvas.resx">
+      <DependentUpon>Canvas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FTPActions\FTPActions.resx">
+      <DependentUpon>FTPActions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FTPActions\FTPDelete.resx">
+      <DependentUpon>FTPDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FTPActions\FTPExplorer.resx">
+      <DependentUpon>FTPExplorer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PasswordDialog.resx">
+      <DependentUpon>PasswordDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="FTPActions\FTPUpload.resx">
+      <DependentUpon>FTPUpload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FTPActions\Tree.resx">
+      <DependentUpon>Tree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FTPActions\ZoomImageWindow.resx">
+      <DependentUpon>ZoomImageWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScreenShot\ImagePreview.resx">
+      <DependentUpon>ImagePreview.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BCK\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 i x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Tesseract.3.3.0\build\Tesseract.targets" Condition="Exists('..\packages\Tesseract.3.3.0\build\Tesseract.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Ten projekt zawiera odwołania do pakietów NuGet, których nie ma na tym komputerze. Użyj przywracania pakietów NuGet, aby je pobrać. Aby uzyskać więcej informacji, zobacz http://go.microsoft.com/fwlink/?LinkID=322105. Brakujący plik: {0}.</ErrorText>
+    </PropertyGroup>
+  </Target>
+</Project>

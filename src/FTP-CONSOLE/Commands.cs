@@ -275,6 +275,10 @@ namespace FTP_CONSOLE
                 {
                     Showimg(args);
                 }
+                if (Program.GetArgs(args, 1, 1).ToLower() == "gui")
+                {
+                    ShowGUI(args);
+                }
                 return "";
             }
             public static string Showimg(List<string> args)
@@ -283,6 +287,14 @@ namespace FTP_CONSOLE
                 patch = "0RootScreenShot08/" + patch;
                 var img = FTPHandle.DownloadImage(patch);
                 PREVIEW.PREVIEW.Open().Show(img);
+                return "";
+            }
+            public static string ShowGUI(List<string> args)
+            {
+                Program.ShowWindow(Program.GetConsoleWindow(),Program.SW_HIDE);
+                var tmp =new FTPScreenShot.MainWindow();
+                tmp.ShowDialog();
+                Program.ShowWindow(Program.GetConsoleWindow(), Program.SW_SHOW);
                 return "";
             }
         }

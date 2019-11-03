@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace FTP_CONSOLE
 {
-    class Program
+    public class Program
     {
         [DllImport("kernel32.dll")]
         public static extern IntPtr GetConsoleWindow();
@@ -59,6 +59,10 @@ namespace FTP_CONSOLE
             Console.Write("\n");
             Console.ForegroundColor = ConsoleColor.White;
         }
+        public void BackFromGUI()
+        {
+            Program.ShowWindow(Program.GetConsoleWindow(), Program.SW_SHOW);
+        }
         public static ConsoleColor DecodeCode(char code)
         {
             ConsoleColor color = ConsoleColor.White;
@@ -84,7 +88,7 @@ namespace FTP_CONSOLE
             }
             return color;
         }
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             while (true)
             {

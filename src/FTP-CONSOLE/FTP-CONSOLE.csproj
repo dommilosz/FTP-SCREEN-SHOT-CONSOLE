@@ -81,6 +81,10 @@
       <Project>{71094452-e2b4-47aa-ab05-411be1447a7c}</Project>
       <Name>CANVAS</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FTPScreenShot\FTPScreenShot.csproj">
+      <Project>{8d1127a8-7900-4cc2-81d6-5028506cf918}</Project>
+      <Name>FTPScreenShot</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PREVIEW\PREVIEW.csproj">
       <Project>{46ca3b42-db20-411e-9bea-b7d4245bc75c}</Project>
       <Name>PREVIEW</Name>
