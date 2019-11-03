@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Runtime.InteropServices;
 
 namespace FTP_CONSOLE
 {
@@ -17,6 +17,7 @@ namespace FTP_CONSOLE
 
         public const int SW_HIDE = 0;
         public const int SW_SHOW = 5;
+
         public static string GetArgs(List<string> args, int fromindex, int toindex = -2, string add = " ")
         {
             string rn = "";
@@ -94,7 +95,7 @@ namespace FTP_CONSOLE
             {
                 try
                 {
-                    
+
                     WriteTxt("/");
                     Console.SetCursorPosition(1, Console.CursorTop - 1);
                     List<string> argsl = Console.ReadLine().Split(' ').ToList();
@@ -115,13 +116,13 @@ namespace FTP_CONSOLE
                         case "screenshot": Commands.SCREENSHOT.Run(argsl); break;
                         case "tree": Commands.TREE.Run(argsl); break;
                         case "gui": Commands.GUICMD.Run(argsl); break;
-                        case "download":  
+                        case "download":
                         case "dl": Commands.DOWNLOAD.Run(argsl); break;
                         case "delete":
                         case "del": Commands.DELETE.Run(argsl); break;
                         default: throw new Exception("Unknown Command");
                     }
-                    
+
                 }
                 catch (Exception ex) { WriteTxt($"&4{ex.Message}"); }
             }

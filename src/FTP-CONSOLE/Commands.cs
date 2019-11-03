@@ -279,6 +279,10 @@ namespace FTP_CONSOLE
                 {
                     ShowGUI(args);
                 }
+                if (Program.GetArgs(args, 1, 1).ToLower() == "guioldconsole")
+                {
+                    ShowGUIOld(args);
+                }
                 return "";
             }
             public static string Showimg(List<string> args)
@@ -292,7 +296,16 @@ namespace FTP_CONSOLE
             public static string ShowGUI(List<string> args)
             {
                 Program.ShowWindow(Program.GetConsoleWindow(),Program.SW_HIDE);
-                var tmp =new FTPScreenShot.MainWindow();
+                var tmp =new FTPScreenShot.MainWindow(true);
+                tmp.ShowDialog();
+                Program.ShowWindow(Program.GetConsoleWindow(), Program.SW_SHOW);
+                return "";
+            }
+            public static string ShowGUIOld(List<string> args)
+            {
+                Program.ShowWindow(Program.GetConsoleWindow(), Program.SW_HIDE);
+                var tmp = new FTPScreenShot.MainWindow(true);
+                tmp.newconsole = false;
                 tmp.ShowDialog();
                 Program.ShowWindow(Program.GetConsoleWindow(), Program.SW_SHOW);
                 return "";

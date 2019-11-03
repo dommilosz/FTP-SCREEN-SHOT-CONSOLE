@@ -18,13 +18,5 @@ namespace FTPScreenShot
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainWindow());
         }
-        public static void MainWP()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            var tmp = new MainWindow();
-            tmp.AcceptLogin();
-            Application.Run(tmp);
-        }
     }
 }

@@ -17,12 +17,26 @@ namespace FTPScreenShot
     {
         public static MainWindow form1;
         bool folder_created = false;
+        public bool newconsole = true;
         public MainWindow()
         {
             InitializeComponent();
             form1 = this;
-            //PasswordDialog pd = new PasswordDialog();
-            //pd.ShowDialog();
+            
+            PasswordDialog pd = new PasswordDialog();
+            pd.ShowDialog();
+            FTPHandle.CreateDir("ScreenShot/");
+
+        }
+        public MainWindow(bool nopass)
+        {
+            InitializeComponent();
+            form1 = this;
+            if (!nopass)
+            {
+                PasswordDialog pd = new PasswordDialog();
+                pd.ShowDialog();
+            }
             FTPHandle.CreateDir("ScreenShot/");
 
         }
@@ -34,8 +48,11 @@ namespace FTPScreenShot
 
         public void Timer1_Tick(object sender, EventArgs e)
         {
-
-            timer1.Stop();
+            if (PasswordDialog.done && !PasswordDialog.good)
+            {
+                this.Close();
+            }
+            if (PasswordDialog.good) timer1.Stop();
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -112,8 +129,15 @@ namespace FTPScreenShot
 
         private void Button6_Click(object sender, EventArgs e)
         {
-            this.Close();
-            //DevConsole.ShowConsole();
-        }
+            
+            if (newconsole)
+            {
+                this.Close();
+            }
+            else
+            {
+                DevConsole.ShowConsole();
+            }
+            }
     }
 }
