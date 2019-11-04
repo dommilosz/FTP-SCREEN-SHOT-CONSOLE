@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\Costura.Fody.4.1.0\build\Costura.Fody.props" Condition="Exists('..\..\packages\Costura.Fody.4.1.0\build\Costura.Fody.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -50,14 +51,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
-      <HintPath>..\packages\Portable.BouncyCastle.1.8.5\lib\net40\BouncyCastle.Crypto.dll</HintPath>
-    </Reference>
     <Reference Include="ChineseTraditional, Version=4.0.0.20746, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
       <HintPath>..\packages\IronOcr.Languages.ChineseTraditional.4.4.4.1\lib\net40\ChineseTraditional.dll</HintPath>
     </Reference>
-    <Reference Include="FluentFTP, Version=27.0.2.0, Culture=neutral, PublicKeyToken=f4af092b1d8df44f, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentFTP.27.0.2\lib\net45\FluentFTP.dll</HintPath>
+    <Reference Include="Costura, Version=4.1.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Costura.Fody.4.1.0\lib\net40\Costura.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentFTP, Version=28.0.1.0, Culture=neutral, PublicKeyToken=f4af092b1d8df44f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FluentFTP.28.0.1\lib\net45\FluentFTP.dll</HintPath>
     </Reference>
     <Reference Include="IronOcr, Version=4.4.0.21181, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
       <HintPath>..\packages\IronOcr.4.4.0\lib\net40\IronOcr.dll</HintPath>
@@ -74,11 +75,11 @@
     <Reference Include="IronOcr.Finnish, Version=4.0.0.20748, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
       <HintPath>..\packages\IronOcr.Languages.Finnish.4.4.4.1\lib\net40\IronOcr.Finnish.dll</HintPath>
     </Reference>
-    <Reference Include="IronOcr.French, Version=4.0.0.20747, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronOcr.Languages.French.4.4.4.1\lib\net40\IronOcr.French.dll</HintPath>
+    <Reference Include="IronOcr.French, Version=4.0.0.20729, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\IronOcr.Languages.French.4.4.4.2\lib\net40\IronOcr.French.dll</HintPath>
     </Reference>
-    <Reference Include="IronOcr.German, Version=4.0.0.20745, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronOcr.Languages.German.4.4.4.1\lib\net40\IronOcr.German.dll</HintPath>
+    <Reference Include="IronOcr.German, Version=4.0.0.18757, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\IronOcr.Languages.German.4.4.4.11\lib\net40\IronOcr.German.dll</HintPath>
     </Reference>
     <Reference Include="IronOcr.Hebrew, Version=4.0.0.20748, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
       <HintPath>..\packages\IronOcr.Languages.Hebrew.4.4.4.1\lib\net40\IronOcr.Hebrew.dll</HintPath>
@@ -86,8 +87,8 @@
     <Reference Include="IronOcr.International, Version=4.4.4.22148, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
       <HintPath>..\packages\Ocr.4.4.4.11\lib\net40\IronOcr.International.dll</HintPath>
     </Reference>
-    <Reference Include="IronOcr.Italian, Version=4.0.0.20748, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronOcr.Languages.Italian.4.4.4.1\lib\net40\IronOcr.Italian.dll</HintPath>
+    <Reference Include="IronOcr.Italian, Version=4.0.0.26600, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\IronOcr.Languages.Italian.4.4.4.11\lib\net40\IronOcr.Italian.dll</HintPath>
     </Reference>
     <Reference Include="IronOcr.Japanese, Version=4.0.0.20747, Culture=neutral, PublicKeyToken=5f366048dc436899, processorArchitecture=MSIL">
       <HintPath>..\packages\IronOcr.Languages.Japanese.4.4.4.1\lib\net40\IronOcr.Japanese.dll</HintPath>
@@ -326,5 +327,8 @@
     <PropertyGroup>
       <ErrorText>Ten projekt zawiera odwołania do pakietów NuGet, których nie ma na tym komputerze. Użyj przywracania pakietów NuGet, aby je pobrać. Aby uzyskać więcej informacji, zobacz http://go.microsoft.com/fwlink/?LinkID=322105. Brakujący plik: {0}.</ErrorText>
     </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Costura.Fody.4.1.0\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Costura.Fody.4.1.0\build\Costura.Fody.props'))" />
+    <Error Condition="!Exists('..\..\packages\Fody.6.0.4\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Fody.6.0.4\build\Fody.targets'))" />
   </Target>
+  <Import Project="..\..\packages\Fody.6.0.4\build\Fody.targets" Condition="Exists('..\..\packages\Fody.6.0.4\build\Fody.targets')" />
 </Project>
