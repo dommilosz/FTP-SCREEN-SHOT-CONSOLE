@@ -32,30 +32,29 @@ namespace FTP_CONSOLE
         }
         public static void WriteTxt(string txt)
         {
+            txt += "    ";
             txt = txt.Replace("0RootScreenShot08/", "");
-            Console.ForegroundColor = ConsoleColor.White;
-            string codes = "0123456789abcdef";
+            Console.ForegroundColor = DecodeCode('f');
+            string codes = Commands.CLCODE.codes;
             for (int i = 0; i < txt.Length; i++)
             {
-                if (txt.Length - 1 > i + 1)
+                if (i >= 0 && txt[i] == '@' && txt[i + 1] == '&' && codes.Contains(txt[i + 2]))
                 {
-                    if (txt[i] == '&' && codes.Contains(txt[i + 1]))
-                    {
-                        if (i - 1 >= 0)
-                        {
-                            if (txt[i - 1] == @"\"[0])
-                            {
-                                Console.Write(txt[i]);
-                            }
-                            else { Console.ForegroundColor = DecodeCode(txt[i + 1]); txt = txt.Remove(i, 1); }
-                        }
-                        else { Console.ForegroundColor = DecodeCode(txt[i + 1]); txt = txt.Remove(i, 1); }
-
-
-                    }
-                    else if (txt[i] != @"\"[0]) Console.Write(txt[i]);
+                    Console.ForegroundColor = DecodeCode(txt[i + 2], true);
+                    txt = txt.Remove(i + 2, 1);
+                    txt = txt.Remove(i + 1, 1);
+                    txt = txt.Remove(i, 1);
                 }
-                else if (txt[i] != @"\"[0]) Console.Write(txt[i]);
+                if (txt.Length - 1 > i + 1 && txt[i] == '&' && codes.Contains(txt[i + 1]))
+                {
+                    if (i - 1 >= 0 && txt[i - 1] == @"\"[0])
+                    {
+                        Console.Write(txt[i]);
+                    }
+                    else { Console.ForegroundColor = DecodeCode(txt[i + 1]); txt = txt.Remove(i+1,1); }
+                }
+                else { bool tmp = true; if (txt[i] == '@' && txt[i + 1] == '&') tmp = false; if (txt[i] == '&' && codes.Contains(txt[i + 1])) tmp = false; if (txt[i] == @"\"[0]&& txt[i+1] == '&'&&codes.Contains(txt[i+2])) tmp = false; if (tmp) Console.Write(txt[i]); }
+
             }
             Console.Write("\n");
             Console.ForegroundColor = ConsoleColor.White;
@@ -64,8 +63,11 @@ namespace FTP_CONSOLE
         {
             Program.ShowWindow(Program.GetConsoleWindow(), Program.SW_SHOW);
         }
-        public static ConsoleColor DecodeCode(char code)
+        public static ConsoleColor DecodeCode(char code, bool ignoredefcol = false)
         {
+            char tmp = Commands.COLOR.color;
+            if (!ignoredefcol)
+                if (Commands.CLCODE.codes.Contains(tmp)) { code = tmp; }
             ConsoleColor color = ConsoleColor.White;
             switch (code)
             {
@@ -89,6 +91,16 @@ namespace FTP_CONSOLE
             }
             return color;
         }
+        public static void SetTitle(List<string> argsl)
+        {
+            Console.Title = $"FTP CONSOLE - [";
+            foreach (var item in argsl)
+            {
+                Console.Title += item + " ";
+            }
+            Console.Title = Console.Title.Trim();
+            Console.Title += "]";
+        }
         public static void Main(string[] args)
         {
             while (true)
@@ -96,10 +108,16 @@ namespace FTP_CONSOLE
                 try
                 {
 
-                    WriteTxt("/");
+                    WriteTxt("@&2/");
+                    Console.Title = $"FTP CONSOLE - [IDLE]";
                     Console.SetCursorPosition(1, Console.CursorTop - 1);
                     List<string> argsl = Console.ReadLine().Split(' ').ToList();
-                    FTPHandle.CreateDir("0RootScreenShot08");
+                    SetTitle(argsl);
+                    if (string.IsNullOrWhiteSpace(GetArgs(argsl, 0).ToLower()))
+                    {
+                        Main(args);
+                        break;
+                    }
                     switch (GetArgs(argsl, 0).ToLower())
                     {
                         case "wikisearch":
@@ -115,11 +133,13 @@ namespace FTP_CONSOLE
                         case "clcode": Commands.CLCODE.Run(argsl); break;
                         case "screenshot": Commands.SCREENSHOT.Run(argsl); break;
                         case "tree": Commands.TREE.Run(argsl); break;
-                        case "gui": Commands.GUICMD.Run(argsl); break;
+                        case "gui": Commands.GUI.Run(argsl); break;
                         case "download":
                         case "dl": Commands.DOWNLOAD.Run(argsl); break;
                         case "delete":
                         case "del": Commands.DELETE.Run(argsl); break;
+                        case "color": Commands.COLOR.Run(argsl); break;
+                        case "exit": Commands.EXIT.Run(argsl); break;
                         default: throw new Exception("Unknown Command");
                     }
 

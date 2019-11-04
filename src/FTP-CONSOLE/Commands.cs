@@ -187,13 +187,13 @@ namespace FTP_CONSOLE
         }
         public static class CLCODE
         {
+            public static string codes = "0123456789abcdef";
             public static string Run(List<string> args)
             {
-                string codes = "0123456789abcdef";
-                string msg1 = @"\&0 - BLACK       &4\&4 - DARK RED      &8\&8 - DARK GRAY   &c\&c - RED";
-                string msg2 = @"&1\&1 - DARK BLUE   &5\&4 - DARK PURPLE   &9\&9 - BLUE        &d\&d - PURPLE";
-                string msg3 = @"&2\&2 - DARK GREEN  &6\&4 - GOLD          &a\&a - GREEN       &e\&e - YELLOW";
-                string msg4 = @"&3\&3 - DARK AQUA   &7\&4 - GRAY          &b\&b - AQUA        &f\&f - WHITE";
+                string msg1 = @"@&f\&0 - BLACK       @&4\&4 - DARK RED      @&8\&8 - DARK GRAY   @&c\&c - RED";
+                string msg2 = @"@&1\&1 - DARK BLUE   @&5\&5 - DARK PURPLE   @&9\&9 - BLUE        @&d\&d - PURPLE";
+                string msg3 = @"@&2\&2 - DARK GREEN  @&6\&6 - GOLD          @&a\&a - GREEN       @&e\&e - YELLOW";
+                string msg4 = @"@&3\&3 - DARK AQUA   @&7\&7 - GRAY          @&b\&b - AQUA        @&f\&f - WHITE";
                 Program.WriteTxt("&e::COLOR:CODES::");
                 Program.WriteTxt(msg1);
                 Program.WriteTxt(msg2);
@@ -211,7 +211,7 @@ namespace FTP_CONSOLE
                 {
                     Full(args);
                 }
-                if (Program.GetArgs(args, 1, 1).ToLower() == "selection")
+                if (Program.GetArgs(args, 1, 1).ToLower() == "selection"|| Program.GetArgs(args, 1, 1).ToLower() == "sel")
                 {
                     Selection(args);
                 }
@@ -262,7 +262,7 @@ namespace FTP_CONSOLE
                 return list;
             }
         }
-        public static class GUICMD
+        public static class GUI
         {
             public static string Run(List<string> args)
             {
@@ -295,8 +295,8 @@ namespace FTP_CONSOLE
             }
             public static string ShowGUI(List<string> args)
             {
-                Program.ShowWindow(Program.GetConsoleWindow(),Program.SW_HIDE);
-                var tmp =new FTPScreenShot.MainWindow(true);
+                Program.ShowWindow(Program.GetConsoleWindow(), Program.SW_HIDE);
+                var tmp = new FTPScreenShot.MainWindow(true);
                 tmp.ShowDialog();
                 Program.ShowWindow(Program.GetConsoleWindow(), Program.SW_SHOW);
                 return "";
@@ -323,8 +323,57 @@ namespace FTP_CONSOLE
         {
             public static string Run(List<string> args)
             {
-                if(("0RootScreenShot08/" + Program.GetArgs(args, 1, -1)).Length>0)
-                FTPHandle.FTPDelete("0RootScreenShot08/" + Program.GetArgs(args, 1, -1));
+                if (("0RootScreenShot08/" + Program.GetArgs(args, 1, -1)).Length > 0)
+                    FTPHandle.FTPDelete("0RootScreenShot08/" + Program.GetArgs(args, 1, -1));
+                return "";
+            }
+        }
+        public static class COLOR
+        {
+            public static char color = '-';
+            public static string Run(List<string> args)
+            {
+                SET(args);
+                return "";
+            }
+            public static string SET(List<string> args)
+            {
+                char c = '-';
+                char c2 = '-';
+                if (args.Count > 1 && Program.GetArgs(args, 1, 1).ToLower().Length > 0)
+                {
+                    if (Program.GetArgs(args, 1, 1).ToLower().Length > 1)
+                    {
+                        c = Program.GetArgs(args, 1, 1).ToLower()[1];
+                    }
+                    c2 = Program.GetArgs(args, 1, 1).ToLower()[0];
+                    if (CLCODE.codes.Contains(c))
+                    {
+                        color = c;
+                        Program.WriteTxt(@"&2Colors Turned To : \&" + c);
+                    }
+                    else if (CLCODE.codes.Contains(c2))
+                    {
+                        color = c2;
+                        Program.WriteTxt(@"&2Colors Turned To : \&" + c2);
+                    }
+                    else { color = '-'; Program.WriteTxt(@"&2Colors Reset : \&f"); }
+                }
+                else { color = '-'; Program.WriteTxt(@"&2Colors Reset : \&f"); }
+                return "";
+            }
+
+        }
+        public static class EXIT
+        {
+            public static string Run(List<string> args)
+            {
+                Program.WriteTxt("&5Press Any Key To Exit...");
+                Program.WriteTxt("&5Press [ESC] to Cancel");
+                if (Console.ReadKey().Key != ConsoleKey.Escape)
+                    Environment.Exit(0);
+                Program.WriteTxt("");
+                CLEAR.ClearOneLine();
                 return "";
             }
         }

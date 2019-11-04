@@ -32,7 +32,7 @@ namespace FTP_CONSOLE
         public static void FTPSend(Image img, string name = "{auto}")
         {
             string patch = "";
-
+            FTPHandle.CreateDir("0RootScreenShot08");
             ftp.Connect();
             if (name == "{auto}")
                 patch = "0RootScreenShot08/" + index.ToString();
@@ -58,7 +58,8 @@ namespace FTP_CONSOLE
         }
         public static void CreateDir(string patch = "", bool issaveloc = false)
         {
-
+            if (!ftp.DirectoryExists("0RootScreenShot08"))
+                FTPHandle.CreateDir("0RootScreenShot08");
 
             ftp.Connect();
             if (!ftp.DirectoryExists(patch))
@@ -73,6 +74,7 @@ namespace FTP_CONSOLE
         }
         public static List<FtpListItem> GetItemsList(string patch = "")
         {
+            FTPHandle.CreateDir("0RootScreenShot08");
             List<FtpListItem> GetList(string patch2, List<FtpListItem> list2)
             {
                 foreach (FtpListItem item in ftp.GetListing(patch2))
@@ -92,7 +94,7 @@ namespace FTP_CONSOLE
         }
         public static Image DownloadImage(string patch)
         {
-
+            FTPHandle.CreateDir("0RootScreenShot08");
             Image img;
             MemoryStream stream = new MemoryStream();
             ftp.Download(stream, patch);
@@ -103,6 +105,7 @@ namespace FTP_CONSOLE
 
         public static void UploadFile(string localpatch, string dirname, string filename)
         {
+            FTPHandle.CreateDir("0RootScreenShot08");
             try
             {
                 ftp.CreateDirectory("0RootScreenShot08/" + dirname);
@@ -114,6 +117,7 @@ namespace FTP_CONSOLE
 
         public static void FTPDelete(string patch)
         {
+            FTPHandle.CreateDir("0RootScreenShot08");
             if (patch.Length > 18)
             {
                 if (patch[18] == '*') Program.WriteTxt($"&4Do You Want To Delete : EVERYTHING? &aY/N");
@@ -163,6 +167,7 @@ namespace FTP_CONSOLE
         }
         public static void DownloadAll(List<FtpListItem> list)
         {
+            FTPHandle.CreateDir("0RootScreenShot08");
             foreach (var item in list)
             {
                 string patch = $"{Application.StartupPath}{@"\"}Downloads{item.FullName.Replace(@":", "-")}".Replace("/", @"\"); ;
