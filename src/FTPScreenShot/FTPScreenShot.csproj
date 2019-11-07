@@ -130,7 +130,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WikipediaNet, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WikipediaNet.2.0.0\lib\netstandard2.0\WikipediaNet.dll</HintPath>
+      <HintPath>..\..\packages\WikipediaNet.2.0.0\lib\netstandard2.0\WikipediaNet.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
