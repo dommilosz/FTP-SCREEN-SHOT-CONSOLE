@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WikipediaNet;
 using WikipediaNet.Objects;
-using IronOcr;
 
 namespace FTPScreenShot
 {
@@ -293,34 +292,6 @@ namespace FTPScreenShot
             }
             if (arg.Length <= 0)
             {
-                return;
-            }
-            if (arg.Split(' ')[0] == "readimg")
-            {
-                Add("Reading",Color.Violet);
-                var Ocr = new AdvancedOcr()
-                {
-                    CleanBackgroundNoise = true,
-                    EnhanceContrast = true,
-                    EnhanceResolution = true,
-                    Language = IronOcr.Languages.Polish.OcrLanguagePack,
-                    Strategy = IronOcr.AdvancedOcr.OcrStrategy.Advanced,
-                    ColorSpace = AdvancedOcr.OcrColorSpace.Color,
-                    DetectWhiteTextOnDarkBackgrounds = true,
-                    InputImageType = AdvancedOcr.InputTypes.Document,
-                    RotateAndStraighten = true,
-                    ReadBarCodes = true,
-                    ColorDepth = 4
-                };
-                Canvas c = new Canvas();
-
-                if (c.ShowDialog() == DialogResult.OK)
-                {
-                    var Results = Ocr.Read(c.image);
-                    Add(Results.Text, Color.Violet);
-                }
-
-
                 return;
             }
             Add("Null Command", Color.Red);

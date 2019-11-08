@@ -275,14 +275,15 @@ namespace FTP_CONSOLE
                 {
                     Showimg(args);
                 }
-                if (Program.GetArgs(args, 1, 1).ToLower() == "gui")
+                if (Program.GetArgs(args, 1, -2).ToLower() == "gui")
                 {
+                    if (Program.GetArgs(args, 2,-2).ToLower() == "oldconsole"|| Program.GetArgs(args, 2, -1).ToLower() == "old")
+                    {
+                        ShowGUIOld(args);
+                    }else
                     ShowGUI(args);
                 }
-                if (Program.GetArgs(args, 1, 1).ToLower() == "guioldconsole")
-                {
-                    ShowGUIOld(args);
-                }
+                
                 return "";
             }
             public static string Showimg(List<string> args)
