@@ -277,7 +277,7 @@ namespace FTP_CONSOLE
                 }
                 if (Program.GetArgs(args, 1, -2).ToLower() == "gui")
                 {
-                    if (Program.GetArgs(args, 2,-2).ToLower() == "oldconsole"|| Program.GetArgs(args, 2, -1).ToLower() == "old")
+                    if (args.Count > 2 && Program.GetArgs(args, 2,-2).ToLower() == "oldconsole"|| Program.GetArgs(args, 2, -1).ToLower() == "old")
                     {
                         ShowGUIOld(args);
                     }else
