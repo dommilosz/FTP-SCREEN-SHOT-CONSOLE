@@ -54,9 +54,11 @@ namespace FTP_CONSOLE
                 Wikipedia w = new Wikipedia(WikipediaNet.Enums.Language.Polish);
                 string q = Program.GetArgs(args, 1, -1);
                 var rs = w.Search(q);
-                Program.WriteTxt("&e::Results::");
+                Program.WriteTxt("&e&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&aWS RESULTS&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=");
                 int rstof = rs.Search.Count;
+                
                 if (rs.Search.Count > max) rstof = max;
+                if (max == -1) rstof = rs.Search.Count;
                 for (int i = 0; i < rstof; i++)
                 {
                     string raw = rs.Search[i].Snippet;
@@ -64,7 +66,7 @@ namespace FTP_CONSOLE
                     f = f.Replace("</span>", "");
                     Program.WriteTxt("&d" + f);
                 }
-                Program.WriteTxt("&e::Results::");
+                Program.WriteTxt("&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=");
                 return "";
             }
         }
@@ -138,7 +140,7 @@ namespace FTP_CONSOLE
                     if (Program.GetArgs(args, 1).ToLower() == "test") { Test(args); return ""; }
                     FTPHandle.ReloadCredentials();
                 }
-                Program.WriteTxt("&e::CREDENTIALS::");
+                Program.WriteTxt("&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&aCREDENTIALS&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=");
 
                 Program.WriteTxt($"&9HOST     :: &b{FTPHandle.adres}");
 
@@ -150,7 +152,6 @@ namespace FTP_CONSOLE
                 else Program.WriteTxt($"&9PASSWORD :: &b*********");
 
                 Program.WriteUSAGE("credentials", usages);
-                Program.WriteTxt("&e::CREDENTIALS::");
                 return "";
             }
             public static string SetPass(List<string> args)
@@ -255,7 +256,7 @@ namespace FTP_CONSOLE
         {
             public static List<FluentFTP.FtpListItem> Run(List<string> args)
             {
-                Program.WriteTxt("&e::LISTING::");
+                Program.WriteTxt("&e&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&aFILE LIST&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=");
                 var list = FTPHandle.GetItemsList("0RootScreenShot08/");
 
                 foreach (var item in list)
@@ -267,11 +268,20 @@ namespace FTP_CONSOLE
                     string tmp = "";
                     for (int i = 0; i < item.FullName.Split("/"[0]).Length - 2; i++)
                     {
-                        tmp += "---";
+                        tmp += "--";
                     }
-                    Program.WriteTxt($"&8{tmp}&2{item.FullName.Trim('/')}");
+                    string txt = $"&8{tmp}&2{item.FullName.Trim('/')}";
+                    if(item.Type == FluentFTP.FtpFileSystemObjectType.File)
+                    {
+                        txt = txt.Replace(txt.Split('/')[txt.Split('/').Length - 1], $"&a{txt.Split('/')[txt.Split('/').Length - 1]}&2");
+                    }
+                    txt = txt.Replace("/", "&6/&2");
+                    if(txt.Contains('.'))
+                    txt = txt.Replace(txt.Split('.')[txt.Split('.').Length-1], $"&e{txt.Split('.')[txt.Split('.').Length-1]}");
+                    txt = txt.Replace(".", "&b.&2");
+                    Program.WriteTxt(txt);
                 }
-                Program.WriteTxt("&e::LISTING::");
+                Program.WriteTxt("&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=");
 
                 return list;
             }

@@ -33,7 +33,7 @@ namespace FTP_CONSOLE
         public static void WriteTxt(string txt)
         {
             txt += "    ";
-            txt = txt.Replace("0RootScreenShot08/", "");
+            txt = txt.Replace("0RootScreenShot08", "");
             Console.ForegroundColor = DecodeCode('f');
             string codes = Commands.CLCODE.codes;
             for (int i = 0; i < txt.Length; i++)
@@ -61,11 +61,12 @@ namespace FTP_CONSOLE
         }
         public static void WriteUSAGE(string cmd, List<string> usages)
         {
-            WriteTxt($"&e::USAGE:&b{cmd}&e::");
+            WriteTxt($"&4=&a-&4=&a-&4=&a-&4=&a-&4=&aUSAGE&4=&a{cmd}&4=&a-&4=&a-&4=&a-&4=&a-&4=");
             foreach (var item in usages)
             {
-                WriteTxt($"&c{cmd} &e{item}");
+                WriteTxt($"&2/&c{cmd} &e{item}");
             }
+            WriteTxt("&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=");
         }
         public void BackFromGUI()
         {
@@ -107,6 +108,7 @@ namespace FTP_CONSOLE
                 Console.Title += item + " ";
             }
             Console.Title = Console.Title.Trim();
+            Console.Title = " " + Console.Title;
             Console.Title += "]";
         }
         public static void Main(string[] args)
@@ -117,7 +119,7 @@ namespace FTP_CONSOLE
                 {
 
                     WriteTxt("@&2/");
-                    Console.Title = $"FTP CONSOLE - [IDLE]";
+                    Console.Title = $" FTP CONSOLE - [IDLE]";
                     Console.SetCursorPosition(1, Console.CursorTop - 1);
                     List<string> argsl = Console.ReadLine().Split(' ').ToList();
                     SetTitle(argsl);
