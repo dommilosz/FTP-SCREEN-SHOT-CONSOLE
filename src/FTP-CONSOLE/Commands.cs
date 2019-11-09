@@ -21,9 +21,18 @@ namespace FTP_CONSOLE
                 string result = "";
                 if (LOGIN.loged)
                 {
-                    if (args.Count > 1 && Program.GetArgs(args, 1).ToLower() == "#max" && args.Count > 2 && Program.GetArgs(args, 2).Length > 0)
+                    if (args.Count < 2) { Program.WriteUSAGE("wikisearch", usages); return ""; }
+                    if (args.Count > 1 && Program.GetArgs(args, 1).ToLower() == "#max")
                     {
-                        SetMax(args);
+                        if (args.Count > 2 && Program.GetArgs(args, 2).Length > 0 )
+                        {
+                            SetMax(args);
+                        }
+                        else
+                        {
+                            Program.WriteTxt($"&eMax is : {max}");
+
+                        }
                         return "";
                     }
                     else { if (Program.GetArgs(args, 1).ToLower() != "#max" && args.Count > 1 && Program.GetArgs(args, 1).ToLower().Length > 0) Search(args); else { Program.WriteUSAGE("wikisearch", usages); } }
@@ -210,7 +219,7 @@ namespace FTP_CONSOLE
             public static List<string> usages = new string[] { "full <patch>", "selection <patch>", "sel <patch>" }.ToList();
             public static string Run(List<string> args)
             {
-                if (args.Count<3||Program.GetArgs(args, 1, 1).ToLower() != "full"&& Program.GetArgs(args, 1, 1).ToLower() != "sel"&& Program.GetArgs(args, 1, 1).ToLower() != "selection"|| Program.GetArgs(args, 2).ToLower().Length <1) { Program.WriteUSAGE("screenshot", usages); return ""; }
+                if (args.Count < 3 || Program.GetArgs(args, 1, 1).ToLower() != "full" && Program.GetArgs(args, 1, 1).ToLower() != "sel" && Program.GetArgs(args, 1, 1).ToLower() != "selection" || Program.GetArgs(args, 2).ToLower().Length < 1) { Program.WriteUSAGE("screenshot", usages); return ""; }
                 if (Program.GetArgs(args, 1, 1).ToLower() == "full")
                 {
                     Full(args);
@@ -269,18 +278,19 @@ namespace FTP_CONSOLE
         }
         public static class GUI
         {
-            public static List<string> usages = new string[] { "gui", "gui old","showimg <patch>" }.ToList();
+            public static List<string> usages = new string[] { "gui", "gui old", "showimg <patch>" }.ToList();
             public static string Run(List<string> args)
             {
-                if (args.Count < 2|| Program.GetArgs(args, 1, 1).ToLower() != "showimg"&& Program.GetArgs(args, 1, 1).ToLower() != "gui")
+                if (args.Count < 2 || Program.GetArgs(args, 1, 1).ToLower() != "showimg" && Program.GetArgs(args, 1, 1).ToLower() != "gui")
                 {
-                    Program.WriteUSAGE("gui",usages);
+                    Program.WriteUSAGE("gui", usages);
                     return "";
                 }
-                if (args.Count>2&&Program.GetArgs(args, 1, 1).ToLower() == "showimg"&& Program.GetArgs(args, 2).ToLower().Length>0)
+                if (args.Count > 2 && Program.GetArgs(args, 1, 1).ToLower() == "showimg" && Program.GetArgs(args, 2).ToLower().Length > 0)
                 {
                     Showimg(args);
-                }else if(args.Count < 3|| Program.GetArgs(args, 2).ToLower().Length < 1) Program.WriteUSAGE("gui", usages);
+                }
+                else if (args.Count < 3 || Program.GetArgs(args, 2).ToLower().Length < 1) Program.WriteUSAGE("gui", usages);
                 if (Program.GetArgs(args, 1, -2).ToLower() == "gui")
                 {
                     if (args.Count > 2 && Program.GetArgs(args, 2, -2).ToLower() == "oldconsole" || Program.GetArgs(args, 2, -1).ToLower() == "old")
@@ -332,7 +342,7 @@ namespace FTP_CONSOLE
         }
         public static class DELETE
         {
-            public static List<string> usages = new string[] { "<patch>","*" }.ToList();
+            public static List<string> usages = new string[] { "<patch>", "*" }.ToList();
             public static string Run(List<string> args)
             {
                 if (args.Count > 1 && Program.GetArgs(args, 1).Length > 0)

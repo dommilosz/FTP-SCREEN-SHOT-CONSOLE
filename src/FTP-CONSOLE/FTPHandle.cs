@@ -182,7 +182,7 @@ namespace FTP_CONSOLE
 
                 if (item.Type == FtpFileSystemObjectType.File)
                 {
-                    Program.WriteTxt("&eDeleting file : " + item.FullName.Trim('/'));
+                    Program.WriteTxt("&eDownloading file : " + item.FullName.Trim('/'));
                     ftp.DownloadFile(patch, item.FullName.Trim('/'));
                 }
             }
