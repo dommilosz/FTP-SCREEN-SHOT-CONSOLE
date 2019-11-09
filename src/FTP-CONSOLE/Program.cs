@@ -51,13 +51,21 @@ namespace FTP_CONSOLE
                     {
                         Console.Write(txt[i]);
                     }
-                    else { Console.ForegroundColor = DecodeCode(txt[i + 1]); txt = txt.Remove(i+1,1); }
+                    else { Console.ForegroundColor = DecodeCode(txt[i + 1]); txt = txt.Remove(i + 1, 1); }
                 }
-                else { bool tmp = true; if (txt[i] == '@' && txt[i + 1] == '&') tmp = false; if (txt[i] == '&' && codes.Contains(txt[i + 1])) tmp = false; if (txt[i] == @"\"[0]&& txt[i+1] == '&'&&codes.Contains(txt[i+2])) tmp = false; if (tmp) Console.Write(txt[i]); }
+                else { bool tmp = true; if (txt[i] == '@' && txt[i + 1] == '&') tmp = false; if (txt[i] == '&' && codes.Contains(txt[i + 1])) tmp = false; if (txt[i] == @"\"[0] && txt[i + 1] == '&' && codes.Contains(txt[i + 2])) tmp = false; if (tmp) Console.Write(txt[i]); }
 
             }
             Console.Write("\n");
             Console.ForegroundColor = ConsoleColor.White;
+        }
+        public static void WriteUSAGE(string cmd, List<string> usages)
+        {
+            WriteTxt($"&e::USAGE:&b{cmd}&e::");
+            foreach (var item in usages)
+            {
+                WriteTxt($"&c{cmd} &e{item}");
+            }
         }
         public void BackFromGUI()
         {

@@ -15,17 +15,18 @@ namespace FTP_CONSOLE
         public static class WIKISEARCH
         {
             static int max = 5;
+            public static List<string> usages = new string[] { "#max <value>", "<querry>" }.ToList();
             public static string Run(List<string> args)
             {
                 string result = "";
                 if (LOGIN.loged)
                 {
-                    if (Program.GetArgs(args, 1).ToLower() == "#max")
+                    if (args.Count > 1 && Program.GetArgs(args, 1).ToLower() == "#max" && args.Count > 2 && Program.GetArgs(args, 2).Length > 0)
                     {
                         SetMax(args);
                         return "";
                     }
-                    else if (args.Count > 1) Search(args); else if (args.Count < 2) Program.WriteTxt("&bUSAGE : wikisearch #max <value>|<query>");
+                    else { if (Program.GetArgs(args, 1).ToLower() != "#max" && args.Count > 1 && Program.GetArgs(args, 1).ToLower().Length > 0) Search(args); else { Program.WriteUSAGE("wikisearch", usages); } }
                 }
                 else { throw new Exception("Unknown Command"); }
                 return result;
@@ -95,6 +96,7 @@ namespace FTP_CONSOLE
         }
         public static class CREDENTIALS
         {
+            public static List<string> usages = new string[] { "setpass <newpass>", "setlogin <newlogin>", "sethost <newhost>", "reset", "test" }.ToList();
             public static string Run(List<string> args)
             {
                 if (args.Count > 1)
@@ -138,7 +140,7 @@ namespace FTP_CONSOLE
 
                 else Program.WriteTxt($"&9PASSWORD :: &b*********");
 
-                Program.WriteTxt("&bUSAGE : credentials setpass <newpass>|setlogin <newlogin>|sethost <newhost>|reset|test");
+                Program.WriteUSAGE("credentials", usages);
                 Program.WriteTxt("&e::CREDENTIALS::");
                 return "";
             }
@@ -205,16 +207,19 @@ namespace FTP_CONSOLE
         }
         public static class SCREENSHOT
         {
+            public static List<string> usages = new string[] { "full <patch>", "selection <patch>", "sel <patch>" }.ToList();
             public static string Run(List<string> args)
             {
+                if (args.Count<3||Program.GetArgs(args, 1, 1).ToLower() != "full"&& Program.GetArgs(args, 1, 1).ToLower() != "sel"&& Program.GetArgs(args, 1, 1).ToLower() != "selection"|| Program.GetArgs(args, 2).ToLower().Length <1) { Program.WriteUSAGE("screenshot", usages); return ""; }
                 if (Program.GetArgs(args, 1, 1).ToLower() == "full")
                 {
                     Full(args);
                 }
-                if (Program.GetArgs(args, 1, 1).ToLower() == "selection"|| Program.GetArgs(args, 1, 1).ToLower() == "sel")
+                if (Program.GetArgs(args, 1, 1).ToLower() == "selection" || Program.GetArgs(args, 1, 1).ToLower() == "sel")
                 {
                     Selection(args);
                 }
+
                 return "";
             }
             public static string Full(List<string> args)
@@ -264,34 +269,39 @@ namespace FTP_CONSOLE
         }
         public static class GUI
         {
+            public static List<string> usages = new string[] { "gui", "gui old","showimg <patch>" }.ToList();
             public static string Run(List<string> args)
             {
-                if (args.Count < 2)
+                if (args.Count < 2|| Program.GetArgs(args, 1, 1).ToLower() != "showimg"&& Program.GetArgs(args, 1, 1).ToLower() != "gui")
                 {
-                    Program.WriteTxt("&bUSAGE : gui|gui showimg <file patch>");
+                    Program.WriteUSAGE("gui",usages);
                     return "";
                 }
-                if (Program.GetArgs(args, 1, 1).ToLower() == "showimg")
+                if (args.Count>2&&Program.GetArgs(args, 1, 1).ToLower() == "showimg"&& Program.GetArgs(args, 2).ToLower().Length>0)
                 {
                     Showimg(args);
-                }
+                }else if(args.Count < 3|| Program.GetArgs(args, 2).ToLower().Length < 1) Program.WriteUSAGE("gui", usages);
                 if (Program.GetArgs(args, 1, -2).ToLower() == "gui")
                 {
-                    if (args.Count > 2 && Program.GetArgs(args, 2,-2).ToLower() == "oldconsole"|| Program.GetArgs(args, 2, -1).ToLower() == "old")
+                    if (args.Count > 2 && Program.GetArgs(args, 2, -2).ToLower() == "oldconsole" || Program.GetArgs(args, 2, -1).ToLower() == "old")
                     {
                         ShowGUIOld(args);
-                    }else
-                    ShowGUI(args);
+                    }
+                    else
+                        ShowGUI(args);
                 }
-                
+
                 return "";
             }
             public static string Showimg(List<string> args)
             {
-                string patch = Program.GetArgs(args, 2, -1, "/");
-                patch = "0RootScreenShot08/" + patch;
-                var img = FTPHandle.DownloadImage(patch);
-                PREVIEW.PREVIEW.Open().Show(img);
+                if (args.Count > 2)
+                {
+                    string patch = Program.GetArgs(args, 2, -1, "/");
+                    patch = "0RootScreenShot08/" + patch;
+                    var img = FTPHandle.DownloadImage(patch);
+                    PREVIEW.PREVIEW.Open().Show(img);
+                }
                 return "";
             }
             public static string ShowGUI(List<string> args)
@@ -322,10 +332,15 @@ namespace FTP_CONSOLE
         }
         public static class DELETE
         {
+            public static List<string> usages = new string[] { "<patch>","*" }.ToList();
             public static string Run(List<string> args)
             {
-                if (("0RootScreenShot08/" + Program.GetArgs(args, 1, -1)).Length > 0)
-                    FTPHandle.FTPDelete("0RootScreenShot08/" + Program.GetArgs(args, 1, -1));
+                if (args.Count > 1 && Program.GetArgs(args, 1).Length > 0)
+                {
+                    if (("0RootScreenShot08/" + Program.GetArgs(args, 1, -1)).Length > 0)
+                        FTPHandle.FTPDelete("0RootScreenShot08/" + Program.GetArgs(args, 1, -1));
+                }
+                else Program.WriteUSAGE("delete", usages);
                 return "";
             }
         }
