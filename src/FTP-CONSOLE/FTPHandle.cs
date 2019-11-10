@@ -175,7 +175,6 @@ namespace FTP_CONSOLE
                 for (int i = 0; i < dirs.Count - 1; i++)
                 {
                     string ddir = Program.GetArgs(dirs, 0, i, @"\").TrimEnd(@"\"[0]);
-                    ddir = ddir;
                     if (!Directory.Exists(ddir))
                         Directory.CreateDirectory(ddir);
                 }

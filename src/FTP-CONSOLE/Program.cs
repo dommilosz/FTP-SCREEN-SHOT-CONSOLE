@@ -17,9 +17,11 @@ namespace FTP_CONSOLE
 
         public const int SW_HIDE = 0;
         public const int SW_SHOW = 5;
+        public static List<string> mainusages = new string[] { "clear", "cs", "credentials", "cr", "write", "echo", "clcode", "screenshot", "tree", "gui", "download", "dl", "delete", "del", "color", "exit", "help" }.ToList();
 
         public static string GetArgs(List<string> args, int fromindex, int toindex = -2, string add = " ")
         {
+
             string rn = "";
             List<string> arg = args;
             if (toindex == -1) toindex = arg.Count - 1;
@@ -58,15 +60,24 @@ namespace FTP_CONSOLE
             }
             Console.Write("\n");
             Console.ForegroundColor = ConsoleColor.White;
+
         }
         public static void WriteUSAGE(string cmd, List<string> usages)
         {
-            WriteTxt($"&4=&a-&4=&a-&4=&a-&4=&a-&4=&aUSAGE&4=&a{cmd}&4=&a-&4=&a-&4=&a-&4=&a-&4=");
+            string startln = $"&4=&a-&4=&a-&4=&a-&4=&a-&4=&aUSAGE&4=&a{cmd}&4=&a-&4=&a-&4=&a-&4=&a-&4=";
+            if (cmd == "")
+                startln = $"&4=&a-&4=&a-&4=&a-&4=&a-&4=&aUSAGE&4=&a-&4=&a-&4=&a-&4=&a-&4=";
+            WriteTxt(startln);
             foreach (var item in usages)
             {
-                WriteTxt($"&2/&c{cmd} &e{item}");
+                if (cmd != "")
+                    WriteTxt($"&2/&c{cmd} &e{item}".Trim());
+                if (cmd == "")
+                    WriteTxt($"&2/&e{item}".Trim());
             }
-            WriteTxt("&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=");
+            string endln = "&4=";
+            while (endln.Replace("&4", "").Replace("&a", "").Length < startln.Replace("&4", "").Replace("&a", "").Length) { endln += "&a-&4="; }
+            WriteTxt(endln);
         }
         public void BackFromGUI()
         {
@@ -111,6 +122,7 @@ namespace FTP_CONSOLE
             Console.Title = " " + Console.Title;
             Console.Title += "]";
         }
+        [STAThreadAttribute]
         public static void Main(string[] args)
         {
             while (true)
@@ -150,6 +162,7 @@ namespace FTP_CONSOLE
                         case "del": Commands.DELETE.Run(argsl); break;
                         case "color": Commands.COLOR.Run(argsl); break;
                         case "exit": Commands.EXIT.Run(argsl); break;
+                        case "help": Program.WriteUSAGE("", mainusages); break;
                         default: throw new Exception("Unknown Command");
                     }
 

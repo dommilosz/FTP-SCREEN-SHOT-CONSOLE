@@ -15,27 +15,45 @@ namespace FTP_CONSOLE
         public static class WIKISEARCH
         {
             static int max = 5;
-            public static List<string> usages = new string[] { "#max <value>", "<querry>" }.ToList();
+            static int mode = 0;
+            public static List<string> usages = new string[] { "#max <value>", "#mode <value>", "<querry>" }.ToList();
+            public static List<string> modeusages = new string[] { "0 - text", "1 - copy to clipboard", "2 - message box (all in one)", "3 - message box (all in separate)" }.ToList();
             public static string Run(List<string> args)
             {
                 string result = "";
                 if (LOGIN.loged)
                 {
-                    if (args.Count < 2) { Program.WriteUSAGE("wikisearch", usages); return ""; }
-                    if (args.Count > 1 && Program.GetArgs(args, 1).ToLower() == "#max")
+                    if (args.Count < 2 || args[1].Length <= 0) { Program.WriteUSAGE("wikisearch", usages); return ""; }
+                    if (args.Count > 1)
                     {
-                        if (args.Count > 2 && Program.GetArgs(args, 2).Length > 0 )
+                        if (Program.GetArgs(args, 1).ToLower() == "#max")
                         {
-                            SetMax(args);
-                        }
-                        else
-                        {
-                            Program.WriteTxt($"&eMax is : {max}");
+                            if (args.Count > 2 && Program.GetArgs(args, 2).Length > 0)
+                            {
+                                SetMax(args);
+                            }
+                            else
+                            {
+                                Program.WriteTxt($"&eMax is : {max}");
 
+                            }
+                            return "";
                         }
-                        return "";
+                        if (Program.GetArgs(args, 1).ToLower() == "#mode")
+                        {
+                            if (args.Count > 2 && Program.GetArgs(args, 2).Length > 0)
+                            {
+                                SetMode(args);
+                            }
+                            else
+                            {
+                                Program.WriteTxt($"&eMode is : {mode}");
+                                Program.WriteUSAGE("wikisearch #mode", modeusages);
+                            }
+                            return "";
+                        }
                     }
-                    else { if (Program.GetArgs(args, 1).ToLower() != "#max" && args.Count > 1 && Program.GetArgs(args, 1).ToLower().Length > 0) Search(args); else { Program.WriteUSAGE("wikisearch", usages); } }
+                    { if (Program.GetArgs(args, 1).ToLower() != "#mode" && Program.GetArgs(args, 1).ToLower() != "#max" && args.Count > 1 && Program.GetArgs(args, 1).ToLower().Length > 0) Search(args); else { Program.WriteUSAGE("wikisearch", usages); } }
                 }
                 else { throw new Exception("Unknown Command"); }
                 return result;
@@ -54,19 +72,54 @@ namespace FTP_CONSOLE
                 Wikipedia w = new Wikipedia(WikipediaNet.Enums.Language.Polish);
                 string q = Program.GetArgs(args, 1, -1);
                 var rs = w.Search(q);
-                Program.WriteTxt("&e&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&aWS RESULTS&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=");
+
                 int rstof = rs.Search.Count;
-                
+
                 if (rs.Search.Count > max) rstof = max;
                 if (max == -1) rstof = rs.Search.Count;
+                List<string> results = new List<string>();
                 for (int i = 0; i < rstof; i++)
                 {
                     string raw = rs.Search[i].Snippet;
                     string f = raw.Replace("<span class=\"searchmatch\">", "");
                     f = f.Replace("</span>", "");
-                    Program.WriteTxt("&d" + f);
+                    if (mode == 0)
+                        results.Add("&d" + f);
+                    if (mode != 0)
+                        results.Add(f);
                 }
-                Program.WriteTxt("&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=");
+
+                if (mode == 0)
+                {
+                    Program.WriteTxt("&e&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&aWS RESULTS&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=");
+                    Program.WriteTxt(Program.GetArgs(results, 0, -1));
+                    Program.WriteTxt("&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=");
+                }
+                if (mode == 1)
+                {
+                    Clipboard.SetText(Program.GetArgs(results, 0, -1));
+                }
+                if (mode == 2)
+                {
+                    MessageBox.Show(Program.GetArgs(results, 0, -1), "Results");
+                }
+                if (mode == 3)
+                {
+                    for (int i = 0; i < results.Count; i++)
+                    {
+                        MessageBox.Show(results[i], $"Result {i + 1}/{results.Count}");
+                    }
+                }
+
+                return "";
+            }
+            public static string SetMode(List<string> args)
+            {
+                if (LOGIN.loged)
+                {
+                    mode = Convert.ToInt32(Program.GetArgs(args, 2));
+                    Program.WriteTxt($"&eMode Set to : {mode}");
+                }
                 return "";
             }
         }
@@ -271,13 +324,13 @@ namespace FTP_CONSOLE
                         tmp += "--";
                     }
                     string txt = $"&8{tmp}&2{item.FullName.Trim('/')}";
-                    if(item.Type == FluentFTP.FtpFileSystemObjectType.File)
+                    if (item.Type == FluentFTP.FtpFileSystemObjectType.File)
                     {
                         txt = txt.Replace(txt.Split('/')[txt.Split('/').Length - 1], $"&a{txt.Split('/')[txt.Split('/').Length - 1]}&2");
                     }
                     txt = txt.Replace("/", "&6/&2");
-                    if(txt.Contains('.'))
-                    txt = txt.Replace(txt.Split('.')[txt.Split('.').Length-1], $"&e{txt.Split('.')[txt.Split('.').Length-1]}");
+                    if (txt.Contains('.'))
+                        txt = txt.Replace(txt.Split('.')[txt.Split('.').Length - 1], $"&e{txt.Split('.')[txt.Split('.').Length - 1]}");
                     txt = txt.Replace(".", "&b.&2");
                     Program.WriteTxt(txt);
                 }
@@ -300,7 +353,7 @@ namespace FTP_CONSOLE
                 {
                     Showimg(args);
                 }
-                else if (args.Count < 3 || Program.GetArgs(args, 2).ToLower().Length < 1) Program.WriteUSAGE("gui", usages);
+                else if(args.Count > 1 && Program.GetArgs(args, 1, 1).ToLower() == "showimg") { if(args.Count < 3 || Program.GetArgs(args, 2).ToLower().Length < 1) Program.WriteUSAGE("gui", usages); }
                 if (Program.GetArgs(args, 1, -2).ToLower() == "gui")
                 {
                     if (args.Count > 2 && Program.GetArgs(args, 2, -2).ToLower() == "oldconsole" || Program.GetArgs(args, 2, -1).ToLower() == "old")
