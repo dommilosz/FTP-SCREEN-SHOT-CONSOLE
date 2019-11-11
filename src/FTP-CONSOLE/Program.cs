@@ -79,6 +79,39 @@ namespace FTP_CONSOLE
             while (endln.Replace("&4", "").Replace("&a", "").Length < startln.Replace("&4", "").Replace("&a", "").Length) { endln += "&a-&4="; }
             WriteTxt(endln);
         }
+        public static string MaskString(string value, int shift)
+        {
+
+            char[] buffer = value.ToCharArray();
+            for (int i = 0; i < buffer.Length; i++)
+            {
+                // Letter.
+                char letter = buffer[i];
+                bool isupper = letter.ToString() == letter.ToString().ToUpper();
+                letter = letter.ToString().ToLower().ToCharArray()[0];
+                if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToLower().Contains(letter))
+                {
+                    // Add shift to all.
+                    letter = (char)(letter + shift);
+                    // Subtract 26 on overflow.
+                    // Add 26 on underflow.
+                    if (letter > 'z')
+                    {
+                        letter = (char)(letter - 26);
+                    }
+                    else if (letter < 'a')
+                    {
+                        letter = (char)(letter + 26);
+                    }
+                    // Store.
+                }
+                if (!isupper)
+                    buffer[i] = letter;
+                if (isupper)
+                    buffer[i] = letter.ToString().ToUpper().ToCharArray()[0];
+            }
+            return new string(buffer);
+        }
         public void BackFromGUI()
         {
             Program.ShowWindow(Program.GetConsoleWindow(), Program.SW_SHOW);
@@ -163,6 +196,7 @@ namespace FTP_CONSOLE
                         case "color": Commands.COLOR.Run(argsl); break;
                         case "exit": Commands.EXIT.Run(argsl); break;
                         case "help": Program.WriteUSAGE("", mainusages); break;
+                        case "msk": Program.WriteTxt(Program.MaskString(GetArgs(argsl, 2, -1), Convert.ToInt32(argsl[1]))); break;
                         default: throw new Exception("Unknown Command");
                     }
 

@@ -16,7 +16,8 @@ namespace FTP_CONSOLE
         {
             static int max = 5;
             static int mode = 0;
-            public static List<string> usages = new string[] { "#max <value>", "#mode <value>", "<querry>" }.ToList();
+            static int mask = 0;
+            public static List<string> usages = new string[] { "#max <value>", "#mode <value>", "#mask <value>", "<querry>" }.ToList();
             public static List<string> modeusages = new string[] { "0 - text", "1 - copy to clipboard", "2 - message box (all in one)", "3 - message box (all in separate)" }.ToList();
             public static string Run(List<string> args)
             {
@@ -52,8 +53,20 @@ namespace FTP_CONSOLE
                             }
                             return "";
                         }
+                        if (Program.GetArgs(args, 1).ToLower() == "#mask")
+                        {
+                            if (args.Count > 2 && Program.GetArgs(args, 2).Length > 0)
+                            {
+                                SetMask(args);
+                            }
+                            else
+                            {
+                                Program.WriteTxt($"&eMask is : {mask}");
+                            }
+                            return "";
+                        }
                     }
-                    { if (Program.GetArgs(args, 1).ToLower() != "#mode" && Program.GetArgs(args, 1).ToLower() != "#max" && args.Count > 1 && Program.GetArgs(args, 1).ToLower().Length > 0) Search(args); else { Program.WriteUSAGE("wikisearch", usages); } }
+                    if (args.Count > 1 && Program.GetArgs(args, 1).ToLower().Length > 0) Search(args); else { Program.WriteUSAGE("wikisearch", usages); }
                 }
                 else { throw new Exception("Unknown Command"); }
                 return result;
@@ -64,6 +77,15 @@ namespace FTP_CONSOLE
                 {
                     max = Convert.ToInt32(Program.GetArgs(args, 2));
                     Program.WriteTxt($"&eMax Set to : {max}");
+                }
+                return "";
+            }
+            public static string SetMask(List<string> args)
+            {
+                if (LOGIN.loged)
+                {
+                    mask = Convert.ToInt32(Program.GetArgs(args, 2));
+                    Program.WriteTxt($"&eMask Set to : {mask}");
                 }
                 return "";
             }
@@ -83,12 +105,20 @@ namespace FTP_CONSOLE
                     string raw = rs.Search[i].Snippet;
                     string f = raw.Replace("<span class=\"searchmatch\">", "");
                     f = f.Replace("</span>", "");
+                    f = Program.MaskString(f, mask);
                     if (mode == 0)
+                    {
+                        foreach (var item in CLCODE.codes)
+                        {
+                            f = f.Replace("&" + item, @"\&" + item);
+                        }
                         results.Add("&d" + f);
+                    }
                     if (mode != 0)
+                    {
                         results.Add(f);
+                    }
                 }
-
                 if (mode == 0)
                 {
                     Program.WriteTxt("&e&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&aWS RESULTS&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=");
@@ -353,7 +383,7 @@ namespace FTP_CONSOLE
                 {
                     Showimg(args);
                 }
-                else if(args.Count > 1 && Program.GetArgs(args, 1, 1).ToLower() == "showimg") { if(args.Count < 3 || Program.GetArgs(args, 2).ToLower().Length < 1) Program.WriteUSAGE("gui", usages); }
+                else if (args.Count > 1 && Program.GetArgs(args, 1, 1).ToLower() == "showimg") { if (args.Count < 3 || Program.GetArgs(args, 2).ToLower().Length < 1) Program.WriteUSAGE("gui", usages); }
                 if (Program.GetArgs(args, 1, -2).ToLower() == "gui")
                 {
                     if (args.Count > 2 && Program.GetArgs(args, 2, -2).ToLower() == "oldconsole" || Program.GetArgs(args, 2, -1).ToLower() == "old")
