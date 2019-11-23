@@ -1,10 +1,8 @@
-﻿using PREVIEW;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using WikipediaNet;
 
@@ -12,6 +10,14 @@ namespace FTP_CONSOLE
 {
     public class Commands
     {
+        public static class EXAMPLE
+        {
+            public static string Run(List<string> args)
+            {
+                return "";
+            }
+        }
+
         public static class WIKISEARCH
         {
             static int max = 5;
@@ -493,6 +499,55 @@ namespace FTP_CONSOLE
                     Environment.Exit(0);
                 Program.WriteTxt("");
                 CLEAR.ClearOneLine();
+                return "";
+            }
+        }
+        public static class WINCMD
+        {
+            public static List<string> usages = new string[] { "<command>", "wifi-list", "wifi-info <name>" }.ToList();
+            public static string Run(List<string> args)
+            {
+                if (args.Count > 1 && args[1].Length > 0)
+                {
+                    if (args[1] != "wifi-list" && args[1] != "wifi-info") RunCMD(args);
+                    if (args[1] == "wifi-list") RunCMD(new string[] { args[1], "netsh wlan show profile" }.ToList());
+                    if (args[1] == "wifi-info") if (args.Count > 2) RunCMD(new string[] { args[1], $"netsh wlan show profile {args[2]} key=clear" }.ToList()); else Program.WriteUSAGE("wincmd", usages);
+                }
+                else Program.WriteUSAGE("wincmd", usages);
+                return "";
+            }
+            public static string RunCMD(List<string> args)
+            {
+                void cwrite(string d)
+                {
+                    //Thread.Sleep(1);
+                    if (d != null)
+                    {
+                        if (args[0] == "wifi-info")
+                        {
+                            d = d.Replace("Key Content            : ", "Key Content            : &5");
+                            d = d.Replace("Name                   : ", "Name                   : &5");
+                            d = d.Replace("SSID name              : ", "SSID name              : &5");
+                        }
+                        d = d.Replace(": ", "&a: &6");
+                        Program.WriteTxt("&3"+d);
+                    }
+                    
+                }
+                var p = new Process();
+                p.StartInfo.FileName = "cmd.exe";
+                p.StartInfo.Arguments = $"/c {Program.GetArgs(args, 1, -1)}";
+                p.StartInfo.CreateNoWindow = true;
+                p.StartInfo.RedirectStandardError = true;
+                p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.RedirectStandardInput = false;
+                p.StartInfo.UseShellExecute = false;
+                p.OutputDataReceived += (a, b) => cwrite(b.Data);
+                p.ErrorDataReceived += (a, b) => cwrite(b.Data);
+                p.Start();
+                p.BeginErrorReadLine();
+                p.BeginOutputReadLine();
+                p.WaitForExit();
                 return "";
             }
         }

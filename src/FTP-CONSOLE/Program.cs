@@ -32,7 +32,7 @@ namespace FTP_CONSOLE
             }
             return rn.Trim();
         }
-        public static void WriteTxt(string txt)
+        public static void WriteTxt(string txt,bool newline = true)
         {
             txt += "    ";
             txt = txt.Replace("0RootScreenShot08", "");
@@ -58,6 +58,7 @@ namespace FTP_CONSOLE
                 else { bool tmp = true; if (txt[i] == '@' && txt[i + 1] == '&') tmp = false; if (txt[i] == '&' && codes.Contains(txt[i + 1])) tmp = false; if (txt[i] == @"\"[0] && txt[i + 1] == '&' && codes.Contains(txt[i + 2])) tmp = false; if (tmp) Console.Write(txt[i]); }
 
             }
+            if(newline)
             Console.Write("\n");
             Console.ForegroundColor = ConsoleColor.White;
 
@@ -197,6 +198,7 @@ namespace FTP_CONSOLE
                         case "exit": Commands.EXIT.Run(argsl); break;
                         case "help": Program.WriteUSAGE("", mainusages); break;
                         case "msk": Program.WriteTxt(Program.MaskString(GetArgs(argsl, 2, -1), Convert.ToInt32(argsl[1]))); break;
+                        case "wincmd": Commands.WINCMD.Run(argsl); break;
                         default: throw new Exception("Unknown Command");
                     }
 
