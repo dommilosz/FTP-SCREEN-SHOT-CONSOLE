@@ -87,9 +87,11 @@ namespace FTP_CONSOLE
                         GetList(item.FullName, list2);
 
                 }
+                ftp.Disconnect();
                 return list2;
             }
             List<FtpListItem> list = new List<FtpListItem>();
+            ftp.Disconnect();
             return GetList(patch, list);
         }
         public static Image DownloadImage(string patch)
@@ -164,6 +166,55 @@ namespace FTP_CONSOLE
         {
             ftp.Credentials = credential;
             ftp.Host = adres;
+        }
+        public static int GetCIDLenght()
+        {
+            int i = 0;
+            Stream stream1 = ftp.OpenRead("/cidmsg.txt");
+            StreamReader stream = new StreamReader(stream1);
+            while (stream.EndOfStream == false)
+            {
+                stream.ReadLine();
+                i++;
+            }
+            ftp.Disconnect();
+            return i;
+        }
+        public static string GetCIDTxt(int pos)
+        {
+            int i = 0;
+            string m = "";
+            Stream stream1 = ftp.OpenRead("/cidmsg.txt");
+            StreamReader stream = new StreamReader(stream1);
+            while (i!=pos)
+            {
+                m = stream.ReadLine();
+                i++;
+            }
+            ftp.Disconnect();
+            return m;
+        }
+        public static void CIDRemove()
+        {
+            Stream stream1 = ftp.OpenWrite("/cidmsg.txt");
+            StreamWriter stream = new StreamWriter(stream1);
+            stream.WriteLine("");
+            stream.Flush();
+            stream1.Flush();
+            stream.Close();
+            stream1.Close();
+            ftp.Disconnect();
+        }
+        public static void AppCIDTxt(string txt)
+        {
+            Stream stream1 = ftp.OpenAppend("/cidmsg.txt");
+            StreamWriter stream = new StreamWriter(stream1);
+            stream.WriteLine(txt);
+            stream.Flush();
+            stream1.Flush();
+            stream.Close();
+            stream1.Close();
+            ftp.Disconnect();
         }
         public static void DownloadAll(List<FtpListItem> list)
         {

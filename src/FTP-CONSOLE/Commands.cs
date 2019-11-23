@@ -530,9 +530,9 @@ namespace FTP_CONSOLE
                             d = d.Replace("SSID name              : ", "SSID name              : &5");
                         }
                         d = d.Replace(": ", "&a: &6");
-                        Program.WriteTxt("&3"+d);
+                        Program.WriteTxt("&3" + d);
                     }
-                    
+
                 }
                 var p = new Process();
                 p.StartInfo.FileName = "cmd.exe";
@@ -549,6 +549,118 @@ namespace FTP_CONSOLE
                 p.BeginOutputReadLine();
                 p.WaitForExit();
                 return "";
+            }
+        }
+        public static class CID
+        {
+            public static List<string> tosend = new List<string>();
+            public static List<string> unread = new List<string>();
+            public static int lastreadline = FTPHandle.GetCIDLenght();
+            public static int client_id = new Random().Next(100000, 999999);
+            public static List<string> usages = new string[] { "get", "renew", "send <cid> <message>", "send * <message>", "read" }.ToList();
+            public static string Run(List<string> args)
+            {
+                if (args.Count > 1)
+                {
+                    if (args[1] == "renew") { client_id = new Random().Next(100000, 999999); Program.WriteTxt($"&bYour new CID is : &5{client_id}"); }
+                    if (args[1] == "send") Send(args);
+                    if (args[1] == "read") Synch();
+                    if (args[1] == "info") Info();
+                    if (args[1] == "reset") Reset();
+                    if (args[1] == "remove") Remove();
+                }
+                else Program.WriteUSAGE("cid", usages);
+                return "";
+            }
+            public static string Send(List<string> args)
+            {
+                if (args.Count >= 4 && args[2].Length > 0 && args[3].Length > 0)
+                {
+                    if (args[2].Trim() == "*")
+                    {
+                        tosend.Add(Program.GetArgs(args, 3, -1) + "#to*all#");
+                    }
+                    else if (args[2].Length == 6)
+                    {
+                        tosend.Add(Program.GetArgs(args, 3, -1) + "#to" + args[2] + "#");
+                    }
+                }
+                else Program.WriteUSAGE("cid", usages);
+                SendAll();
+                return "";
+            }
+            public static string Read()
+            {
+                Program.WriteTxt("&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&aREADING&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=");
+                foreach (var item in unread)
+                {
+                    Program.WriteTxt(item);
+                }
+                if (unread.Count < 1) Program.WriteTxt("&4Nothing to read!");
+                unread.Clear();
+                Program.WriteTxt("&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&aREADING&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=");
+                return "";
+            }
+            public static string Remove()
+            {
+                FTPHandle.CIDRemove();
+                Reset();
+                return "";
+            }
+            public static string Reset()
+            {
+                tosend.Clear();
+                unread.Clear();
+                lastreadline = 0;
+                return "";
+            }
+            public static string Info()
+            {
+                DownloadAll();
+                Program.WriteTxt("&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&aCID-INFO&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=");
+                Program.WriteTxt($"&3CID : &5{client_id}");
+                Program.WriteTxt($"&3Position : &5{lastreadline} / &b{FTPHandle.GetCIDLenght()}");
+                Program.WriteTxt($"&3Buffor : ");
+                Program.WriteTxt($"&3     Read : &5{unread.Count}");
+                Program.WriteTxt($"&3     Send : &5{tosend.Count}");
+                Program.WriteTxt("&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&aCID-INFO&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=");
+                return "";
+            }
+            public static void Synch()
+            {
+                DownloadAll();
+                Read();
+            }
+            public static void DownloadAll(bool report = true)
+            {
+                int cidlenght = FTPHandle.GetCIDLenght();
+                if (report) Program.WriteTxt($"&4CID Download : [{lastreadline}]/[{cidlenght}]");
+                FTPHandle.ftp.Disconnect();
+                while (cidlenght > lastreadline)
+                {
+                    string txt = FTPHandle.GetCIDTxt(lastreadline + 1);
+                    FTPHandle.ftp.Disconnect();
+                    if (txt.Contains("#to*all#") || txt.Contains("#to" + client_id + "#"))
+                    {
+                        txt = txt.Replace("#to*all#", "");
+                        txt = txt.Replace("#to" + client_id + "#", "");
+                        unread.Add(txt);
+                    }
+                    lastreadline++;
+                    if (report) CLEAR.ClearOneLine();
+                    if (report) Program.WriteTxt($"&4CID Download : [{lastreadline}]/[{cidlenght}]");
+                }
+            }
+            public static void SendAll(bool report = true)
+            {
+                int done = 0;
+                foreach (var item in tosend)
+                {
+                    done++;
+                    if (report) Program.WriteTxt($"&4CID Upload : [{done}]/[{tosend.Count}]");
+                    FTPHandle.AppCIDTxt(item);
+                }
+                tosend.Clear();
             }
         }
     }

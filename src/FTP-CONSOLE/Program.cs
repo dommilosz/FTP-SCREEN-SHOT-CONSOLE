@@ -4,6 +4,8 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Threading;
 
 namespace FTP_CONSOLE
 {
@@ -155,6 +157,12 @@ namespace FTP_CONSOLE
             Console.Title = Console.Title.Trim();
             Console.Title = " " + Console.Title;
             Console.Title += "]";
+            //int unread = 0;
+            //Commands.CID.DownloadAll();
+            //unread = Commands.CID.unread.Count;
+            //Console.Title += "   [U:";
+            //Console.Title += unread.ToString();
+            //Console.Title += "]";
         }
         [STAThreadAttribute]
         public static void Main(string[] args)
@@ -163,9 +171,8 @@ namespace FTP_CONSOLE
             {
                 try
                 {
-
                     WriteTxt("@&2/");
-                    Console.Title = $" FTP CONSOLE - [IDLE]";
+                    SetTitle(new string[] { "IDLE" }.ToList());
                     Console.SetCursorPosition(1, Console.CursorTop - 1);
                     List<string> argsl = Console.ReadLine().Split(' ').ToList();
                     SetTitle(argsl);
@@ -199,6 +206,7 @@ namespace FTP_CONSOLE
                         case "help": Program.WriteUSAGE("", mainusages); break;
                         case "msk": Program.WriteTxt(Program.MaskString(GetArgs(argsl, 2, -1), Convert.ToInt32(argsl[1]))); break;
                         case "wincmd": Commands.WINCMD.Run(argsl); break;
+                        case "cid": Commands.CID.Run(argsl); break;
                         default: throw new Exception("Unknown Command");
                     }
 
