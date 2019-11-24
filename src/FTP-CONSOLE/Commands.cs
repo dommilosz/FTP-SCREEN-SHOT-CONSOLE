@@ -556,7 +556,7 @@ namespace FTP_CONSOLE
         {
             public static List<string> tosend = new List<string>();
             public static List<string> unread = new List<string>();
-            public static int lastreadline = FTPHandle.GetCIDLenght();
+            public static int lastreadline = 0;
             public static int client_id = new Random().Next(100000, 999999);
             public static List<string> usages = new string[] { "read", "get", "renew", "send <cid> <message>", "send * <message>", "info" }.ToList();
             public static string Run(List<string> args)
@@ -571,6 +571,14 @@ namespace FTP_CONSOLE
                     if (args[1] == "remove") Remove();
                 }
                 else Program.WriteUSAGE("cid", usages);
+                return "";
+            }
+            public static string Init(List<string> args)
+            {
+                lastreadline = FTPHandle.GetCIDLenght();
+                Reset();
+                Commands.CID.DownloadAll(fast: true);
+                Commands.CLEAR.ClearOneLine();
                 return "";
             }
             public static string Send(List<string> args)

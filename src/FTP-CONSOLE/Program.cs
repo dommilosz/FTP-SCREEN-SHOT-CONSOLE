@@ -166,8 +166,11 @@ namespace FTP_CONSOLE
         }
         public static void Main(string[] args)
         {
-            Commands.CID.DownloadAll(fast: true);
-            Commands.CLEAR.ClearOneLine();
+            try
+            {
+                Commands.CID.Init(args.ToList());
+            }
+            catch { }
             CMD(args);
         }
         [STAThreadAttribute]
