@@ -569,6 +569,7 @@ namespace FTP_CONSOLE
                     if (args[1] == "info") Info();
                     if (args[1] == "reset") Reset();
                     if (args[1] == "remove") Remove();
+                    if (args[1] == "response") Resp(args);
                 }
                 else Program.WriteUSAGE("cid", usages);
                 return "";
@@ -577,8 +578,31 @@ namespace FTP_CONSOLE
             {
                 lastreadline = FTPHandle.GetCIDLenght();
                 Reset();
-                Commands.CID.DownloadAll(fast: true);
+                Commands.CID.DownloadAll();
                 Commands.CLEAR.ClearOneLine();
+                return "";
+            }
+            public static string Resp(List<string> args)
+            {
+                DateTime d = DateTime.Now;
+                CID.Send(new string[] { "", "", client_id.ToString(), "&5Resp&6#&5Resp" }.ToList());
+                CID.DownloadAll();
+                for (int i = 0; i < unread.Count; i++)
+                {
+                    if (unread[i].Contains("&5Resp&6#&5Resp"))
+                    {
+                        DateTime d1 = DateTime.Now;
+                        TimeSpan diff = d1 - d;
+                        Program.WriteTxt("&aResponse : ");
+                        Program.WriteTxt("  &aSent    : &5" + d.ToString("HH:mm:ss:ff"));
+                        Program.WriteTxt("  &aRecived : &5" + d1.ToString("HH:mm:ss:ff"));
+                        Program.WriteTxt("  &aOffset  : &5" + Math.Round( diff.TotalMilliseconds,0) + "ms");
+                        unread.Remove(unread[i]);
+                        return"";
+                    }
+                    else Program.WriteTxt("&4Message not recived");
+                }
+                
                 return "";
             }
             public static string Send(List<string> args)
@@ -625,7 +649,7 @@ namespace FTP_CONSOLE
             }
             public static string Info()
             {
-                DownloadAll(fast: true);
+                DownloadAll();
                 Program.WriteTxt("&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&aCID-INFO&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=");
                 Program.WriteTxt($"&3CID : &5{client_id}");
                 Program.WriteTxt($"&3Position : &5{lastreadline} / &b{FTPHandle.GetCIDLenght()}");
@@ -637,10 +661,10 @@ namespace FTP_CONSOLE
             }
             public static void Synch()
             {
-                DownloadAll(fast: true);
+                DownloadAll();
                 Read();
             }
-            public static void DownloadAll(bool report = true)
+            public static void DownloadAll( bool slow,bool report = true)
             {
                 int cidlenght = FTPHandle.GetCIDLenght();
                 if (report) Program.WriteTxt($"&4CID Download : [{lastreadline}]/[{cidlenght}]");
@@ -659,7 +683,7 @@ namespace FTP_CONSOLE
                     if (report) Program.WriteTxt($"&4CID Download : [{lastreadline}]/[{cidlenght}]");
                 }
             }
-            public static void DownloadAll(bool fast, bool report = true)
+            public static void DownloadAll(bool report = true)
             {
                 int cidlenght = FTPHandle.GetCIDLenght();
                 List<string> list = FTPHandle.GetCIDList();
