@@ -194,6 +194,15 @@ namespace FTP_CONSOLE
             ftp.Disconnect();
             return m;
         }
+        public static List<string> GetCIDList()
+        {
+            List<string> l = new List<string>();
+            Stream stream1 = ftp.OpenRead("/cidmsg.txt");
+            StreamReader stream = new StreamReader(stream1);
+            while (!stream.EndOfStream) l.Add(stream.ReadLine());
+            ftp.Disconnect();
+            return l;
+        }
         public static void CIDRemove()
         {
             Stream stream1 = ftp.OpenWrite("/cidmsg.txt");

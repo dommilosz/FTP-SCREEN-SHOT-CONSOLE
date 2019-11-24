@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -557,7 +558,7 @@ namespace FTP_CONSOLE
             public static List<string> unread = new List<string>();
             public static int lastreadline = FTPHandle.GetCIDLenght();
             public static int client_id = new Random().Next(100000, 999999);
-            public static List<string> usages = new string[] { "get", "renew", "send <cid> <message>", "send * <message>", "read" }.ToList();
+            public static List<string> usages = new string[] { "read", "get", "renew", "send <cid> <message>", "send * <message>", "info" }.ToList();
             public static string Run(List<string> args)
             {
                 if (args.Count > 1)
@@ -578,11 +579,11 @@ namespace FTP_CONSOLE
                 {
                     if (args[2].Trim() == "*")
                     {
-                        tosend.Add(Program.GetArgs(args, 3, -1) + "#to*all#");
+                        tosend.Add(Program.GetArgs(args, 3, -1) + "#to*all#" + $"#from#:[{client_id}]");
                     }
                     else if (args[2].Length == 6)
                     {
-                        tosend.Add(Program.GetArgs(args, 3, -1) + "#to" + args[2] + "#");
+                        tosend.Add(Program.GetArgs(args, 3, -1) + "#to" + args[2] + "#" + $"#from#:[{client_id}]");
                     }
                 }
                 else Program.WriteUSAGE("cid", usages);
@@ -616,7 +617,7 @@ namespace FTP_CONSOLE
             }
             public static string Info()
             {
-                DownloadAll();
+                DownloadAll(fast: true);
                 Program.WriteTxt("&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&aCID-INFO&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=&a-&4=");
                 Program.WriteTxt($"&3CID : &5{client_id}");
                 Program.WriteTxt($"&3Position : &5{lastreadline} / &b{FTPHandle.GetCIDLenght()}");
@@ -628,7 +629,7 @@ namespace FTP_CONSOLE
             }
             public static void Synch()
             {
-                DownloadAll();
+                DownloadAll(fast: true);
                 Read();
             }
             public static void DownloadAll(bool report = true)
@@ -639,7 +640,6 @@ namespace FTP_CONSOLE
                 while (cidlenght > lastreadline)
                 {
                     string txt = FTPHandle.GetCIDTxt(lastreadline + 1);
-                    FTPHandle.ftp.Disconnect();
                     if (txt.Contains("#to*all#") || txt.Contains("#to" + client_id + "#"))
                     {
                         txt = txt.Replace("#to*all#", "");
@@ -647,6 +647,30 @@ namespace FTP_CONSOLE
                         unread.Add(txt);
                     }
                     lastreadline++;
+                    if (report) CLEAR.ClearOneLine();
+                    if (report) Program.WriteTxt($"&4CID Download : [{lastreadline}]/[{cidlenght}]");
+                }
+            }
+            public static void DownloadAll(bool fast, bool report = true)
+            {
+                int cidlenght = FTPHandle.GetCIDLenght();
+                List<string> list = FTPHandle.GetCIDList();
+                if (report) Program.WriteTxt($"&4CID Download : [{lastreadline}]/[{cidlenght}]");
+                while (cidlenght > lastreadline)
+                {
+                    string txt = list[lastreadline];
+                    if (txt.Contains("#to*all#") || txt.Contains("#to" + client_id + "#"))
+                    {
+                        txt = txt.Replace("#to*all#", "");
+                        txt = txt.Replace("#to" + client_id + "#", "");
+                        string fcid = txt[txt.Length - 7].ToString() + txt[txt.Length - 6].ToString() + txt[txt.Length - 5].ToString() + txt[txt.Length - 4].ToString() + txt[txt.Length - 3].ToString() + txt[txt.Length - 2].ToString();
+                        fcid = fcid.Replace(client_id.ToString(), $"{client_id} &5(YOU)");
+                        txt = txt.Remove(txt.Length - 15, 15);
+                        // #from#:[123456]
+                        unread.Add($"&e{fcid} &b: &f" + txt);
+                    }
+                    lastreadline++;
+                    Thread.Sleep(10);
                     if (report) CLEAR.ClearOneLine();
                     if (report) Program.WriteTxt($"&4CID Download : [{lastreadline}]/[{cidlenght}]");
                 }

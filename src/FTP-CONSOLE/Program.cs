@@ -19,7 +19,7 @@ namespace FTP_CONSOLE
 
         public const int SW_HIDE = 0;
         public const int SW_SHOW = 5;
-        public static List<string> mainusages = new string[] { "clear", "cs", "credentials", "cr", "write", "echo", "clcode", "screenshot", "tree", "gui", "download", "dl", "delete", "del", "color", "exit", "help" }.ToList();
+        public static List<string> mainusages = new string[] { "clear", "cs", "credentials", "cr", "write", "echo", "clcode", "screenshot", "tree", "gui", "download", "dl", "delete", "del", "color", "exit","cid", "help" }.ToList();
 
         public static string GetArgs(List<string> args, int fromindex, int toindex = -2, string add = " ")
         {
@@ -164,8 +164,14 @@ namespace FTP_CONSOLE
             //Console.Title += unread.ToString();
             //Console.Title += "]";
         }
-        [STAThreadAttribute]
         public static void Main(string[] args)
+        {
+            Commands.CID.DownloadAll(fast: true);
+            Commands.CLEAR.ClearOneLine();
+            CMD(args);
+        }
+        [STAThreadAttribute]
+        public static void CMD(string[] args)
         {
             while (true)
             {
@@ -178,7 +184,7 @@ namespace FTP_CONSOLE
                     SetTitle(argsl);
                     if (string.IsNullOrWhiteSpace(GetArgs(argsl, 0).ToLower()))
                     {
-                        Main(args);
+                        CMD(args);
                         break;
                     }
                     switch (GetArgs(argsl, 0).ToLower())
