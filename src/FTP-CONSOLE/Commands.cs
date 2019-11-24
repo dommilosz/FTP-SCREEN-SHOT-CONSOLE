@@ -678,7 +678,6 @@ namespace FTP_CONSOLE
                         unread.Add($"&e{fcid} &b: &f" + txt);
                     }
                     lastreadline++;
-                    Thread.Sleep(10);
                     if (report) CLEAR.ClearOneLine();
                     if (report) Program.WriteTxt($"&4CID Download : [{lastreadline}]/[{cidlenght}]");
                 }
