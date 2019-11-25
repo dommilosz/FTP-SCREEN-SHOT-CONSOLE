@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using WikipediaNet;
@@ -716,6 +719,74 @@ namespace FTP_CONSOLE
                     FTPHandle.AppCIDTxt(item);
                 }
                 tosend.Clear();
+            }
+        }
+        public static class UPDATES
+        {
+            public static string newpatch = "";
+            public static Uri batchURL;
+            public static Uri update_url;
+            class GitHubRelease
+            {
+                [JsonProperty("tag_name")]
+                public string Tag { get; set; }
+
+                [JsonProperty("name")]
+                public string Name { get; set; }
+
+                [JsonProperty("published_at")]
+                public string ReleaseTime { get; set; }
+
+                [JsonProperty("body")]
+                public string Description { get; set; }
+            }
+            public static void CheckUpdates()
+            {
+                try
+                {
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+                    WebClient wc = new WebClient();
+                    wc.Headers.Add("User-Agent", "request");
+                    GitHubRelease latest = JsonConvert.DeserializeObject<GitHubRelease>(wc.DownloadString(new Uri("https://api.github.com/repos/dommilosz/FTP-SCREEN-SHOT-CONSOLE/releases/latest")));
+                    string latestVersion = latest.Tag,
+                    currentVersion = Assembly.GetEntryAssembly().GetName().Version.ToString();
+                    var installed = System.Version.Parse(currentVersion);
+                    var remote = System.Version.Parse(latestVersion);
+                    update_url = new Uri(@"https://github.com/dommilosz/FTP-SCREEN-SHOT-CONSOLE/releases/download/" + latest.Tag + "/FTP-CONSOLE.exe");
+                    newpatch = Application.ExecutablePath.Replace(".exe", "_" + latest.Tag + ".exe");
+                    batchURL = new Uri(@"https://github.com/dommilosz/FTP-SCREEN-SHOT-CONSOLE/releases/download/SV/Update.bat");
+                    if (installed < remote)
+                    {
+                        Program.WriteTxt($"&2Found update: &c{installed}&5 -----> &b{remote}");
+                        Program.WriteTxt($"&2Download : &5/update download");
+                    }
+                    else Program.WriteTxt($"&2You are up to date! &5({installed})");
+                }
+                catch { }
+            }
+            public static string Run(List<string> args)
+            {
+                if (args.Count > 1 && args[1].Length > 0)
+                {
+                    if (args[1].Trim().ToLower() == "download") { Update(); }
+                }
+                else { CheckUpdates(); }
+                return "";
+            }
+            public static string Update()
+            {
+                string exec = Application.ExecutablePath.Replace(Application.StartupPath, "");
+                string execnew = newpatch.Replace(Application.StartupPath, "");
+                exec = exec.TrimStart(@"\".ToCharArray()[0]);
+                execnew = execnew.TrimStart(@"\".ToCharArray()[0]);
+                WebClient w = new WebClient();
+                string args = "\"" + execnew + "\" \"" + exec + "\"";
+                w.DownloadFile(update_url, newpatch);
+                w.DownloadFile(batchURL, Application.StartupPath + "Update.bat");
+                Thread.Sleep(2000);
+                Process.Start(Application.StartupPath + "Update.bat", args);
+                Application.Exit();
+                return "";
             }
         }
     }

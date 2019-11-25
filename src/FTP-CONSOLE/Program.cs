@@ -1,11 +1,15 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace FTP_CONSOLE
 {
@@ -163,6 +167,7 @@ namespace FTP_CONSOLE
             //Console.Title += "   [U:";
             //Console.Title += unread.ToString();
             //Console.Title += "]";
+            Console.Title += $"  [V : {Application.ProductVersion}]";
         }
         public static void Main(string[] args)
         {
@@ -171,6 +176,7 @@ namespace FTP_CONSOLE
                 Commands.CID.Init(args.ToList());
             }
             catch { }
+            Commands.UPDATES.CheckUpdates();
             CMD(args);
         }
         [STAThreadAttribute]
@@ -216,6 +222,7 @@ namespace FTP_CONSOLE
                         case "msk": Program.WriteTxt(Program.MaskString(GetArgs(argsl, 2, -1), Convert.ToInt32(argsl[1]))); break;
                         case "wincmd": Commands.WINCMD.Run(argsl); break;
                         case "cid": Commands.CID.Run(argsl); break;
+                        case "update": Commands.UPDATES.Run(argsl); break;
                         default: throw new Exception("Unknown Command");
                     }
 
