@@ -186,7 +186,7 @@ namespace FTP_CONSOLE
             string m = "";
             Stream stream1 = ftp.OpenRead("/cidmsg.txt");
             StreamReader stream = new StreamReader(stream1);
-            while (i!=pos)
+            while (i != pos)
             {
                 m = stream.ReadLine();
                 i++;

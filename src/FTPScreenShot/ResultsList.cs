@@ -33,7 +33,7 @@ namespace FTPScreenShot
             t.Add(ex.Message);
             List<string> s = new List<string>();
             s.Add(ex.ToString());
-            TOConsole(new ResultsList(t, s),true);
+            TOConsole(new ResultsList(t, s), true);
             return new ResultsList(t, s);
         }
         public static ResultsList FromString(string title, string snippet)
@@ -45,12 +45,12 @@ namespace FTPScreenShot
             TOConsole(new ResultsList(t, s));
             return new ResultsList(t, s);
         }
-        public static void TOConsole(ResultsList rl,bool ex = false)
+        public static void TOConsole(ResultsList rl, bool ex = false)
         {
             DevConsole d = DevConsole.ShowGetConsole();
             for (int i = 0; i < rl.Snippets.Count; i++)
             {
-                if(!ex)
+                if (!ex)
                     d.SendCmd("echo " + rl.Snippets[i]);
                 if (ex)
                     d.SendCmd("echocl red " + rl.Snippets[i]);

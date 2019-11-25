@@ -21,7 +21,7 @@ namespace FTPScreenShot.ScreenShot
 
         }
         public ImagePreview(Image back, Image sel, Rectangle r)
-        { 
+        {
             r.Width--;
             r.Height--;
             rec = r;

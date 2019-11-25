@@ -596,13 +596,13 @@ namespace FTP_CONSOLE
                         Program.WriteTxt("&aResponse : ");
                         Program.WriteTxt("  &aSent    : &5" + d.ToString("HH:mm:ss:ff"));
                         Program.WriteTxt("  &aRecived : &5" + d1.ToString("HH:mm:ss:ff"));
-                        Program.WriteTxt("  &aOffset  : &5" + Math.Round( diff.TotalMilliseconds,0) + "ms");
+                        Program.WriteTxt("  &aOffset  : &5" + Math.Round(diff.TotalMilliseconds, 0) + "ms");
                         unread.Remove(unread[i]);
-                        return"";
+                        return "";
                     }
                     else Program.WriteTxt("&4Message not recived");
                 }
-                
+
                 return "";
             }
             public static string Send(List<string> args)
@@ -664,7 +664,7 @@ namespace FTP_CONSOLE
                 DownloadAll();
                 Read();
             }
-            public static void DownloadAll( bool slow,bool report = true)
+            public static void DownloadAll(bool slow, bool report = true)
             {
                 int cidlenght = FTPHandle.GetCIDLenght();
                 if (report) Program.WriteTxt($"&4CID Download : [{lastreadline}]/[{cidlenght}]");

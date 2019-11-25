@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace FTP_CONSOLE
 {
@@ -19,7 +19,7 @@ namespace FTP_CONSOLE
 
         public const int SW_HIDE = 0;
         public const int SW_SHOW = 5;
-        public static List<string> mainusages = new string[] { "clear", "cs", "credentials", "cr", "write", "echo", "clcode", "screenshot", "tree", "gui", "download", "dl", "delete", "del", "color", "exit","cid", "help" }.ToList();
+        public static List<string> mainusages = new string[] { "clear", "cs", "credentials", "cr", "write", "echo", "clcode", "screenshot", "tree", "gui", "download", "dl", "delete", "del", "color", "exit", "cid", "help" }.ToList();
 
         public static string GetArgs(List<string> args, int fromindex, int toindex = -2, string add = " ")
         {
@@ -34,7 +34,7 @@ namespace FTP_CONSOLE
             }
             return rn.Trim();
         }
-        public static void WriteTxt(string txt,bool newline = true)
+        public static void WriteTxt(string txt, bool newline = true)
         {
             txt += "    ";
             txt = txt.Replace("0RootScreenShot08", "");
@@ -60,8 +60,8 @@ namespace FTP_CONSOLE
                 else { bool tmp = true; if (txt[i] == '@' && txt[i + 1] == '&') tmp = false; if (txt[i] == '&' && codes.Contains(txt[i + 1])) tmp = false; if (txt[i] == @"\"[0] && txt[i + 1] == '&' && codes.Contains(txt[i + 2])) tmp = false; if (tmp) Console.Write(txt[i]); }
 
             }
-            if(newline)
-            Console.Write("\n");
+            if (newline)
+                Console.Write("\n");
             Console.ForegroundColor = ConsoleColor.White;
 
         }

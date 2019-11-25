@@ -12,7 +12,7 @@ namespace FTPScreenShot
 {
     public partial class ProgressReport : Form
     {
-        static ProgressBarDialog pbd; 
+        static ProgressBarDialog pbd;
         public ProgressReport(float v, float max)
         {
             InitializeComponent();
@@ -20,14 +20,14 @@ namespace FTPScreenShot
             string pers = (w * 100).ToString().Split(',')[0];
             int per = Convert.ToInt32(pers);
             pbd.progressBar1.Value = per;
-            pbd.Text = "Downloading...    [" +per+ "%]";
-            DevConsole.ShowGetConsole().SendCmd("echocl violet "+pbd.Text);
+            pbd.Text = "Downloading...    [" + per + "%]";
+            DevConsole.ShowGetConsole().SendCmd("echocl violet " + pbd.Text);
         }
         public static void Report(float v, float max)
         {
             ProgressReport pd = new ProgressReport(v, max);
             pd.ShowDialog();
-            
+
         }
         public static void StartReporting()
         {

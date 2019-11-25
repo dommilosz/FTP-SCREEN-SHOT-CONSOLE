@@ -102,7 +102,7 @@ namespace FTPScreenShot
             {
                 LoadSelected();
             }
-            else if(treeView1.SelectedNode.Level != 0)
+            else if (treeView1.SelectedNode.Level != 0)
             {
                 int i = GetSelectedIndex();
                 ftpDownload.ftpImage1.comboBox1.SelectedItem = ftpDownload.ftpImage1.comboBox1.Items[i];

@@ -22,7 +22,7 @@ namespace FTPScreenShot
         {
             InitializeComponent();
             form1 = this;
-            
+
             PasswordDialog pd = new PasswordDialog();
             pd.ShowDialog();
             FTPHandle.CreateDir("ScreenShot/");
@@ -129,7 +129,7 @@ namespace FTPScreenShot
 
         private void Button6_Click(object sender, EventArgs e)
         {
-            
+
             if (newconsole)
             {
                 this.Close();
@@ -138,6 +138,6 @@ namespace FTPScreenShot
             {
                 DevConsole.ShowConsole();
             }
-            }
+        }
     }
 }

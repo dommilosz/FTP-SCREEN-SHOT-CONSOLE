@@ -37,7 +37,7 @@ namespace FTPScreenShot
                 index++;
                 ftp.Disconnect();
             }
-            catch(Exception ex) { ResultsList.FromException(ex); }
+            catch (Exception ex) { ResultsList.FromException(ex); }
         }
         public static void CreateDir(string patch = "", bool issaveloc = false)
         {
@@ -48,7 +48,7 @@ namespace FTPScreenShot
                 if (issaveloc) dir = patch;
                 ftp.Disconnect();
             }
-            catch(Exception ex) { ResultsList.FromException(ex); }
+            catch (Exception ex) { ResultsList.FromException(ex); }
         }
         public static List<FtpListItem> GetItemsList(string patch = "")
         {

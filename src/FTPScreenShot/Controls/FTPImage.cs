@@ -76,7 +76,7 @@ namespace FTPScreenShot.Controls
             imagesindir = FTPHandle.GetItemsList(dirs[index].FullName);
             int max = imagesindir.Count;
             this.images = new List<Image>();
-            if (2==1)
+            if (2 == 1)
             {
                 for (int i = 0; i < max; i++)
                 {
@@ -95,7 +95,7 @@ namespace FTPScreenShot.Controls
                     List<ImgMem.Dir> dirstos = ImgMem.dirs;
                     ImgMem.Dir dir = ImgMem.dirs[ImgMem.SavedIndex(imagesindir)];
                     images = dir.images;
-                    ProgressReport.Report(1,1);
+                    ProgressReport.Report(1, 1);
                     SetImages();
                 }
                 else
@@ -110,7 +110,7 @@ namespace FTPScreenShot.Controls
                         catch (Exception ex) { i = 100000; ResultsList.FromException(ex); }
                     }
                     ImgMem.Save(images, imagesindir, dirs[index].Name);
-                    
+
                 }
                 ImgMem.SaveImages();
             }

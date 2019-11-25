@@ -2,11 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
-using System.Drawing.Imaging;
 
 namespace FTPScreenShot
 {
@@ -28,7 +28,7 @@ namespace FTPScreenShot
             hash += "#";
             return hash;
         }
-        public static void Save(List<Image> imagesa,List<FtpListItem> items, string dirname)
+        public static void Save(List<Image> imagesa, List<FtpListItem> items, string dirname)
         {
             List<Image> imgs = new List<Image>();
             for (int i = 0; i < imagesa.Count; i++)
@@ -36,7 +36,7 @@ namespace FTPScreenShot
                 Image img = (Image)imagesa[i].Clone();
                 imgs.Add(img);
             }
-            dirs.Add(new Dir(imagesa,items, dirname));
+            dirs.Add(new Dir(imagesa, items, dirname));
             List<ImgMem.Dir> dirstos = ImgMem.dirs;
         }
         public static bool IsSaved(List<FtpListItem> items)
