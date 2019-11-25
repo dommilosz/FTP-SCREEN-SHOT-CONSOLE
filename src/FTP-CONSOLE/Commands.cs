@@ -726,6 +726,9 @@ namespace FTP_CONSOLE
             public static string newpatch = "";
             public static Uri batchURL;
             public static Uri update_url;
+            public static bool uptodate = false;
+            public static Version installed;
+            public static Version remote;
             class GitHubRelease
             {
                 [JsonProperty("tag_name")]
@@ -744,14 +747,15 @@ namespace FTP_CONSOLE
             {
                 try
                 {
+                    uptodate = true;
                     ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
                     WebClient wc = new WebClient();
                     wc.Headers.Add("User-Agent", "request");
                     GitHubRelease latest = JsonConvert.DeserializeObject<GitHubRelease>(wc.DownloadString(new Uri("https://api.github.com/repos/dommilosz/FTP-SCREEN-SHOT-CONSOLE/releases/latest")));
                     string latestVersion = latest.Tag,
                     currentVersion = Assembly.GetEntryAssembly().GetName().Version.ToString();
-                    var installed = System.Version.Parse(currentVersion);
-                    var remote = System.Version.Parse(latestVersion);
+                    installed = System.Version.Parse(currentVersion);
+                    remote = System.Version.Parse(latestVersion);
                     update_url = new Uri(@"https://github.com/dommilosz/FTP-SCREEN-SHOT-CONSOLE/releases/download/" + latest.Tag + "/FTP-CONSOLE.exe");
                     newpatch = Application.ExecutablePath.Replace(".exe", "_" + latest.Tag + ".exe");
                     batchURL = new Uri(@"https://github.com/dommilosz/FTP-SCREEN-SHOT-CONSOLE/releases/download/SV/Update.bat");
@@ -759,8 +763,9 @@ namespace FTP_CONSOLE
                     {
                         Program.WriteTxt($"&2Found update: &c{installed}&5 -----> &b{remote}");
                         Program.WriteTxt($"&2Download : &5/update download");
+                        uptodate = false;
                     }
-                    else Program.WriteTxt($"&2You are up to date! &5({installed})");
+                    else Program.WriteTxt($"&aYou are Up To Date! &5({installed})");
                 }
                 catch { }
             }
@@ -775,6 +780,17 @@ namespace FTP_CONSOLE
             }
             public static string Update()
             {
+                CheckUpdates();
+                if (uptodate)
+                {
+
+                    Program.WriteTxt($"&4Do You Want To Reinstall FTP-CONSOLE? &aY/N");
+                    if (Console.ReadKey().KeyChar == 'Y' || Console.ReadKey().KeyChar == 'y')
+                    {
+
+                    }
+                    else { return ""; }
+                }
                 string exec = Application.ExecutablePath.Replace(Application.StartupPath, "");
                 string execnew = newpatch.Replace(Application.StartupPath, "");
                 exec = exec.TrimStart(@"\".ToCharArray()[0]);

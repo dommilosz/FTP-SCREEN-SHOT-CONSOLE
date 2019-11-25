@@ -23,7 +23,7 @@ namespace FTP_CONSOLE
 
         public const int SW_HIDE = 0;
         public const int SW_SHOW = 5;
-        public static List<string> mainusages = new string[] { "clear", "cs", "credentials", "cr", "write", "echo", "clcode", "screenshot", "tree", "gui", "download", "dl", "delete", "del", "color", "exit", "cid","update", "help" }.ToList();
+        public static List<string> mainusages = new string[] { "clear", "cs", "credentials", "cr", "write", "echo", "clcode", "screenshot", "tree", "gui", "download", "dl", "delete", "del", "color", "exit", "cid", "update", "help" }.ToList();
 
         public static string GetArgs(List<string> args, int fromindex, int toindex = -2, string add = " ")
         {
