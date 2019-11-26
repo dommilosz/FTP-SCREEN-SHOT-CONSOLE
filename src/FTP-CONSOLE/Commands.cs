@@ -729,6 +729,7 @@ namespace FTP_CONSOLE
             public static bool uptodate = false;
             public static Version installed;
             public static Version remote;
+            public static string token = "?client_id=9a3e58501214628adc6d&client_secret=9f30900fad7b567e1c59e931f0518cedc8aec68c";
             class GitHubRelease
             {
                 [JsonProperty("tag_name")]
@@ -751,14 +752,15 @@ namespace FTP_CONSOLE
                     ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
                     WebClient wc = new WebClient();
                     wc.Headers.Add("User-Agent", "request");
-                    GitHubRelease latest = JsonConvert.DeserializeObject<GitHubRelease>(wc.DownloadString(new Uri("https://api.github.com/repos/dommilosz/FTP-SCREEN-SHOT-CONSOLE/releases/latest")));
+                    var json = wc.DownloadString(new Uri("https://api.github.com/repos/dommilosz/FTP-SCREEN-SHOT-CONSOLE/releases/latest" + token));
+                    GitHubRelease latest = JsonConvert.DeserializeObject<GitHubRelease>(json);
                     string latestVersion = latest.Tag,
                     currentVersion = Assembly.GetEntryAssembly().GetName().Version.ToString();
                     installed = System.Version.Parse(currentVersion);
                     remote = System.Version.Parse(latestVersion);
-                    update_url = new Uri(@"https://github.com/dommilosz/FTP-SCREEN-SHOT-CONSOLE/releases/download/" + latest.Tag + "/FTP-CONSOLE.exe");
+                    update_url = new Uri(@"https://github.com/dommilosz/FTP-SCREEN-SHOT-CONSOLE/releases/download/" + latest.Tag + "/FTP-CONSOLE.exe"+token);
                     newpatch = Application.ExecutablePath.Replace(".exe", "_" + latest.Tag + ".exe");
-                    batchURL = new Uri(@"https://github.com/dommilosz/FTP-SCREEN-SHOT-CONSOLE/releases/download/SV/Update.bat");
+                    batchURL = new Uri(@"https://github.com/dommilosz/FTP-SCREEN-SHOT-CONSOLE/releases/download/SV/Update.bat" + token);
                     if (installed < remote)
                     {
                         Program.WriteTxt($"&2Found update: &c{installed}&5 -----> &b{remote}");
