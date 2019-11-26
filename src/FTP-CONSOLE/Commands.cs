@@ -793,6 +793,7 @@ namespace FTP_CONSOLE
                     }
                     else { return ""; }
                 }
+                Program.WriteTxt($"&2Downloading Updates!");
                 string exec = Application.ExecutablePath.Replace(Application.StartupPath, "");
                 string execnew = newpatch.Replace(Application.StartupPath, "");
                 exec = exec.TrimStart(@"\".ToCharArray()[0]);
