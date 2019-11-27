@@ -727,6 +727,7 @@ namespace FTP_CONSOLE
             public static Uri batchURL;
             public static Uri update_url;
             public static bool uptodate = false;
+            public static bool dev = false;
             public static Version installed;
             public static Version remote;
             public static string token = "?client_id=9a3e58501214628adc6d&client_secret=9f30900fad7b567e1c59e931f0518cedc8aec68c";
@@ -749,6 +750,7 @@ namespace FTP_CONSOLE
                 try
                 {
                     uptodate = true;
+                    dev = false;
                     ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
                     WebClient wc = new WebClient();
                     wc.Headers.Add("User-Agent", "request");
@@ -758,9 +760,15 @@ namespace FTP_CONSOLE
                     currentVersion = Assembly.GetEntryAssembly().GetName().Version.ToString();
                     installed = System.Version.Parse(currentVersion);
                     remote = System.Version.Parse(latestVersion);
-                    update_url = new Uri(@"https://github.com/dommilosz/FTP-SCREEN-SHOT-CONSOLE/releases/download/" + latest.Tag + "/FTP-CONSOLE.exe"+token);
+                    update_url = new Uri(@"https://github.com/dommilosz/FTP-SCREEN-SHOT-CONSOLE/releases/download/" + latest.Tag + "/FTP-CONSOLE.exe" + token);
                     newpatch = Application.ExecutablePath.Replace(".exe", "_" + latest.Tag + ".exe");
                     batchURL = new Uri(@"https://github.com/dommilosz/FTP-SCREEN-SHOT-CONSOLE/releases/download/SV/Update.bat" + token);
+                    if (Application.ProductVersion.Contains("DEV"))
+                    {
+                        Program.WriteTxt($"&aYou are Using &5DEV&a Version! ");
+                        dev = true;
+                        return;
+                    }
                     if (installed < remote)
                     {
                         Program.WriteTxt($"&2Found update: &c{installed}&5 -----> &b{remote}");
@@ -783,11 +791,13 @@ namespace FTP_CONSOLE
             public static string Update()
             {
                 CheckUpdates();
-                if (uptodate)
+                if (uptodate||dev)
                 {
 
-                    Program.WriteTxt($"&4Do You Want To Reinstall FTP-CONSOLE? &aY/N");
-                    if (Console.ReadKey().KeyChar == 'Y' || Console.ReadKey().KeyChar == 'y')
+                    Program.WriteTxt($"&4Do You Want To Reinstall FTP-CONSOLE? &aY/N  : ",false);
+                    string ans = Console.ReadKey().KeyChar.ToString().ToLower();
+                    Program.WriteTxt("");
+                    if (ans == "y")
                     {
 
                     }

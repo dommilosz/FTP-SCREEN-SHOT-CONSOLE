@@ -57,11 +57,12 @@ namespace FTP_CONSOLE
                 {
                     if (i - 1 >= 0 && txt[i - 1] == @"\"[0])
                     {
+                        if(i<txt.Length-4)
                         Console.Write(txt[i]);
                     }
                     else { Console.ForegroundColor = DecodeCode(txt[i + 1]); txt = txt.Remove(i + 1, 1); }
                 }
-                else { bool tmp = true; if (txt[i] == '@' && txt[i + 1] == '&') tmp = false; if (txt[i] == '&' && codes.Contains(txt[i + 1])) tmp = false; if (txt[i] == @"\"[0] && txt[i + 1] == '&' && codes.Contains(txt[i + 2])) tmp = false; if (tmp) Console.Write(txt[i]); }
+                else { bool tmp = (i < txt.Length - 4); if (txt[i] == '@' && txt[i + 1] == '&') tmp = false; if (txt[i] == '&' && codes.Contains(txt[i + 1])) tmp = false; if (txt[i] == @"\"[0] && txt[i + 1] == '&' && codes.Contains(txt[i + 2])) tmp = false; if (tmp) Console.Write(txt[i]); }
 
             }
             if (newline)
