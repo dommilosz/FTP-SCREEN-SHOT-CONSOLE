@@ -187,10 +187,14 @@ namespace BlueScreen_Simulator
                 this.TopMost = false;
                 this.Select();
                 password_in.Text = "";
+                contextMenuStrip1.Visible = true;
+                contextMenuStrip2.Visible = true;
             }
             else
             {
                 password_in.Select();
+                contextMenuStrip1.Visible = false;
+                contextMenuStrip2.Visible = false;
                 CursorShown = false;
                 this.TopMost = true;
                 textBox2.Text = prevproctxt.Replace("{p}", pr.ToString());
@@ -555,6 +559,12 @@ namespace BlueScreen_Simulator
         private void contextMenuStrip2_Opened(object sender, EventArgs e)
         {
             _sc = contextMenuStrip2.SourceControl;
+            
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            if (timer2.Enabled) e.Cancel = true;
         }
     }
 }
