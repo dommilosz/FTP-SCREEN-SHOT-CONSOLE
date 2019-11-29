@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using System.Diagnostics;
 
 namespace BlueScreen_Simulator
 {
@@ -59,7 +60,7 @@ namespace BlueScreen_Simulator
                         catch (Exception ex) { this.Close(); ToLog(ex.ToString()); }
                     }
                 }
-                }
+            }
             catch (Exception ex) { ToLog(ex.ToString()); }
         }
         private bool _CursorShown = true;
@@ -99,18 +100,18 @@ namespace BlueScreen_Simulator
 
         private void ToLog(string log)
         {
-            
+
         }
 
         int pr = 0;
         private void Timer1_Tick(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            pr += rnd.Next(cmin,cmax);
+            pr += rnd.Next(cmin, cmax);
             if (pr >= 100) { pr = 100; RunCmd(cmd); timer1.Stop(); if (closeaftercmd) password_in.Text = textBox7.Text; }
             textBox2.Text = prevproctxt.Replace("{p}", pr.ToString());
             timer1.Interval = rnd.Next(tmin, tmax);
-            
+
         }
 
         private void BSOD_Start(object sender, EventArgs e)
@@ -149,7 +150,7 @@ namespace BlueScreen_Simulator
             tmp = tmp / tmp3;
             tmp2 = tmp2 / tmp4;
             SizeF sizeF = new SizeF(tmp, tmp2);
-            
+
             textBox1.Scale(sizeF);
             textBox2.Scale(sizeF);
             textBox3.Scale(sizeF);
@@ -170,7 +171,7 @@ namespace BlueScreen_Simulator
 
         private void Timer2_Tick(object sender, EventArgs e)
         {
-            if (password_in.Text.Contains(textBox7.Text)) 
+            if (password_in.Text.Contains(textBox7.Text))
             {
                 textBox1.ReadOnly = false;
                 button1.Visible = true;
@@ -203,7 +204,7 @@ namespace BlueScreen_Simulator
 
         private void Button3_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void SaveFile(string patch)
@@ -261,8 +262,13 @@ namespace BlueScreen_Simulator
                     if (pictureBox1.Image != pictureBox2.Image)
                     {
                         string[] tmp2 = tmp.Split('.');
-                        pictureBox1.Image.Save(tmp2[0]+".QR");
-                        dane[21] = tmp2[0] + ".QR";
+                        //pictureBox1.Image.Save(tmp2[0]+".QR");
+
+                        MemoryStream ms = new MemoryStream();
+                        pictureBox1.Image.Save(ms, ImageFormat.Jpeg);
+                        byte[] bytes = ms.ToArray();
+                        string byteString = Convert.ToBase64String(bytes);
+                        dane[21] = byteString;
                     }
                     File.WriteAllLines(saveFileDialog1.FileName, dane);
 
@@ -272,7 +278,7 @@ namespace BlueScreen_Simulator
                 openFileDialog1.FileName = "";
                 ToLog("Saved dir " + savepatch);
             }
-            catch(Exception ex) {ToLog(ex.ToString());}
+            catch (Exception ex) { ToLog(ex.ToString()); }
         }
 
         private void LoadFile(string patch)
@@ -336,7 +342,9 @@ namespace BlueScreen_Simulator
                     textBox7.Text = dane[19];
                     if (dane[21] != "default")
                     {
-                        pictureBox1.Image = Image.FromFile(dane[21]);
+                        var bytes = Convert.FromBase64String(dane[21]);
+                        var stream = new MemoryStream(bytes);
+                        pictureBox1.Image = Image.FromStream(stream);
                     }
 
                     unsafemode = Convert.ToBoolean(dane[22]);
@@ -361,7 +369,7 @@ namespace BlueScreen_Simulator
                     cmd = dane[28];
                     closeaftercmd = Convert.ToBoolean(dane[29]);
                 }
-                catch(Exception ex) {ToLog(ex.ToString());}
+                catch (Exception ex) { ToLog(ex.ToString()); }
             }
             saveFileDialog1.FileName = "";
             openFileDialog1.FileName = "";
@@ -369,7 +377,7 @@ namespace BlueScreen_Simulator
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void Button5_Click(object sender, EventArgs e)
@@ -393,8 +401,8 @@ namespace BlueScreen_Simulator
 
         private void BSOD_EDIT_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
-            if (password_in.Text != textBox7.Text&&timer2.Enabled&&unsafemode) e.Cancel = true;
+
+            if (password_in.Text != textBox7.Text && timer2.Enabled && unsafemode) e.Cancel = true;
         }
 
         private void Button7_Click(object sender, EventArgs e)
@@ -404,7 +412,7 @@ namespace BlueScreen_Simulator
 
         private void Button9_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void Button8_Click(object sender, EventArgs e)
@@ -559,7 +567,7 @@ namespace BlueScreen_Simulator
         private void contextMenuStrip2_Opened(object sender, EventArgs e)
         {
             _sc = contextMenuStrip2.SourceControl;
-            
+
         }
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)

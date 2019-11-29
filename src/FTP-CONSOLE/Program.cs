@@ -170,6 +170,7 @@ namespace FTP_CONSOLE
             //Console.Title += "]";
             Console.Title += $"  [V : {Application.ProductVersion}]";
         }
+        [STAThreadAttribute]
         public static void Main(string[] args)
         {
             try
