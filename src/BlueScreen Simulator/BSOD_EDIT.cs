@@ -36,7 +36,7 @@ namespace BlueScreen_Simulator
             ThisScale();
             args = Environment.GetCommandLineArgs();
             ToLog(string.Join(" ", args));
-
+            CursorShown = true;
             try
             {
                 if (args.Length > 1)
@@ -54,7 +54,7 @@ namespace BlueScreen_Simulator
                             pictureBox3.Dock = DockStyle.Fill;
                             timer3.Start();
                             pictureBox3.BackColor = this.BackColor;
-                            BSOD_Start(new object(), new EventArgs());
+                            BSOD_Start();
                         }
                         catch (Exception ex) { this.Close(); ToLog(ex.ToString()); }
                     }
@@ -114,6 +114,10 @@ namespace BlueScreen_Simulator
         }
 
         private void BSOD_Start(object sender, EventArgs e)
+        {
+            BSOD_Start();
+        }
+        public void BSOD_Start()
         {
             ToLog("BSOD START");
             textBox1.ReadOnly = true;
@@ -187,14 +191,10 @@ namespace BlueScreen_Simulator
                 this.TopMost = false;
                 this.Select();
                 password_in.Text = "";
-                contextMenuStrip1.Visible = true;
-                contextMenuStrip2.Visible = true;
             }
             else
             {
                 password_in.Select();
-                contextMenuStrip1.Visible = false;
-                contextMenuStrip2.Visible = false;
                 CursorShown = false;
                 this.TopMost = true;
                 textBox2.Text = prevproctxt.Replace("{p}", pr.ToString());

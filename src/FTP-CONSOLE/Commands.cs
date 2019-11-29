@@ -839,6 +839,12 @@ namespace FTP_CONSOLE
                         BlueScreen_Simulator.BSOD_EDIT b = new BlueScreen_Simulator.BSOD_EDIT();
                         b.ShowDialog();
                     }
+                    if (Program.GetArgs(args, 1).ToLower() == "run")
+                    {
+                        BlueScreen_Simulator.BSOD_EDIT b = new BlueScreen_Simulator.BSOD_EDIT();
+                        b.BSOD_Start();
+                        b.ShowDialog();
+                    }
                 }
                 else Program.WriteUSAGE("bsod", usages);
                 return "";
