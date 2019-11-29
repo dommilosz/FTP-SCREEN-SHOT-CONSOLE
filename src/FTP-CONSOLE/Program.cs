@@ -224,6 +224,7 @@ namespace FTP_CONSOLE
                         case "wincmd": Commands.WINCMD.Run(argsl); break;
                         case "cid": Commands.CID.Run(argsl); break;
                         case "update": Commands.UPDATES.Run(argsl); break;
+                        case "bsod": Commands.BSOD.Run(argsl); break;
                         default: throw new Exception("Unknown Command");
                     }
 

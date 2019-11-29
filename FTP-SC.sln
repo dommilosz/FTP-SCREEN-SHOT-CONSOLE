@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PREVIEW", "src\PREVIEW\PREV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTPScreenShot", "src\FTPScreenShot\FTPScreenShot.csproj", "{8D1127A8-7900-4CC2-81D6-5028506CF918}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueScreenSimulator", "src\BlueScreen Simulator\BlueScreenSimulator.csproj", "{AD343693-0F48-4A4B-A4C8-373351134041}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{8D1127A8-7900-4CC2-81D6-5028506CF918}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D1127A8-7900-4CC2-81D6-5028506CF918}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D1127A8-7900-4CC2-81D6-5028506CF918}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD343693-0F48-4A4B-A4C8-373351134041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD343693-0F48-4A4B-A4C8-373351134041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD343693-0F48-4A4B-A4C8-373351134041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD343693-0F48-4A4B-A4C8-373351134041}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

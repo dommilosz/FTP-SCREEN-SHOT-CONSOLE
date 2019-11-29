@@ -33,4 +33,5 @@ using System.Runtime.InteropServices;
 // przy użyciu symbolu „*”, tak jak pokazano poniżej:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
+#pragma warning disable CS7035 // Określony ciąg wersji nie jest zgodny z zalecanym formatem — wersja_główna.wersja_pomocnicza.kompilacja.poprawka
 [assembly: AssemblyFileVersion("DEV")]

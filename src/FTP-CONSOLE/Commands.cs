@@ -16,8 +16,17 @@ namespace FTP_CONSOLE
     {
         public static class EXAMPLE
         {
+            public static List<string> usages = new string[] { "" }.ToList();
             public static string Run(List<string> args)
             {
+                if (args.Count > 1 && args[1].Length > 0)
+                {
+                    if (Program.GetArgs(args, 1) != "EXAMPLE")
+                    {
+
+                    }
+                }
+                else Program.WriteUSAGE("EXAMPLE", usages);
                 return "";
             }
         }
@@ -791,10 +800,10 @@ namespace FTP_CONSOLE
             public static string Update()
             {
                 CheckUpdates();
-                if (uptodate||dev)
+                if (uptodate || dev)
                 {
 
-                    Program.WriteTxt($"&4Do You Want To Reinstall FTP-CONSOLE? &aY/N  : ",false);
+                    Program.WriteTxt($"&4Do You Want To Reinstall FTP-CONSOLE? &aY/N  : ", false);
                     string ans = Console.ReadKey().KeyChar.ToString().ToLower();
                     Program.WriteTxt("");
                     if (ans == "y")
@@ -815,6 +824,23 @@ namespace FTP_CONSOLE
                 Thread.Sleep(2000);
                 Process.Start(Application.StartupPath + "Update.bat", args);
                 Application.Exit();
+                return "";
+            }
+        }
+        public static class BSOD
+        {
+            public static List<string> usages = new string[] { "edit" }.ToList();
+            public static string Run(List<string> args)
+            {
+                if (args.Count > 1 && args[1].Length > 0)
+                {
+                    if (Program.GetArgs(args,1).ToLower() =="editor")
+                    {
+                        BlueScreen_Simulator.BSOD_EDIT b = new BlueScreen_Simulator.BSOD_EDIT();
+                        b.ShowDialog();
+                    }
+                }
+                else Program.WriteUSAGE("bsod", usages);
                 return "";
             }
         }

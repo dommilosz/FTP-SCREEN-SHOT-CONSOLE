@@ -77,6 +77,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BlueScreen Simulator\BlueScreenSimulator.csproj">
+      <Project>{ad343693-0f48-4a4b-a4c8-373351134041}</Project>
+      <Name>BlueScreenSimulator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CANVAS\CANVAS.csproj">
       <Project>{71094452-e2b4-47aa-ab05-411be1447a7c}</Project>
       <Name>CANVAS</Name>
