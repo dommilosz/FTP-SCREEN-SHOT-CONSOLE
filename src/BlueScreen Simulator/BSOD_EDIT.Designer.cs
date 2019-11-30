@@ -72,6 +72,7 @@
             // 
             this.txt_2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
             this.txt_2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_2.ContextMenuStrip = this.contextMenuStrip1;
             this.txt_2.DetectUrls = false;
             this.txt_2.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txt_2.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -86,6 +87,7 @@
             // 
             this.txt_5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
             this.txt_5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_5.ContextMenuStrip = this.contextMenuStrip1;
             this.txt_5.DetectUrls = false;
             this.txt_5.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 19F);
             this.txt_5.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -100,6 +102,7 @@
             // 
             this.txt_6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
             this.txt_6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_6.ContextMenuStrip = this.contextMenuStrip1;
             this.txt_6.DetectUrls = false;
             this.txt_6.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_6.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -115,6 +118,7 @@
             // 
             this.txt_7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
             this.txt_7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_7.ContextMenuStrip = this.contextMenuStrip1;
             this.txt_7.DetectUrls = false;
             this.txt_7.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_7.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -129,6 +133,7 @@
             // 
             this.txt_8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
             this.txt_8.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_8.ContextMenuStrip = this.contextMenuStrip1;
             this.txt_8.DetectUrls = false;
             this.txt_8.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_8.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -143,6 +148,7 @@
             // 
             this.txt_1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
             this.txt_1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_1.ContextMenuStrip = this.contextMenuStrip1;
             this.txt_1.DetectUrls = false;
             this.txt_1.Font = new System.Drawing.Font("Microsoft YaHei UI", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txt_1.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -238,6 +244,7 @@
             // 
             this.txt_3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
             this.txt_3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_3.ContextMenuStrip = this.contextMenuStrip1;
             this.txt_3.DetectUrls = false;
             this.txt_3.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txt_3.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -252,6 +259,7 @@
             // 
             this.txt_4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
             this.txt_4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_4.ContextMenuStrip = this.contextMenuStrip1;
             this.txt_4.DetectUrls = false;
             this.txt_4.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txt_4.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -283,7 +291,7 @@
             this.qRToolStripMenuItem,
             this.sETTINGSToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(155, 92);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // fILEToolStripMenuItem
@@ -292,7 +300,7 @@
             this.sAVEToolStripMenuItem,
             this.lOADToolStripMenuItem});
             this.fILEToolStripMenuItem.Name = "fILEToolStripMenuItem";
-            this.fILEToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fILEToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.fILEToolStripMenuItem.Text = "FILE";
             // 
             // sAVEToolStripMenuItem
@@ -315,7 +323,7 @@
             this.cHANGEToolStripMenuItem,
             this.rESETToolStripMenuItem});
             this.cHANGEBACKCOLORToolStripMenuItem.Name = "cHANGEBACKCOLORToolStripMenuItem";
-            this.cHANGEBACKCOLORToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cHANGEBACKCOLORToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.cHANGEBACKCOLORToolStripMenuItem.Text = "COLOR (BACK)";
             // 
             // cHANGEToolStripMenuItem
@@ -338,7 +346,7 @@
             this.cHANGEToolStripMenuItem1,
             this.rESETToolStripMenuItem1});
             this.qRToolStripMenuItem.Name = "qRToolStripMenuItem";
-            this.qRToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.qRToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.qRToolStripMenuItem.Text = "QR";
             // 
             // cHANGEToolStripMenuItem1
@@ -358,7 +366,7 @@
             // sETTINGSToolStripMenuItem
             // 
             this.sETTINGSToolStripMenuItem.Name = "sETTINGSToolStripMenuItem";
-            this.sETTINGSToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sETTINGSToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.sETTINGSToolStripMenuItem.Text = "SETTINGS";
             this.sETTINGSToolStripMenuItem.Click += new System.EventHandler(this.sETTINGSToolStripMenuItem_Click);
             // 
