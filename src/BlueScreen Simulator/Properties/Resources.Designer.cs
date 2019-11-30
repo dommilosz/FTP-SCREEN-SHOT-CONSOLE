@@ -61,6 +61,55 @@ namespace BlueScreen_Simulator.Properties {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu :(
+        ///Your PC ran into a problem and needs to restart. We&apos;re{endl}just collecting some error info, and then we&apos;ll restart for{endl}you
+        ///{p}% complete
+        ///For more information about this issue and possible fixes, visit https://windows.com/stopcode
+        ///If you call a support person, give them this info:
+        ///Stop code: CRITICAL PROCESS DIED
+        /////timer settings
+        ///1
+        ///8
+        ///1000
+        ///3500
+        /////color settings
+        ///0
+        ///120
+        ///215
+        ///
+        ///
+        ///
+        /////password settings
+        ///33215
+        /////image settings
+        ///default
+        ///True
+        ///18
+        ///9,25
+        ///100
+        ///
+        ///
+        ///
+        ///False
+        ///
+        ///
+        ///
+        ///
+        ///
+        ///
+        ///
+        ///
+        ///
+        ///
+        ///        /// [obcięto pozostałą część ciągu]&quot;;.
+        /// </summary>
+        internal static string _default {
+            get {
+                return ResourceManager.GetString("_default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap QR {

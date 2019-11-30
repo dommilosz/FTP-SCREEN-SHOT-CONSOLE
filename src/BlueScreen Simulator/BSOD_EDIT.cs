@@ -350,7 +350,11 @@ namespace BlueScreen_Simulator
             {
                 try
                 {
-                    dane = File.ReadAllLines(openFileDialog1.FileName);
+                    if (patch != "default.txt{res}")
+                    {
+                        dane = File.ReadAllLines(openFileDialog1.FileName);
+                    }
+                    else { dane = Properties.Resources._default.Split('\n'); }
                     txt_1.Text = dane[0].Replace("{endl}", "\n");
                     txt_2.Text = dane[1].Replace("{endl}", "\n");
                     txt_3.Text = dane[2].Replace("{endl}", "\n");
@@ -372,7 +376,7 @@ namespace BlueScreen_Simulator
                     txt_5.BackColor = colorDialog1.Color;
                     txt_6.BackColor = colorDialog1.Color;
                     textBox7.Text = dane[19];
-                    if (dane[21] != "default")
+                    if (dane[21].Replace("\r","") != "default")
                     {
                         var bytes = Convert.FromBase64String(dane[21]);
                         var stream = new MemoryStream(bytes);
@@ -588,6 +592,11 @@ namespace BlueScreen_Simulator
                 txt_6.SelectAll(); txt_6.SelectionColor = Color.WhiteSmoke;
             }
         }
+
+        private void rESETToolStripMenuItem2_Click_1(object sender, EventArgs e)
+        {
+            LoadFile("default.txt{res}");
+        }
     }
     public static class RichTextBoxExtensions
     {
@@ -655,6 +664,78 @@ namespace BlueScreen_Simulator
                         else { c = DecodeCode(txt[i + 1]); txt = txt.Remove(i + 1, 1); }
                     }
                     else { bool tmp = (i < txt.Length - 4); if (txt[i] == '@' && txt[i + 1] == '&') tmp = false; if (txt[i] == '&' && codes.Contains(txt[i + 1])) tmp = false; if (txt[i] == @"\"[0] && txt[i + 1] == '&' && codes.Contains(txt[i + 2])) tmp = false; if (tmp) { AppChar(txt[i], c); } }
+
+                }
+                c = Color.White;
+            }
+            void AppChar(char c, Color c2)
+            {
+                //int selectStart = r.SelectionStart;
+                //r.Text += (c);
+                //r.SelectionColor = c2;
+                //r.Select(r.Text.Length - 1, 1); 
+                //r.SelectionColor = c2;
+                //r.Select(selectStart, 0);
+                //r.SelectionColor = ForeColor;
+                r.AppendText(c.ToString(), c2);
+            }
+            string tmptxt = r.Text;
+            r.Text = "";
+            WriteTxt(tmptxt);
+
+        }
+        public static void FormatTxtNORemoveCodes(this RichTextBox r)
+        {
+            r.SelectAll();
+            r.SelectionColor = Color.WhiteSmoke;
+            Color DecodeCode(char code)
+            {
+                Color color = Color.White;
+                switch (code)
+                {
+                    case '0': color = Color.Black; break;
+                    case '1': color = Color.DarkBlue; break;
+                    case '2': color = Color.DarkGreen; break;
+                    case '3': color = Color.DarkCyan; break;
+                    case '4': color = Color.DarkRed; break;
+                    case '5': color = Color.DarkMagenta; break;
+                    case '6': color = Color.Gold; break;
+                    case '7': color = Color.Gray; break;
+                    case '8': color = Color.DarkGray; break;
+                    case '9': color = Color.Blue; break;
+
+                    case 'a': color = Color.Green; break;
+                    case 'b': color = Color.Cyan; break;
+                    case 'c': color = Color.Red; break;
+                    case 'd': color = Color.Magenta; break;
+                    case 'e': color = Color.Yellow; break;
+                    case 'f': color = Color.White; break;
+                }
+                return color;
+            }
+            void WriteTxt(string txt)
+            {
+                txt += "    ";
+                Color c = DecodeCode('f');
+                string codes = "0123456789abcdef";
+                for (int i = 0; i < txt.Length; i++)
+                {
+                    if (i >= 0 && txt[i] == '@' && txt[i + 1] == '&' && codes.Contains(txt[i + 2]))
+                    {
+                        c = DecodeCode(txt[i + 2]);
+                    }
+                    if (txt.Length - 1 > i + 1 && txt[i] == '&' && codes.Contains(txt[i + 1]))
+                    {
+                        if (i - 1 >= 0 && txt[i - 1] == @"\"[0])
+                        {
+                            if (i < txt.Length - 4)
+                            {
+                                AppChar(txt[i], c);
+                            }
+                        }
+                        else { c = DecodeCode(txt[i + 1]); txt = txt.Remove(i + 1, 1); }
+                    }
+                    else { bool tmp = (i < txt.Length - 4); if (tmp) { AppChar(txt[i], c); } }
 
                 }
                 c = Color.White;
