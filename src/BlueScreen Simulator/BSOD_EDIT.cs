@@ -21,8 +21,6 @@ namespace BlueScreen_Simulator
         string prevtxt_4 = "";
         string prevtxt_5 = "";
         string prevtxt_6 = "";
-        string prevtxt_7 = "";
-        string prevtxt_8 = "";
         string savepatch = "not saved";
         int cmin = 1;
         int cmax = 8;
@@ -33,6 +31,7 @@ namespace BlueScreen_Simulator
         readonly string[] args = new string[100];
         string cmd = "";
         bool closeaftercmd = false;
+        bool preview = false;
         Size thissize;
         public BSOD_EDIT()
         {
@@ -104,7 +103,7 @@ namespace BlueScreen_Simulator
 
         private void ToLog(string log)
         {
-            
+
         }
 
         int pr = 0;
@@ -112,7 +111,7 @@ namespace BlueScreen_Simulator
         {
             Random rnd = new Random();
             pr += rnd.Next(cmin, cmax);
-            if (pr >= 100) { pr = 100; RunCmd(cmd); Perc_Timer.Stop(); if (closeaftercmd) password_in.Text = textBox7.Text; }
+            if (pr >= 100) { pr = 100; RunCmd(cmd); Perc_Timer.Stop(); if (closeaftercmd) { password_in.Text = textBox7.Text; this.Close(); } }
             Perc_Timer.Interval = rnd.Next(tmin, tmax);
 
         }
@@ -126,26 +125,24 @@ namespace BlueScreen_Simulator
             ToLog("BSOD START");
             txt_2.ReadOnly = true;
             button1.Visible = false;
+            button2.Visible = false;
             Perc_Timer.Start();
             BSOD_Timer.Start();
-            txt_5.ReadOnly = true;
-            txt_6.ReadOnly = true;
-            txt_7.ReadOnly = true;
-            txt_8.ReadOnly = true;
             txt_1.ReadOnly = true;
-            label2.Visible = false;
-            textBox7.Visible = false;
-            txt_5.Visible = true;
+            txt_2.ReadOnly = true;
             txt_3.ReadOnly = true;
             txt_4.ReadOnly = true;
+            txt_5.ReadOnly = true;
+            txt_6.ReadOnly = true;
+            label2.Visible = false;
+            textBox7.Visible = false;
+
             prevtxt_1 = txt_1.Text;
             prevtxt_2 = txt_2.Text;
             prevtxt_3 = txt_3.Text;
             prevtxt_4 = txt_4.Text;
             prevtxt_5 = txt_5.Text;
             prevtxt_6 = txt_6.Text;
-            prevtxt_7 = txt_7.Text;
-            prevtxt_8 = txt_8.Text;
 
             FormatTexts();
             //ThisScale();
@@ -162,19 +159,18 @@ namespace BlueScreen_Simulator
             tmp2 = tmp2 / tmp4;
             SizeF sizeF = new SizeF(tmp, tmp2);
 
-            txt_2.Scale(sizeF);
-            txt_5.Scale(sizeF);
-            txt_6.Scale(sizeF);
-            txt_7.Scale(sizeF);
-            txt_8.Scale(sizeF);
             txt_1.Scale(sizeF);
-            textBox7.Scale(sizeF);
+            txt_2.Scale(sizeF);
             txt_3.Scale(sizeF);
             txt_4.Scale(sizeF);
+            txt_5.Scale(sizeF);
+            txt_6.Scale(sizeF);
+            textBox7.Scale(sizeF);
 
             label2.Scale(sizeF);
 
             button1.Scale(sizeF);
+            button2.Scale(sizeF);
 
             pictureBox1.Scale(sizeF);
             ToLog("Scaling factor " + tmp + " " + tmp2 + " (" + Screen.GetBounds(Point.Empty).Size + "/" + thissize);
@@ -184,19 +180,19 @@ namespace BlueScreen_Simulator
         {
             if (password_in.Text.Contains(textBox7.Text))
             {
-                txt_2.ReadOnly = false;
+
                 button1.Visible = true;
+                button2.Visible = true;
                 Perc_Timer.Stop();
                 BSOD_Timer.Stop();
-                txt_5.ReadOnly = false;
-                txt_6.ReadOnly = false;
-                txt_7.ReadOnly = false;
-                txt_8.ReadOnly = false;
                 txt_1.ReadOnly = false;
-                label2.Visible = true;
-                textBox7.Visible = true;
+                txt_2.ReadOnly = false;
                 txt_3.ReadOnly = false;
                 txt_4.ReadOnly = false;
+                txt_5.ReadOnly = false;
+                txt_6.ReadOnly = false;
+                label2.Visible = true;
+                textBox7.Visible = true;
 
                 txt_1.Text = prevtxt_1;
                 txt_2.Text = prevtxt_2;
@@ -204,8 +200,6 @@ namespace BlueScreen_Simulator
                 txt_4.Text = prevtxt_4;
                 txt_5.Text = prevtxt_5;
                 txt_6.Text = prevtxt_6;
-                txt_7.Text = prevtxt_7;
-                txt_8.Text = prevtxt_8;
 
                 txt_1.SelectAll(); txt_1.SelectionColor = Color.WhiteSmoke;
                 txt_2.SelectAll(); txt_2.SelectionColor = Color.WhiteSmoke;
@@ -213,8 +207,6 @@ namespace BlueScreen_Simulator
                 txt_4.SelectAll(); txt_4.SelectionColor = Color.WhiteSmoke;
                 txt_5.SelectAll(); txt_5.SelectionColor = Color.WhiteSmoke;
                 txt_6.SelectAll(); txt_6.SelectionColor = Color.WhiteSmoke;
-                txt_7.SelectAll(); txt_7.SelectionColor = Color.WhiteSmoke;
-                txt_8.SelectAll(); txt_8.SelectionColor = Color.WhiteSmoke;
 
 
                 pr = 0;
@@ -240,8 +232,6 @@ namespace BlueScreen_Simulator
             txt_4.Text = prevtxt_4;
             txt_5.Text = prevtxt_5;
             txt_6.Text = prevtxt_6;
-            txt_7.Text = prevtxt_7;
-            txt_8.Text = prevtxt_8;
 
             txt_1.FormatVar("p", pr);
             txt_2.FormatVar("p", pr);
@@ -249,8 +239,6 @@ namespace BlueScreen_Simulator
             txt_4.FormatVar("p", pr);
             txt_5.FormatVar("p", pr);
             txt_6.FormatVar("p", pr);
-            txt_7.FormatVar("p", pr);
-            txt_8.FormatVar("p", pr);
 
             txt_1.FormatVar("pass", textBox7.Text);
             txt_2.FormatVar("pass", textBox7.Text);
@@ -258,8 +246,6 @@ namespace BlueScreen_Simulator
             txt_4.FormatVar("pass", textBox7.Text);
             txt_5.FormatVar("pass", textBox7.Text);
             txt_6.FormatVar("pass", textBox7.Text);
-            txt_7.FormatVar("pass", textBox7.Text);
-            txt_8.FormatVar("pass", textBox7.Text);
 
             txt_1.FormatTxt();
             txt_2.FormatTxt();
@@ -267,8 +253,6 @@ namespace BlueScreen_Simulator
             txt_4.FormatTxt();
             txt_5.FormatTxt();
             txt_6.FormatTxt();
-            txt_7.FormatTxt();
-            txt_8.FormatTxt();
 
         }
 
@@ -276,12 +260,12 @@ namespace BlueScreen_Simulator
         {
             try
             {
-                dane[0] = txt_2.Text;
-                dane[1] = txt_5.Text;
-                dane[2] = txt_6.Text;
-                dane[3] = txt_7.Text;
-                dane[4] = txt_8.Text;
-                dane[5] = txt_1.Text;
+                dane[0] = txt_1.Text.Replace("\n", "{endl}");
+                dane[1] = txt_2.Text.Replace("\n", "{endl}");
+                dane[2] = txt_3.Text.Replace("\n", "{endl}");
+                dane[3] = txt_4.Text.Replace("\n", "{endl}");
+                dane[4] = txt_5.Text.Replace("\n", "{endl}");
+                dane[5] = txt_6.Text.Replace("\n", "{endl}");
                 dane[6] = "//timer settings";
                 dane[7] = cmin.ToString();
                 dane[8] = cmax.ToString();
@@ -300,10 +284,8 @@ namespace BlueScreen_Simulator
                 dane[21] = "default";
                 dane[22] = unsafemode.ToString();
                 dane[23] = txt_2.Font.Size.ToString();
-                dane[24] = txt_6.Font.Size.ToString();
+                dane[24] = txt_4.Font.Size.ToString();
                 dane[25] = txt_1.Font.Size.ToString();
-                dane[26] = txt_3.Text;
-                dane[27] = txt_4.Text;
                 dane[28] = cmd;
                 dane[29] = closeaftercmd.ToString();
 
@@ -330,7 +312,7 @@ namespace BlueScreen_Simulator
                         //pictureBox1.Image.Save(tmp2[0]+".QR");
 
                         MemoryStream ms = new MemoryStream();
-                        pictureBox1.Image.Save(ms, ImageFormat.Jpeg);
+                        pictureBox1.Image.Save(ms, ImageFormat.Png);
                         byte[] bytes = ms.ToArray();
                         string byteString = Convert.ToBase64String(bytes);
                         dane[21] = byteString;
@@ -369,14 +351,12 @@ namespace BlueScreen_Simulator
                 try
                 {
                     dane = File.ReadAllLines(openFileDialog1.FileName);
-                    txt_2.Text = dane[0];
-                    txt_5.Text = dane[1];
-                    txt_6.Text = dane[2];
-                    txt_7.Text = dane[3];
-                    txt_8.Text = dane[4];
-                    txt_1.Text = dane[5];
-                    txt_3.Text = dane[26];
-                    txt_4.Text = dane[27];
+                    txt_1.Text = dane[0].Replace("{endl}", "\n");
+                    txt_2.Text = dane[1].Replace("{endl}", "\n");
+                    txt_3.Text = dane[2].Replace("{endl}", "\n");
+                    txt_4.Text = dane[3].Replace("{endl}", "\n");
+                    txt_5.Text = dane[4].Replace("{endl}", "\n");
+                    txt_6.Text = dane[5].Replace("{endl}", "\n");
                     dane[6] = "//timer settings";
                     cmin = Convert.ToInt32(dane[7]);
                     cmax = Convert.ToInt32(dane[8]);
@@ -385,25 +365,12 @@ namespace BlueScreen_Simulator
                     dane[11] = "//color settings";
                     colorDialog1.Color = Color.FromArgb(Convert.ToInt32(dane[12]), Convert.ToInt32(dane[13]), Convert.ToInt32(dane[14]));
                     this.BackColor = colorDialog1.Color;
-                    txt_2.BackColor = colorDialog1.Color;
-                    txt_5.BackColor = colorDialog1.Color;
-                    txt_6.BackColor = colorDialog1.Color;
-                    txt_7.BackColor = colorDialog1.Color;
-                    txt_8.BackColor = colorDialog1.Color;
                     txt_1.BackColor = colorDialog1.Color;
+                    txt_2.BackColor = colorDialog1.Color;
                     txt_3.BackColor = colorDialog1.Color;
                     txt_4.BackColor = colorDialog1.Color;
-                    //colorDialog1.Color = Color.White;
-                    //colorDialog1.Color = Color.FromArgb(Convert.ToInt32(dane[15]), Convert.ToInt32(dane[16]), Convert.ToInt32(dane[17]));
-                    //this.ForeColor = colorDialog1.Color;
-                    //txt_2.ForeColor = colorDialog1.Color;
-                    //txt_5.ForeColor = colorDialog1.Color;
-                    //txt_6.ForeColor = colorDialog1.Color;
-                    //txt_7.ForeColor = colorDialog1.Color;
-                    //txt_8.ForeColor = colorDialog1.Color;
-                    //txt_1.ForeColor = colorDialog1.Color;
-                    //txt_3.ForeColor = colorDialog1.Color;
-                    //txt_4.ForeColor = colorDialog1.Color;
+                    txt_5.BackColor = colorDialog1.Color;
+                    txt_6.BackColor = colorDialog1.Color;
                     textBox7.Text = dane[19];
                     if (dane[21] != "default")
                     {
@@ -415,20 +382,8 @@ namespace BlueScreen_Simulator
                     unsafemode = Convert.ToBoolean(dane[22]);
                     savepatch = openFileDialog1.FileName;
 
-                    float MF = (float)Convert.ToDouble(dane[23]);
-                    Font font = new Font("Microsoft JhengHei UI Light", MF);
-                    txt_2.Font = font;
-                    txt_3.Font = font;
-                    txt_4.Font = font;
-                    txt_5.Font = font;
-                    float QF = (float)Convert.ToDouble(dane[24]);
-                    font = new Font("Microsoft JhengHei UI Light", QF);
-                    txt_6.Font = font;
-                    txt_7.Font = font;
-                    txt_8.Font = font;
-                    float EF = (float)Convert.ToDouble(dane[25]);
-                    font = new Font("Microsoft YaHei UI", EF);
-                    txt_1.Font = font;
+                    FormatFont(dane[23], dane[24], dane[25]);
+
                     saveFileDialog1.FileName = "";
                     openFileDialog1.FileName = "";
                     cmd = dane[28];
@@ -440,18 +395,37 @@ namespace BlueScreen_Simulator
             openFileDialog1.FileName = "";
         }
 
+        private void FormatFont(string FM, string FQ, string FE)
+        {
+            float MF = (float)Convert.ToDouble(FM);
+            Font font_Main = new Font("Microsoft JhengHei UI Light", MF);
+
+            float QF = (float)Convert.ToDouble(FQ);
+            Font font_QR = new Font("Microsoft JhengHei UI Light", QF);
+
+            float EF = (float)Convert.ToDouble(FE);
+            Font font_Emo = new Font("Microsoft YaHei UI", EF);
+
+            txt_1.Font = font_Emo;
+
+            txt_2.Font = font_Main;
+            txt_3.Font = font_Main;
+
+            txt_4.Font = font_QR;
+            txt_5.Font = font_QR;
+            txt_6.Font = font_QR;
+        }
+
         private void Button6_Click(object sender, EventArgs e)
         {
             colorDialog1.Color = Color.FromArgb(0, 120, 215);
             this.BackColor = colorDialog1.Color;
-            txt_2.BackColor = colorDialog1.Color;
-            txt_5.BackColor = colorDialog1.Color;
-            txt_6.BackColor = colorDialog1.Color;
-            txt_7.BackColor = colorDialog1.Color;
-            txt_8.BackColor = colorDialog1.Color;
             txt_1.BackColor = colorDialog1.Color;
+            txt_2.BackColor = colorDialog1.Color;
             txt_3.BackColor = colorDialog1.Color;
             txt_4.BackColor = colorDialog1.Color;
+            txt_5.BackColor = colorDialog1.Color;
+            txt_6.BackColor = colorDialog1.Color;
         }
 
         private void BSOD_EDIT_FormClosing(object sender, FormClosingEventArgs e)
@@ -475,14 +449,12 @@ namespace BlueScreen_Simulator
             if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
                 this.BackColor = colorDialog1.Color;
-                txt_2.BackColor = colorDialog1.Color;
-                txt_5.BackColor = colorDialog1.Color;
-                txt_6.BackColor = colorDialog1.Color;
-                txt_7.BackColor = colorDialog1.Color;
-                txt_8.BackColor = colorDialog1.Color;
                 txt_1.BackColor = colorDialog1.Color;
+                txt_2.BackColor = colorDialog1.Color;
                 txt_3.BackColor = colorDialog1.Color;
                 txt_4.BackColor = colorDialog1.Color;
+                txt_5.BackColor = colorDialog1.Color;
+                txt_6.BackColor = colorDialog1.Color;
             }
         }
 
@@ -490,14 +462,12 @@ namespace BlueScreen_Simulator
         {
             colorDialog1.Color = Color.FromArgb(0, 120, 215);
             this.BackColor = colorDialog1.Color;
-            txt_2.BackColor = colorDialog1.Color;
-            txt_5.BackColor = colorDialog1.Color;
-            txt_6.BackColor = colorDialog1.Color;
-            txt_7.BackColor = colorDialog1.Color;
-            txt_8.BackColor = colorDialog1.Color;
             txt_1.BackColor = colorDialog1.Color;
+            txt_2.BackColor = colorDialog1.Color;
             txt_3.BackColor = colorDialog1.Color;
             txt_4.BackColor = colorDialog1.Color;
+            txt_5.BackColor = colorDialog1.Color;
+            txt_6.BackColor = colorDialog1.Color;
         }
 
         private void cHANGEToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -518,24 +488,14 @@ namespace BlueScreen_Simulator
 
         private void sETTINGSToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Settings settings = new Settings(unsafemode, !pictureBox1.Visible, savepatch, txt_2.Font.Size, txt_6.Font.Size, txt_1.Font.Size, cmd, closeaftercmd, cmin, cmax, tmin, tmax);
+            Settings settings = new Settings(unsafemode, !pictureBox1.Visible, savepatch, txt_2.Font.Size, txt_4.Font.Size, txt_1.Font.Size, cmd, closeaftercmd, cmin, cmax, tmin, tmax);
             if (settings.ShowDialog() == DialogResult.OK)
             {
                 unsafemode = settings.unsmode.Checked;
-                float MF = (float)settings.MFont.Value;
-                Font font = new Font("Microsoft JhengHei UI Light", MF);
-                txt_2.Font = font;
-                txt_5.Font = font;
-                txt_3.Font = font;
-                txt_4.Font = font;
-                float QF = (float)settings.QRFont.Value;
-                font = new Font("Microsoft JhengHei UI Light", QF);
-                txt_6.Font = font;
-                txt_7.Font = font;
-                txt_8.Font = font;
-                float EF = (float)settings.EFont.Value;
-                font = new Font("Microsoft YaHei UI", EF);
-                txt_1.Font = font;
+                string MF = settings.MFont.Value.ToString();
+                string QF = settings.QRFont.Value.ToString();
+                string EF = settings.EFont.Value.ToString();
+                FormatFont(MF, QF, EF);
                 cmd = settings.textBox1.Text;
                 closeaftercmd = settings.checkBox1.Checked;
                 try
@@ -585,7 +545,48 @@ namespace BlueScreen_Simulator
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            if (BSOD_Timer.Enabled) e.Cancel = true;
+            if (BSOD_Timer.Enabled||preview) e.Cancel = true;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            preview = !preview;
+            txt_1.ReadOnly = preview;
+            txt_2.ReadOnly = preview;
+            txt_3.ReadOnly = preview;
+            txt_4.ReadOnly = preview;
+            txt_5.ReadOnly = preview;
+            txt_6.ReadOnly = preview;
+            button1.Enabled = !preview;
+            textBox7.Enabled = !preview;
+            if (preview)
+            {
+                prevtxt_1 = txt_1.Text;
+                prevtxt_2 = txt_2.Text;
+                prevtxt_3 = txt_3.Text;
+                prevtxt_4 = txt_4.Text;
+                prevtxt_5 = txt_5.Text;
+                prevtxt_6 = txt_6.Text;
+                button2.BackColor = Color.Green;
+                FormatTexts();
+            }
+            else
+            {
+                button2.BackColor = this.BackColor;
+                txt_1.Text = prevtxt_1;
+                txt_2.Text = prevtxt_2;
+                txt_3.Text = prevtxt_3;
+                txt_4.Text = prevtxt_4;
+                txt_5.Text = prevtxt_5;
+                txt_6.Text = prevtxt_6;
+
+                txt_1.SelectAll(); txt_1.SelectionColor = Color.WhiteSmoke;
+                txt_2.SelectAll(); txt_2.SelectionColor = Color.WhiteSmoke;
+                txt_3.SelectAll(); txt_3.SelectionColor = Color.WhiteSmoke;
+                txt_4.SelectAll(); txt_4.SelectionColor = Color.WhiteSmoke;
+                txt_5.SelectAll(); txt_5.SelectionColor = Color.WhiteSmoke;
+                txt_6.SelectAll(); txt_6.SelectionColor = Color.WhiteSmoke;
+            }
         }
     }
     public static class RichTextBoxExtensions
