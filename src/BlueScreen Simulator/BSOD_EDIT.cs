@@ -40,7 +40,6 @@ namespace BlueScreen_Simulator
 
             thissize = this.Size;
             ToLog("----NEW-RUN----");
-            Rectangle bounds = Screen.GetBounds(Point.Empty);
             ThisScale();
             args = Environment.GetCommandLineArgs();
             ToLog(string.Join(" ", args));
@@ -59,9 +58,6 @@ namespace BlueScreen_Simulator
                             ToLog(string.Join(" ", tmpvar).TrimStart(' '));
                             LoadFile(string.Join(" ", tmpvar));
 
-                            pictureBox3.Dock = DockStyle.Fill;
-                            timer3.Start();
-                            pictureBox3.BackColor = this.BackColor;
                             BSOD_Start();
                         }
                         catch (Exception ex) { this.Close(); ToLog(ex.ToString()); }
@@ -108,7 +104,7 @@ namespace BlueScreen_Simulator
 
         private void ToLog(string log)
         {
-
+            
         }
 
         int pr = 0;
@@ -444,16 +440,6 @@ namespace BlueScreen_Simulator
             openFileDialog1.FileName = "";
         }
 
-        private void Button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Button5_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Button6_Click(object sender, EventArgs e)
         {
             colorDialog1.Color = Color.FromArgb(0, 120, 215);
@@ -472,42 +458,6 @@ namespace BlueScreen_Simulator
         {
 
             if (password_in.Text != textBox7.Text && BSOD_Timer.Enabled && unsafemode) e.Cancel = true;
-        }
-
-        private void Button7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Button9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Button8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Button10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Button11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Button12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Timer3_Tick(object sender, EventArgs e)
-        {
-            pictureBox3.Visible = false;
-            timer3.Stop();
         }
 
         private void sAVEToolStripMenuItem_Click(object sender, EventArgs e)
