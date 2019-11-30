@@ -30,29 +30,15 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BSOD_EDIT));
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
-            this.cHANGEToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.rESETToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.txt_2 = new System.Windows.Forms.RichTextBox();
+            this.txt_5 = new System.Windows.Forms.RichTextBox();
+            this.txt_6 = new System.Windows.Forms.RichTextBox();
+            this.txt_7 = new System.Windows.Forms.RichTextBox();
+            this.txt_8 = new System.Windows.Forms.RichTextBox();
+            this.txt_1 = new System.Windows.Forms.RichTextBox();
+            this.Perc_Timer = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.BSOD_Timer = new System.Windows.Forms.Timer(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
@@ -61,8 +47,8 @@
             this.password_in = new System.Windows.Forms.TextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.txt_3 = new System.Windows.Forms.RichTextBox();
+            this.txt_4 = new System.Windows.Forms.RichTextBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -76,207 +62,100 @@
             this.cHANGEToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.rESETToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.sETTINGSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txt_2
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.ContextMenuStrip = this.contextMenuStrip2;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox1.Location = new System.Drawing.Point(124, 250);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(1000, 31);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "Your PC ran into a problem and needs to restart. We\'re";
+            this.txt_2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txt_2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_2.DetectUrls = false;
+            this.txt_2.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txt_2.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txt_2.Location = new System.Drawing.Point(124, 250);
+            this.txt_2.Multiline = false;
+            this.txt_2.Name = "txt_2";
+            this.txt_2.Size = new System.Drawing.Size(1000, 31);
+            this.txt_2.TabIndex = 1;
+            this.txt_2.Text = "Your PC ran into a problem and needs to restart. We\'re";
             // 
-            // contextMenuStrip2
+            // txt_5
             // 
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
-            this.toolStripMenuItem4,
-            this.toolStripMenuItem11,
-            this.toolStripMenuItem7,
-            this.toolStripMenuItem10});
-            this.contextMenuStrip2.Name = "contextMenuStrip1";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(155, 114);
-            this.contextMenuStrip2.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
-            this.contextMenuStrip2.Opened += new System.EventHandler(this.contextMenuStrip2_Opened);
+            this.txt_5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txt_5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_5.DetectUrls = false;
+            this.txt_5.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 19F);
+            this.txt_5.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txt_5.Location = new System.Drawing.Point(124, 380);
+            this.txt_5.Multiline = false;
+            this.txt_5.Name = "txt_5";
+            this.txt_5.Size = new System.Drawing.Size(441, 33);
+            this.txt_5.TabIndex = 2;
+            this.txt_5.Text = "{p}% complete";
             // 
-            // toolStripMenuItem1
+            // txt_6
             // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem2,
-            this.toolStripMenuItem3});
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
-            this.toolStripMenuItem1.Text = "FILE";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(105, 22);
-            this.toolStripMenuItem2.Text = "SAVE";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.sAVEToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(105, 22);
-            this.toolStripMenuItem3.Text = "LOAD";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.lOADToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem5,
-            this.toolStripMenuItem6});
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(154, 22);
-            this.toolStripMenuItem4.Text = "COLOR (BACK)";
-            // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(122, 22);
-            this.toolStripMenuItem5.Text = "CHANGE";
-            this.toolStripMenuItem5.Click += new System.EventHandler(this.cHANGEToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem6
-            // 
-            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(122, 22);
-            this.toolStripMenuItem6.Text = "RESET";
-            this.toolStripMenuItem6.Click += new System.EventHandler(this.rESETToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem11
-            // 
-            this.toolStripMenuItem11.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cHANGEToolStripMenuItem2,
-            this.rESETToolStripMenuItem2});
-            this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-            this.toolStripMenuItem11.Size = new System.Drawing.Size(154, 22);
-            this.toolStripMenuItem11.Text = "COLOR (FORE)";
-            // 
-            // cHANGEToolStripMenuItem2
-            // 
-            this.cHANGEToolStripMenuItem2.Name = "cHANGEToolStripMenuItem2";
-            this.cHANGEToolStripMenuItem2.Size = new System.Drawing.Size(122, 22);
-            this.cHANGEToolStripMenuItem2.Text = "CHANGE";
-            this.cHANGEToolStripMenuItem2.Click += new System.EventHandler(this.cHANGEToolStripMenuItem2_Click);
-            // 
-            // rESETToolStripMenuItem2
-            // 
-            this.rESETToolStripMenuItem2.Name = "rESETToolStripMenuItem2";
-            this.rESETToolStripMenuItem2.Size = new System.Drawing.Size(122, 22);
-            this.rESETToolStripMenuItem2.Text = "RESET";
-            this.rESETToolStripMenuItem2.Click += new System.EventHandler(this.rESETToolStripMenuItem2_Click);
-            // 
-            // toolStripMenuItem7
-            // 
-            this.toolStripMenuItem7.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem8,
-            this.toolStripMenuItem9});
-            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(154, 22);
-            this.toolStripMenuItem7.Text = "QR";
-            // 
-            // toolStripMenuItem8
-            // 
-            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(122, 22);
-            this.toolStripMenuItem8.Text = "CHANGE";
-            this.toolStripMenuItem8.Click += new System.EventHandler(this.cHANGEToolStripMenuItem1_Click);
-            // 
-            // toolStripMenuItem9
-            // 
-            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(122, 22);
-            this.toolStripMenuItem9.Text = "RESET";
-            this.toolStripMenuItem9.Click += new System.EventHandler(this.rESETToolStripMenuItem1_Click);
-            // 
-            // toolStripMenuItem10
-            // 
-            this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-            this.toolStripMenuItem10.Size = new System.Drawing.Size(154, 22);
-            this.toolStripMenuItem10.Text = "SETTINGS";
-            this.toolStripMenuItem10.Click += new System.EventHandler(this.sETTINGSToolStripMenuItem_Click);
-            // 
-            // textBox2
-            // 
-            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.ContextMenuStrip = this.contextMenuStrip2;
-            this.textBox2.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 19F);
-            this.textBox2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox2.Location = new System.Drawing.Point(124, 380);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(441, 33);
-            this.textBox2.TabIndex = 2;
-            this.textBox2.Text = "{p}% complete";
-            // 
-            // textBox3
-            // 
-            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox3.ContextMenuStrip = this.contextMenuStrip2;
-            this.textBox3.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox3.Location = new System.Drawing.Point(201, 436);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(1000, 16);
-            this.textBox3.TabIndex = 3;
-            this.textBox3.Text = "For more information about this issue and possible fixes, visit https://windows.c" +
+            this.txt_6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txt_6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_6.DetectUrls = false;
+            this.txt_6.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_6.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txt_6.Location = new System.Drawing.Point(201, 436);
+            this.txt_6.Multiline = false;
+            this.txt_6.Name = "txt_6";
+            this.txt_6.Size = new System.Drawing.Size(1000, 16);
+            this.txt_6.TabIndex = 3;
+            this.txt_6.Text = "For more information about this issue and possible fixes, visit https://windows.c" +
     "om/stopcode";
             // 
-            // textBox4
+            // txt_7
             // 
-            this.textBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox4.ContextMenuStrip = this.contextMenuStrip2;
-            this.textBox4.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox4.Location = new System.Drawing.Point(201, 475);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(1000, 16);
-            this.textBox4.TabIndex = 4;
-            this.textBox4.Text = "If you call a support person, give them this info:";
+            this.txt_7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txt_7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_7.DetectUrls = false;
+            this.txt_7.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_7.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txt_7.Location = new System.Drawing.Point(201, 475);
+            this.txt_7.Multiline = false;
+            this.txt_7.Name = "txt_7";
+            this.txt_7.Size = new System.Drawing.Size(1000, 16);
+            this.txt_7.TabIndex = 4;
+            this.txt_7.Text = "If you call a support person, give them this info:";
             // 
-            // textBox5
+            // txt_8
             // 
-            this.textBox5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox5.ContextMenuStrip = this.contextMenuStrip2;
-            this.textBox5.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox5.Location = new System.Drawing.Point(201, 497);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(1000, 16);
-            this.textBox5.TabIndex = 5;
-            this.textBox5.Text = "Stop code: CRITICAL PROCESS DIED";
+            this.txt_8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txt_8.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_8.DetectUrls = false;
+            this.txt_8.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_8.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txt_8.Location = new System.Drawing.Point(201, 497);
+            this.txt_8.Multiline = false;
+            this.txt_8.Name = "txt_8";
+            this.txt_8.Size = new System.Drawing.Size(1000, 16);
+            this.txt_8.TabIndex = 5;
+            this.txt_8.Text = "Stop code: CRITICAL PROCESS DIED";
             // 
-            // textBox6
+            // txt_1
             // 
-            this.textBox6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox6.ContextMenuStrip = this.contextMenuStrip2;
-            this.textBox6.Font = new System.Drawing.Font("Microsoft YaHei UI", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox6.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox6.Location = new System.Drawing.Point(124, 69);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(1000, 170);
-            this.textBox6.TabIndex = 7;
-            this.textBox6.Text = ":(";
+            this.txt_1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txt_1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_1.DetectUrls = false;
+            this.txt_1.Font = new System.Drawing.Font("Microsoft YaHei UI", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txt_1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txt_1.Location = new System.Drawing.Point(124, 69);
+            this.txt_1.Multiline = false;
+            this.txt_1.Name = "txt_1";
+            this.txt_1.Size = new System.Drawing.Size(1000, 170);
+            this.txt_1.TabIndex = 7;
+            this.txt_1.Text = ":(";
             // 
-            // timer1
+            // Perc_Timer
             // 
-            this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
+            this.Perc_Timer.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
             // button1
             // 
@@ -289,10 +168,10 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.BSOD_Start);
             // 
-            // timer2
+            // BSOD_Timer
             // 
-            this.timer2.Interval = 10;
-            this.timer2.Tick += new System.EventHandler(this.Timer2_Tick);
+            this.BSOD_Timer.Interval = 10;
+            this.BSOD_Timer.Tick += new System.EventHandler(this.Timer2_Tick);
             // 
             // openFileDialog1
             // 
@@ -355,31 +234,33 @@
             this.pictureBox1.TabIndex = 16;
             this.pictureBox1.TabStop = false;
             // 
-            // textBox8
+            // txt_3
             // 
-            this.textBox8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox8.ContextMenuStrip = this.contextMenuStrip2;
-            this.textBox8.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox8.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox8.Location = new System.Drawing.Point(124, 280);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(1000, 31);
-            this.textBox8.TabIndex = 27;
-            this.textBox8.Text = "just collecting some error info, and then we\'ll restart for";
+            this.txt_3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txt_3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_3.DetectUrls = false;
+            this.txt_3.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txt_3.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txt_3.Location = new System.Drawing.Point(124, 280);
+            this.txt_3.Multiline = false;
+            this.txt_3.Name = "txt_3";
+            this.txt_3.Size = new System.Drawing.Size(1000, 31);
+            this.txt_3.TabIndex = 27;
+            this.txt_3.Text = "just collecting some error info, and then we\'ll restart for";
             // 
-            // textBox9
+            // txt_4
             // 
-            this.textBox9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox9.ContextMenuStrip = this.contextMenuStrip2;
-            this.textBox9.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox9.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox9.Location = new System.Drawing.Point(124, 310);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(1000, 31);
-            this.textBox9.TabIndex = 28;
-            this.textBox9.Text = "you";
+            this.txt_4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txt_4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_4.DetectUrls = false;
+            this.txt_4.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txt_4.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txt_4.Location = new System.Drawing.Point(124, 310);
+            this.txt_4.Multiline = false;
+            this.txt_4.Name = "txt_4";
+            this.txt_4.Size = new System.Drawing.Size(1000, 31);
+            this.txt_4.TabIndex = 28;
+            this.txt_4.Text = "you";
             // 
             // pictureBox3
             // 
@@ -490,19 +371,19 @@
             this.ClientSize = new System.Drawing.Size(1200, 675);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.textBox9);
-            this.Controls.Add(this.textBox8);
-            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.txt_4);
+            this.Controls.Add(this.txt_3);
+            this.Controls.Add(this.txt_1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.password_in);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox7);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txt_8);
+            this.Controls.Add(this.txt_7);
+            this.Controls.Add(this.txt_6);
+            this.Controls.Add(this.txt_5);
+            this.Controls.Add(this.txt_2);
             this.Controls.Add(this.pictureBox1);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -512,7 +393,6 @@
             this.Text = "BSOD_EDIT";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BSOD_EDIT_FormClosing);
-            this.contextMenuStrip2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -523,15 +403,15 @@
         }
 
         #endregion
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.RichTextBox txt_2;
+        private System.Windows.Forms.RichTextBox txt_5;
+        private System.Windows.Forms.RichTextBox txt_6;
+        private System.Windows.Forms.RichTextBox txt_7;
+        private System.Windows.Forms.RichTextBox txt_8;
+        private System.Windows.Forms.RichTextBox txt_1;
+        private System.Windows.Forms.Timer Perc_Timer;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Timer BSOD_Timer;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ColorDialog colorDialog1;
@@ -540,8 +420,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox password_in;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.RichTextBox txt_4;
+        private System.Windows.Forms.RichTextBox txt_3;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Timer timer3;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
@@ -555,20 +435,6 @@
         private System.Windows.Forms.ToolStripMenuItem cHANGEToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem rESETToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem sETTINGSToolStripMenuItem;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem11;
-        private System.Windows.Forms.ToolStripMenuItem cHANGEToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem rESETToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem10;
     }
 }
 
