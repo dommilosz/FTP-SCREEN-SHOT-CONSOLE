@@ -118,5 +118,16 @@ namespace BlueScreen_Simulator.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu :DEMO:
+        ///{p}         - %                                            {width}       - width of this screen{endl}{pass}    - password                                 {height}      - height of this screen{endl}{cmd}     - command to run 100%           {tmin} {tmax} {cmin} {cmax} - percent step time and count{endl}{scale-x} - scale width on this screen        {unsmode} - is unsafemode checked (settings){endl}{scale-y} - scale height on this screen      {closecmd} - is close after execution checked (settings)
+        ///{p} [obcięto pozostałą część ciągu]&quot;;.
+        /// </summary>
+        internal static string varsdemo {
+            get {
+                return ResourceManager.GetString("varsdemo", resourceCulture);
+            }
+        }
     }
 }

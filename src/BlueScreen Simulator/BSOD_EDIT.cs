@@ -33,6 +33,7 @@ namespace BlueScreen_Simulator
         bool closeaftercmd = false;
         bool preview = false;
         Size thissize;
+        SizeF scalefactor;
         public BSOD_EDIT()
         {
             InitializeComponent();
@@ -158,6 +159,7 @@ namespace BlueScreen_Simulator
             tmp = tmp / tmp3;
             tmp2 = tmp2 / tmp4;
             SizeF sizeF = new SizeF(tmp, tmp2);
+            scalefactor = sizeF;
 
             txt_1.Scale(sizeF);
             txt_2.Scale(sizeF);
@@ -226,6 +228,15 @@ namespace BlueScreen_Simulator
 
         public void FormatTexts()
         {
+            void FormatVarAll(string var, object value)
+            {
+                txt_1.FormatVar(var, value);
+                txt_2.FormatVar(var, value);
+                txt_3.FormatVar(var, value);
+                txt_4.FormatVar(var, value);
+                txt_5.FormatVar(var, value);
+                txt_6.FormatVar(var, value);
+            }
             txt_1.Text = prevtxt_1;
             txt_2.Text = prevtxt_2;
             txt_3.Text = prevtxt_3;
@@ -233,19 +244,19 @@ namespace BlueScreen_Simulator
             txt_5.Text = prevtxt_5;
             txt_6.Text = prevtxt_6;
 
-            txt_1.FormatVar("p", pr);
-            txt_2.FormatVar("p", pr);
-            txt_3.FormatVar("p", pr);
-            txt_4.FormatVar("p", pr);
-            txt_5.FormatVar("p", pr);
-            txt_6.FormatVar("p", pr);
-
-            txt_1.FormatVar("pass", textBox7.Text);
-            txt_2.FormatVar("pass", textBox7.Text);
-            txt_3.FormatVar("pass", textBox7.Text);
-            txt_4.FormatVar("pass", textBox7.Text);
-            txt_5.FormatVar("pass", textBox7.Text);
-            txt_6.FormatVar("pass", textBox7.Text);
+            FormatVarAll("p", pr);
+            FormatVarAll("pass", textBox7.Text);
+            FormatVarAll("cmd", cmd);
+            FormatVarAll("scale-x", scalefactor.Width);
+            FormatVarAll("scale-y", scalefactor.Height);
+            FormatVarAll("width", Bounds.Width);
+            FormatVarAll("height", Bounds.Height);
+            FormatVarAll("tmin", tmin);
+            FormatVarAll("tmax", tmax);
+            FormatVarAll("cmin", cmin);
+            FormatVarAll("cmax", cmax);
+            FormatVarAll("unsmode", unsafemode);
+            FormatVarAll("closecmd", closeaftercmd);
 
             txt_1.FormatTxt();
             txt_2.FormatTxt();
@@ -350,11 +361,17 @@ namespace BlueScreen_Simulator
             {
                 try
                 {
-                    if (patch != "default.txt{res}")
+                    if (patch.Contains("{resource/txt/prop}"))
                     {
-                        dane = File.ReadAllLines(openFileDialog1.FileName);
+                        string txt = "";
+                        if (patch.Contains("varsdemo.txt"))
+                            txt = Properties.Resources.varsdemo;
+                        if (patch.Contains("default.txt"))
+                            txt = Properties.Resources._default;
+                        txt = txt.Replace("\r","");
+                        dane = txt.Split('\n');
                     }
-                    else { dane = Properties.Resources._default.Split('\n'); }
+                    else { dane = File.ReadAllLines(openFileDialog1.FileName); }
                     txt_1.Text = dane[0].Replace("{endl}", "\n");
                     txt_2.Text = dane[1].Replace("{endl}", "\n");
                     txt_3.Text = dane[2].Replace("{endl}", "\n");
@@ -376,7 +393,7 @@ namespace BlueScreen_Simulator
                     txt_5.BackColor = colorDialog1.Color;
                     txt_6.BackColor = colorDialog1.Color;
                     textBox7.Text = dane[19];
-                    if (dane[21].Replace("\r","") != "default")
+                    if (dane[21].Replace("\r", "") != "default")
                     {
                         var bytes = Convert.FromBase64String(dane[21]);
                         var stream = new MemoryStream(bytes);
@@ -434,8 +451,8 @@ namespace BlueScreen_Simulator
 
         private void BSOD_EDIT_FormClosing(object sender, FormClosingEventArgs e)
         {
-
             if (password_in.Text != textBox7.Text && BSOD_Timer.Enabled && unsafemode) e.Cancel = true;
+            if (preview) e.Cancel = true;
         }
 
         private void sAVEToolStripMenuItem_Click(object sender, EventArgs e)
@@ -459,6 +476,8 @@ namespace BlueScreen_Simulator
                 txt_4.BackColor = colorDialog1.Color;
                 txt_5.BackColor = colorDialog1.Color;
                 txt_6.BackColor = colorDialog1.Color;
+                button1.BackColor = colorDialog1.Color;
+                button2.BackColor = colorDialog1.Color;
             }
         }
 
@@ -472,6 +491,8 @@ namespace BlueScreen_Simulator
             txt_4.BackColor = colorDialog1.Color;
             txt_5.BackColor = colorDialog1.Color;
             txt_6.BackColor = colorDialog1.Color;
+            button1.BackColor = colorDialog1.Color;
+            button2.BackColor = colorDialog1.Color;
         }
 
         private void cHANGEToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -549,7 +570,7 @@ namespace BlueScreen_Simulator
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            if (BSOD_Timer.Enabled||preview) e.Cancel = true;
+            if (BSOD_Timer.Enabled || preview) e.Cancel = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -595,7 +616,12 @@ namespace BlueScreen_Simulator
 
         private void rESETToolStripMenuItem2_Click_1(object sender, EventArgs e)
         {
-            LoadFile("default.txt{res}");
+            LoadFile("default.txt{resource/txt/prop}");
+        }
+
+        private void lOADDEMOToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadFile("varsdemo.txt{resource/txt/prop}");
         }
     }
     public static class RichTextBoxExtensions

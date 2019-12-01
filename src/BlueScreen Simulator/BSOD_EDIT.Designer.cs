@@ -35,6 +35,8 @@
             this.fILEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sAVEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lOADToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rESETToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.lOADDEMOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cHANGEBACKCOLORToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cHANGEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rESETToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,7 +59,6 @@
             this.password_in = new System.Windows.Forms.TextBox();
             this.txt_6 = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.rESETToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1.SuspendLayout();
@@ -75,6 +76,7 @@
             this.txt_2.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txt_2.Location = new System.Drawing.Point(124, 250);
             this.txt_2.Name = "txt_2";
+            this.txt_2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.txt_2.Size = new System.Drawing.Size(1000, 124);
             this.txt_2.TabIndex = 1;
             this.txt_2.Text = "Your PC ran into a problem and needs to restart. We\'re\njust collecting some error" +
@@ -88,7 +90,7 @@
             this.qRToolStripMenuItem,
             this.sETTINGSToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(155, 92);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // fILEToolStripMenuItem
@@ -96,9 +98,10 @@
             this.fILEToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sAVEToolStripMenuItem,
             this.lOADToolStripMenuItem,
-            this.rESETToolStripMenuItem2});
+            this.rESETToolStripMenuItem2,
+            this.lOADDEMOToolStripMenuItem});
             this.fILEToolStripMenuItem.Name = "fILEToolStripMenuItem";
-            this.fILEToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fILEToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.fILEToolStripMenuItem.Text = "FILE";
             // 
             // sAVEToolStripMenuItem
@@ -115,26 +118,40 @@
             this.lOADToolStripMenuItem.Text = "LOAD";
             this.lOADToolStripMenuItem.Click += new System.EventHandler(this.lOADToolStripMenuItem_Click);
             // 
+            // rESETToolStripMenuItem2
+            // 
+            this.rESETToolStripMenuItem2.Name = "rESETToolStripMenuItem2";
+            this.rESETToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.rESETToolStripMenuItem2.Text = "RESET";
+            this.rESETToolStripMenuItem2.Click += new System.EventHandler(this.rESETToolStripMenuItem2_Click_1);
+            // 
+            // lOADDEMOToolStripMenuItem
+            // 
+            this.lOADDEMOToolStripMenuItem.Name = "lOADDEMOToolStripMenuItem";
+            this.lOADDEMOToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.lOADDEMOToolStripMenuItem.Text = "LOAD DEMO";
+            this.lOADDEMOToolStripMenuItem.Click += new System.EventHandler(this.lOADDEMOToolStripMenuItem_Click);
+            // 
             // cHANGEBACKCOLORToolStripMenuItem
             // 
             this.cHANGEBACKCOLORToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cHANGEToolStripMenuItem,
             this.rESETToolStripMenuItem});
             this.cHANGEBACKCOLORToolStripMenuItem.Name = "cHANGEBACKCOLORToolStripMenuItem";
-            this.cHANGEBACKCOLORToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cHANGEBACKCOLORToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.cHANGEBACKCOLORToolStripMenuItem.Text = "COLOR (BACK)";
             // 
             // cHANGEToolStripMenuItem
             // 
             this.cHANGEToolStripMenuItem.Name = "cHANGEToolStripMenuItem";
-            this.cHANGEToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cHANGEToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.cHANGEToolStripMenuItem.Text = "CHANGE";
             this.cHANGEToolStripMenuItem.Click += new System.EventHandler(this.cHANGEToolStripMenuItem_Click);
             // 
             // rESETToolStripMenuItem
             // 
             this.rESETToolStripMenuItem.Name = "rESETToolStripMenuItem";
-            this.rESETToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rESETToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.rESETToolStripMenuItem.Text = "RESET";
             this.rESETToolStripMenuItem.Click += new System.EventHandler(this.rESETToolStripMenuItem_Click);
             // 
@@ -144,7 +161,7 @@
             this.cHANGEToolStripMenuItem1,
             this.rESETToolStripMenuItem1});
             this.qRToolStripMenuItem.Name = "qRToolStripMenuItem";
-            this.qRToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.qRToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.qRToolStripMenuItem.Text = "QR";
             // 
             // cHANGEToolStripMenuItem1
@@ -164,7 +181,7 @@
             // sETTINGSToolStripMenuItem
             // 
             this.sETTINGSToolStripMenuItem.Name = "sETTINGSToolStripMenuItem";
-            this.sETTINGSToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sETTINGSToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.sETTINGSToolStripMenuItem.Text = "SETTINGS";
             this.sETTINGSToolStripMenuItem.Click += new System.EventHandler(this.sETTINGSToolStripMenuItem_Click);
             // 
@@ -179,6 +196,7 @@
             this.txt_3.Location = new System.Drawing.Point(124, 380);
             this.txt_3.Multiline = false;
             this.txt_3.Name = "txt_3";
+            this.txt_3.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.txt_3.Size = new System.Drawing.Size(441, 33);
             this.txt_3.TabIndex = 2;
             this.txt_3.Text = "{p}% complete";
@@ -193,6 +211,7 @@
             this.txt_4.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txt_4.Location = new System.Drawing.Point(201, 436);
             this.txt_4.Name = "txt_4";
+            this.txt_4.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.txt_4.Size = new System.Drawing.Size(1000, 33);
             this.txt_4.TabIndex = 3;
             this.txt_4.Text = "For more information about this issue and possible fixes, visit https://windows.c" +
@@ -209,6 +228,7 @@
             this.txt_5.Location = new System.Drawing.Point(201, 475);
             this.txt_5.Multiline = false;
             this.txt_5.Name = "txt_5";
+            this.txt_5.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.txt_5.Size = new System.Drawing.Size(1000, 16);
             this.txt_5.TabIndex = 4;
             this.txt_5.Text = "If you call a support person, give them this info:";
@@ -224,6 +244,7 @@
             this.txt_1.Location = new System.Drawing.Point(124, 69);
             this.txt_1.Multiline = false;
             this.txt_1.Name = "txt_1";
+            this.txt_1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.txt_1.Size = new System.Drawing.Size(1000, 170);
             this.txt_1.TabIndex = 7;
             this.txt_1.Text = ":(";
@@ -299,6 +320,7 @@
             this.txt_6.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txt_6.Location = new System.Drawing.Point(201, 497);
             this.txt_6.Name = "txt_6";
+            this.txt_6.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.txt_6.Size = new System.Drawing.Size(1000, 137);
             this.txt_6.TabIndex = 5;
             this.txt_6.Text = "Stop code: CRITICAL PROCESS DIED";
@@ -313,13 +335,6 @@
             this.button2.Text = "PREVIEW";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // rESETToolStripMenuItem2
-            // 
-            this.rESETToolStripMenuItem2.Name = "rESETToolStripMenuItem2";
-            this.rESETToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.rESETToolStripMenuItem2.Text = "RESET";
-            this.rESETToolStripMenuItem2.Click += new System.EventHandler(this.rESETToolStripMenuItem2_Click_1);
             // 
             // pictureBox2
             // 
@@ -409,6 +424,7 @@
         private System.Windows.Forms.RichTextBox txt_6;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ToolStripMenuItem rESETToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem lOADDEMOToolStripMenuItem;
     }
 }
 
