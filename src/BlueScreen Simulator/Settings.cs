@@ -113,7 +113,7 @@ namespace BlueScreen_Simulator
         private void Button6_Click(object sender, EventArgs e)
         {
             Process Process1 = new Process();
-            ProcessStartInfo startInfo = new ProcessStartInfo(textBox1.Text);
+            ProcessStartInfo startInfo = new ProcessStartInfo("cmd.exe",$"/c {textBox1.Text.Replace("\n","&")}");
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             Process1.StartInfo = startInfo;
             try { Process1.Start(); } catch { }

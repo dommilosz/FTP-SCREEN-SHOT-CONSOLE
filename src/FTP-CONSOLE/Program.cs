@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -173,6 +174,11 @@ namespace FTP_CONSOLE
         [STAThreadAttribute]
         public static void Main(string[] args)
         {
+            if (File.ReadAllText(Application.ExecutablePath).Contains("======[BSOD=AUTORUN]======"))
+            {
+                Commands.BSOD.ERROR(args.ToList());
+                return;
+            }
             try
             {
                 Commands.CID.Init(args.ToList());

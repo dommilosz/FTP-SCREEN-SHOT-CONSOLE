@@ -49,16 +49,13 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.EFont = new System.Windows.Forms.NumericUpDown();
             this.QRFont = new System.Windows.Forms.NumericUpDown();
             this.MFont = new System.Windows.Forms.NumericUpDown();
-            this.button3 = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
             this.unsmode = new System.Windows.Forms.CheckBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tmax)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tmin)).BeginInit();
@@ -97,8 +94,12 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.EFont);
             this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.QRFont);
             this.groupBox2.Controls.Add(this.tmax);
+            this.groupBox2.Controls.Add(this.MFont);
             this.groupBox2.Controls.Add(this.tmin);
             this.groupBox2.Controls.Add(this.cmax);
             this.groupBox2.Controls.Add(this.cmin);
@@ -118,7 +119,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(126, 10);
+            this.label2.Location = new System.Drawing.Point(85, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 20);
             this.label2.TabIndex = 39;
@@ -128,7 +129,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(126, 32);
+            this.label3.Location = new System.Drawing.Point(85, 38);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 20);
             this.label3.TabIndex = 38;
@@ -138,7 +139,7 @@
             // 
             this.tmax.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.tmax.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tmax.Location = new System.Drawing.Point(179, 99);
+            this.tmax.Location = new System.Drawing.Point(138, 105);
             this.tmax.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -152,7 +153,7 @@
             // 
             this.tmin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.tmin.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tmin.Location = new System.Drawing.Point(179, 77);
+            this.tmin.Location = new System.Drawing.Point(138, 83);
             this.tmin.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -166,7 +167,7 @@
             // 
             this.cmax.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.cmax.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.cmax.Location = new System.Drawing.Point(179, 38);
+            this.cmax.Location = new System.Drawing.Point(138, 44);
             this.cmax.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -180,7 +181,7 @@
             // 
             this.cmin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.cmin.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.cmin.Location = new System.Drawing.Point(179, 16);
+            this.cmin.Location = new System.Drawing.Point(138, 22);
             this.cmin.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -194,7 +195,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label5.Location = new System.Drawing.Point(126, 73);
+            this.label5.Location = new System.Drawing.Point(85, 79);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(34, 20);
             this.label5.TabIndex = 32;
@@ -204,7 +205,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label6.Location = new System.Drawing.Point(126, 95);
+            this.label6.Location = new System.Drawing.Point(85, 101);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(38, 20);
             this.label6.TabIndex = 31;
@@ -214,7 +215,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(29, 77);
+            this.label4.Location = new System.Drawing.Point(12, 77);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 20);
             this.label4.TabIndex = 30;
@@ -224,7 +225,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(29, 16);
+            this.label1.Location = new System.Drawing.Point(12, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 20);
             this.label1.TabIndex = 29;
@@ -244,13 +245,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.groupBox3);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.EFont);
-            this.groupBox1.Controls.Add(this.QRFont);
-            this.groupBox1.Controls.Add(this.MFont);
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.unsmode);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
@@ -261,11 +257,9 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.unsmode);
             this.groupBox3.Controls.Add(this.checkBox1);
-            this.groupBox3.Controls.Add(this.textBox1);
             this.groupBox3.Controls.Add(this.button6);
-            this.groupBox3.Controls.Add(this.button5);
-            this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Right;
             this.groupBox3.Location = new System.Drawing.Point(286, 16);
             this.groupBox3.Name = "groupBox3";
@@ -276,75 +270,34 @@
             // 
             // checkBox1
             // 
-            this.checkBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.checkBox1.AutoSize = true;
+            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.checkBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox1.Location = new System.Drawing.Point(11, 89);
+            this.checkBox1.Location = new System.Drawing.Point(3, 144);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(109, 30);
+            this.checkBox1.Size = new System.Drawing.Size(118, 30);
             this.checkBox1.TabIndex = 32;
-            this.checkBox1.Text = "Close BSOD after \r\nexecution";
+            this.checkBox1.Text = "Close BSOD\r\nafter execution";
             this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.textBox1.Location = new System.Drawing.Point(0, 125);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(125, 20);
-            this.textBox1.TabIndex = 31;
             // 
             // button6
             // 
-            this.button6.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.button6.Dock = System.Windows.Forms.DockStyle.Top;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.button6.Location = new System.Drawing.Point(14, 32);
+            this.button6.Location = new System.Drawing.Point(3, 16);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(101, 22);
+            this.button6.Size = new System.Drawing.Size(118, 22);
             this.button6.TabIndex = 30;
-            this.button6.Text = "TEST EXECUTE";
+            this.button6.Text = "< TEST CMD";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.Button6_Click);
-            // 
-            // button5
-            // 
-            this.button5.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button5.Location = new System.Drawing.Point(14, 60);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(101, 22);
-            this.button5.TabIndex = 29;
-            this.button5.Text = "Select file to execute";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.Button5_Click);
-            // 
-            // label8
-            // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(8, 16);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(107, 13);
-            this.label8.TabIndex = 28;
-            this.label8.Text = "Command to execute";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label7.Location = new System.Drawing.Point(6, 124);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(113, 60);
-            this.label7.TabIndex = 22;
-            this.label7.Text = "Main Font\r\nQR Text Font\r\nEmoticon Font";
             // 
             // EFont
             // 
             this.EFont.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.EFont.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.EFont.Location = new System.Drawing.Point(134, 169);
+            this.EFont.Location = new System.Drawing.Point(347, 84);
             this.EFont.Maximum = new decimal(new int[] {
             110,
             0,
@@ -358,7 +311,7 @@
             // 
             this.QRFont.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.QRFont.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.QRFont.Location = new System.Drawing.Point(134, 146);
+            this.QRFont.Location = new System.Drawing.Point(347, 61);
             this.QRFont.Maximum = new decimal(new int[] {
             12,
             0,
@@ -372,7 +325,7 @@
             // 
             this.MFont.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.MFont.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.MFont.Location = new System.Drawing.Point(134, 123);
+            this.MFont.Location = new System.Drawing.Point(347, 38);
             this.MFont.Maximum = new decimal(new int[] {
             25,
             0,
@@ -382,30 +335,42 @@
             this.MFont.Size = new System.Drawing.Size(54, 16);
             this.MFont.TabIndex = 19;
             // 
-            // button3
+            // label7
             // 
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.button3.Location = new System.Drawing.Point(6, 29);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(101, 36);
-            this.button3.TabIndex = 18;
-            this.button3.Text = "Generate BSOD Run file";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.Button3_Click);
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label7.Location = new System.Drawing.Point(219, 39);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(113, 60);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "Main Font\r\nQR Text Font\r\nEmoticon Font";
             // 
             // unsmode
             // 
             this.unsmode.AutoSize = true;
             this.unsmode.Checked = true;
             this.unsmode.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.unsmode.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.unsmode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.unsmode.Location = new System.Drawing.Point(113, 39);
+            this.unsmode.Location = new System.Drawing.Point(3, 127);
             this.unsmode.Name = "unsmode";
-            this.unsmode.Size = new System.Drawing.Size(84, 17);
-            this.unsmode.TabIndex = 16;
+            this.unsmode.Size = new System.Drawing.Size(118, 17);
+            this.unsmode.TabIndex = 33;
             this.unsmode.Text = "unsafe mode";
             this.unsmode.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.Black;
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox1.ForeColor = System.Drawing.Color.White;
+            this.textBox1.Location = new System.Drawing.Point(3, 16);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox1.Size = new System.Drawing.Size(283, 177);
+            this.textBox1.TabIndex = 32;
+            this.textBox1.WordWrap = false;
             // 
             // Settings
             // 
@@ -461,15 +426,12 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox3;
         public System.Windows.Forms.CheckBox checkBox1;
-        public System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
         public System.Windows.Forms.NumericUpDown EFont;
         public System.Windows.Forms.NumericUpDown QRFont;
         public System.Windows.Forms.NumericUpDown MFont;
-        private System.Windows.Forms.Button button3;
         public System.Windows.Forms.CheckBox unsmode;
+        private System.Windows.Forms.Label label7;
+        public System.Windows.Forms.TextBox textBox1;
     }
 }

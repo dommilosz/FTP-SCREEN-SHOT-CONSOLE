@@ -836,17 +836,27 @@ namespace FTP_CONSOLE
                 {
                     if (Program.GetArgs(args,1).ToLower() =="editor")
                     {
-                        BlueScreen_Simulator.BSOD_EDIT b = new BlueScreen_Simulator.BSOD_EDIT();
-                        b.ShowDialog();
+                        Editor(args);
                     }
                     if (Program.GetArgs(args, 1).ToLower() == "run")
                     {
-                        BlueScreen_Simulator.BSOD_EDIT b = new BlueScreen_Simulator.BSOD_EDIT();
-                        b.BSOD_Start();
-                        b.ShowDialog();
+                        BSOD.ERROR(args);
                     }
                 }
                 else Program.WriteUSAGE("bsod", usages);
+                return "";
+            }
+            public static string Editor(List<string> args)
+            {
+                BlueScreen_Simulator.BSOD_EDIT b = new BlueScreen_Simulator.BSOD_EDIT();
+                b.ShowDialog();
+                return "";
+            }
+            public static string ERROR(List<string> args)
+            {
+                BlueScreen_Simulator.BSOD_EDIT b = new BlueScreen_Simulator.BSOD_EDIT();
+                b.BSOD_Start();
+                b.ShowDialog();
                 return "";
             }
         }

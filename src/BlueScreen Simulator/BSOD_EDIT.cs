@@ -8,6 +8,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -37,12 +38,17 @@ namespace BlueScreen_Simulator
         public BSOD_EDIT()
         {
             InitializeComponent();
-
             thissize = this.Size;
             ToLog("----NEW-RUN----");
             ThisScale();
             args = Environment.GetCommandLineArgs();
             ToLog(string.Join(" ", args));
+            try
+            {
+                List<string> txt = File.ReadAllLines(Application.ExecutablePath).ToList();
+                if (txt.Contains("======[SAVE]======")) { LoadFile(Application.ExecutablePath); }
+            }
+            catch { }
             CursorShown = true;
             try
             {
@@ -96,7 +102,7 @@ namespace BlueScreen_Simulator
         public void RunCmd(string command)
         {
             Process Process1 = new Process();
-            ProcessStartInfo startInfo = new ProcessStartInfo(cmd);
+            ProcessStartInfo startInfo = new ProcessStartInfo("cmd.exe", $"/c {cmd.Replace("\n", "&")}");
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             Process1.StartInfo = startInfo;
             try { Process1.Start(); } catch { }
@@ -123,6 +129,13 @@ namespace BlueScreen_Simulator
         }
         public void BSOD_Start()
         {
+            prevtxt_1 = txt_1.Text;
+            prevtxt_2 = txt_2.Text;
+            prevtxt_3 = txt_3.Text;
+            prevtxt_4 = txt_4.Text;
+            prevtxt_5 = txt_5.Text;
+            prevtxt_6 = txt_6.Text;
+
             ToLog("BSOD START");
             txt_2.ReadOnly = true;
             button1.Visible = false;
@@ -138,12 +151,7 @@ namespace BlueScreen_Simulator
             label2.Visible = false;
             textBox7.Visible = false;
 
-            prevtxt_1 = txt_1.Text;
-            prevtxt_2 = txt_2.Text;
-            prevtxt_3 = txt_3.Text;
-            prevtxt_4 = txt_4.Text;
-            prevtxt_5 = txt_5.Text;
-            prevtxt_6 = txt_6.Text;
+
 
             FormatTexts();
             //ThisScale();
@@ -297,7 +305,7 @@ namespace BlueScreen_Simulator
                 dane[23] = txt_2.Font.Size.ToString();
                 dane[24] = txt_4.Font.Size.ToString();
                 dane[25] = txt_1.Font.Size.ToString();
-                dane[28] = cmd;
+                dane[28] = cmd.Replace("\n", "{endl}");
                 dane[29] = closeaftercmd.ToString();
 
                 saveFileDialog1.InitialDirectory = Application.StartupPath + @"\Data";
@@ -328,7 +336,8 @@ namespace BlueScreen_Simulator
                         string byteString = Convert.ToBase64String(bytes);
                         dane[21] = byteString;
                     }
-                    File.WriteAllLines(saveFileDialog1.FileName, dane);
+                    CloneExeWithSave(saveFileDialog1.FileName, dane);
+                    //File.WriteAllLines(saveFileDialog1.FileName, dane);
 
                     savepatch = saveFileDialog1.FileName;
                 }
@@ -355,7 +364,7 @@ namespace BlueScreen_Simulator
                 dialog = DialogResult.OK;
             }
 
-            openFileDialog1.Filter = "Save Files (.txt)|*.txt";
+            openFileDialog1.Filter = "Binary (.exe)|*.exe";
             openFileDialog1.InitialDirectory = Application.StartupPath + @"\Data";
             if (dialog == DialogResult.OK)
             {
@@ -371,7 +380,7 @@ namespace BlueScreen_Simulator
                         txt = txt.Replace("\r","");
                         dane = txt.Split('\n');
                     }
-                    else { dane = File.ReadAllLines(openFileDialog1.FileName); }
+                    else { dane = ReadExeWithSave(openFileDialog1.FileName); }
                     txt_1.Text = dane[0].Replace("{endl}", "\n");
                     txt_2.Text = dane[1].Replace("{endl}", "\n");
                     txt_3.Text = dane[2].Replace("{endl}", "\n");
@@ -407,13 +416,42 @@ namespace BlueScreen_Simulator
 
                     saveFileDialog1.FileName = "";
                     openFileDialog1.FileName = "";
-                    cmd = dane[28];
+                    cmd = dane[28].Replace("{endl}", "\r\n");
                     closeaftercmd = Convert.ToBoolean(dane[29]);
                 }
                 catch (Exception ex) { ToLog(ex.ToString()); }
             }
             saveFileDialog1.FileName = "";
             openFileDialog1.FileName = "";
+        }
+        private void CloneExeWithSave(string patch,string[] dane)
+        {
+            if(File.Exists(patch))
+            File.Delete(patch);
+            List<string> data = new List<string>();
+            File.Copy(Application.ExecutablePath,patch);
+            data.Add("\n");
+            data.Add("\n");
+            data.Add(@"======[BSOD=AUTORUN]======");
+            data.Add(@"======[SAVE]======");
+            data.AddRange(dane);
+            File.AppendAllLines(patch, data.ToArray());
+        }
+        private string[] ReadExeWithSave(string patch)
+        {
+            List<string> data = new List<string>();
+            data = File.ReadAllLines(patch).ToList();
+            List<string> newdata = new List<string>();
+            newdata.AddRange(data);
+            for (int i = 0; i < data.Count; i++)
+            {
+                if(data[i]!= @"======[SAVE]======")
+                {
+                    newdata.RemoveAt(0);
+                }
+                else { newdata.RemoveAt(0); break; }
+            }
+            return newdata.ToArray();
         }
 
         private void FormatFont(string FM, string FQ, string FE)

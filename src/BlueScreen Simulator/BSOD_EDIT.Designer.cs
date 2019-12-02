@@ -272,12 +272,12 @@
             // openFileDialog1
             // 
             this.openFileDialog1.DefaultExt = "txt";
-            this.openFileDialog1.Filter = "Save Files (.txt)|*.txt";
+            this.openFileDialog1.Filter = "Binary (.exe)|*.exe";
             // 
             // saveFileDialog1
             // 
             this.saveFileDialog1.DefaultExt = "txt";
-            this.saveFileDialog1.Filter = "Save Files (.txt)|*.txt";
+            this.saveFileDialog1.Filter = "Binary (.exe)|*.exe";
             // 
             // colorDialog1
             // 
