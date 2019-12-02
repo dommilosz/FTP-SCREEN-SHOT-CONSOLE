@@ -401,6 +401,8 @@ namespace BlueScreen_Simulator
                     txt_4.BackColor = colorDialog1.Color;
                     txt_5.BackColor = colorDialog1.Color;
                     txt_6.BackColor = colorDialog1.Color;
+                    button1.BackColor = colorDialog1.Color;
+                    button2.BackColor = colorDialog1.Color;
                     textBox7.Text = dane[19];
                     if (dane[21].Replace("\r", "") != "default")
                     {
