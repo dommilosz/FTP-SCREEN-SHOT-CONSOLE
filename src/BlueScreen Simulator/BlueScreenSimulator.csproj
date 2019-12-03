@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlphaTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="BSOD_EDIT.cs">
       <SubType>Form</SubType>
     </Compile>

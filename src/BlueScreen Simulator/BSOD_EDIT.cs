@@ -295,7 +295,14 @@ namespace BlueScreen_Simulator
                 dane[12] = this.BackColor.R.ToString();
                 dane[13] = this.BackColor.G.ToString();
                 dane[14] = this.BackColor.B.ToString();
-                //dane[15] = this.ForeColor.R.ToString();
+                string locdata = "";
+                locdata += $"|{txt_1.Location.X}*{txt_1.Location.Y}#{txt_1.Size.Width}*{txt_1.Size.Height}|";
+                locdata += $"|{txt_2.Location.X}*{txt_2.Location.Y}#{txt_2.Size.Width}*{txt_2.Size.Height}|";
+                locdata += $"|{txt_3.Location.X}*{txt_3.Location.Y}#{txt_3.Size.Width}*{txt_3.Size.Height}|";
+                locdata += $"|{txt_4.Location.X}*{txt_4.Location.Y}#{txt_4.Size.Width}*{txt_4.Size.Height}|";
+                locdata += $"|{txt_5.Location.X}*{txt_5.Location.Y}#{txt_5.Size.Width}*{txt_5.Size.Height}|";
+                locdata += $"|{txt_6.Location.X}*{txt_6.Location.Y}#{txt_6.Size.Width}*{txt_6.Size.Height}|";
+                dane[15] = locdata;
                 //dane[16] = this.ForeColor.G.ToString();
                 //dane[17] = this.ForeColor.B.ToString();
                 dane[18] = "//password settings";
@@ -405,6 +412,27 @@ namespace BlueScreen_Simulator
                     button1.BackColor = colorDialog1.Color;
                     button2.BackColor = colorDialog1.Color;
                     textBox7.Text = dane[19];
+                    string locdata = dane[15];
+                    List<string> locdatas = locdata.Split('|').ToList();
+                    while (locdatas.Contains(""))
+                    {
+                        locdatas.Remove("");
+                    }
+                    for (int i = 0; i < locdatas.Count; i++)
+                    {
+                        List<string> locdat = locdatas[i].Split('#').ToList();
+                        List<string> loc = locdat[0].Split('*').ToList();
+                        List<string> size = locdat[1].Split('*').ToList();
+                        Point Location = new Point(Convert.ToInt32(loc[0]), Convert.ToInt32(loc[1]));
+                        Size Size = new Size(Convert.ToInt32(size[0]), Convert.ToInt32(size[1]));
+                        if (i == 0) { txt_1.Location = Location; txt_1.Size = Size; }
+                        if (i == 1) { txt_2.Location = Location; txt_2.Size = Size; }
+                        if (i == 2) { txt_3.Location = Location; txt_3.Size = Size; }
+                        if (i == 3) { txt_4.Location = Location; txt_4.Size = Size; }
+                        if (i == 4) { txt_5.Location = Location; txt_5.Size = Size; }
+                        if (i == 5) { txt_6.Location = Location; txt_6.Size = Size; }
+                    }
+
                     if (dane[21].Replace("\r", "") != "default")
                     {
                         var bytes = Convert.FromBase64String(dane[21]);

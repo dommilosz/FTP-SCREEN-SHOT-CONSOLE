@@ -13,7 +13,7 @@ Stop code: CRITICAL PROCESS DIED
 0
 120
 215
-
+|141*79#1138*193||141*284#1138*141||141*432#502*38||229*496#1138*38||229*540#1138*18||229*565#1138*156|
 
 
 //password settings
@@ -21,8 +21,8 @@ Stop code: CRITICAL PROCESS DIED
 //image settings
 default
 True
-15
-12
+16
+9,25
 100
 
 
