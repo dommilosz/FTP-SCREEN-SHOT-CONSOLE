@@ -124,6 +124,9 @@
   <data name="varsdemo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\varsdemo.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
   </data>
+  <data name="win7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\win7.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
   <data name="_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
   </data>

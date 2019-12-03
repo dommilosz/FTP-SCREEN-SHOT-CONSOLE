@@ -303,8 +303,13 @@ namespace BlueScreen_Simulator
                 locdata += $"|{txt_5.Location.X}*{txt_5.Location.Y}#{txt_5.Size.Width}*{txt_5.Size.Height}|";
                 locdata += $"|{txt_6.Location.X}*{txt_6.Location.Y}#{txt_6.Size.Width}*{txt_6.Size.Height}|";
                 dane[15] = locdata;
-                //dane[16] = this.ForeColor.G.ToString();
-                //dane[17] = this.ForeColor.B.ToString();
+                Font font;
+                Font font2;
+                var fcv = new FontConverter();
+                font = txt_2.Font;
+                font2 = txt_1.Font;
+                dane[16] = fcv.ConvertToString(font);
+                dane[17] = fcv.ConvertToString(font2);
                 dane[18] = "//password settings";
                 dane[19] = textBox7.Text;
                 dane[20] = "//image settings";
@@ -385,6 +390,8 @@ namespace BlueScreen_Simulator
                             txt = Properties.Resources.varsdemo;
                         if (patch.Contains("default.txt"))
                             txt = Properties.Resources._default;
+                        if (patch.Contains("win7.txt"))
+                            txt = Properties.Resources.win7;
                         txt = txt.Replace("\r","");
                         dane = txt.Split('\n');
                     }
@@ -443,7 +450,7 @@ namespace BlueScreen_Simulator
                     unsafemode = Convert.ToBoolean(dane[22]);
                     savepatch = openFileDialog1.FileName;
 
-                    FormatFont(dane[23], dane[24], dane[25]);
+                    FormatFont(dane[23], dane[24], dane[25],dane[16],dane[17]);
 
                     saveFileDialog1.FileName = "";
                     openFileDialog1.FileName = "";
@@ -485,16 +492,23 @@ namespace BlueScreen_Simulator
             return newdata.ToArray();
         }
 
-        private void FormatFont(string FM, string FQ, string FE)
+        private void FormatFont(string FM, string FQ, string FE, string font = "",string emofont = "")
         {
+            FontConverter fcv = new FontConverter();
+            string fs = "Microsoft JhengHei UI Light";
+            string efs = "Microsoft YaHei UI";
+            if (font != "" && emofont != "")
+            {
+                fs = (fcv.ConvertFromString(font) as Font).Name;
+            }
             float MF = (float)Convert.ToDouble(FM);
-            Font font_Main = new Font("Microsoft JhengHei UI Light", MF);
+            Font font_Main = new Font(fs, MF);
 
             float QF = (float)Convert.ToDouble(FQ);
-            Font font_QR = new Font("Microsoft JhengHei UI Light", QF);
+            Font font_QR = new Font(fs, QF);
 
             float EF = (float)Convert.ToDouble(FE);
-            Font font_Emo = new Font("Microsoft YaHei UI", EF);
+            Font font_Emo = new Font(efs, EF);
 
             txt_1.Font = font_Emo;
 
@@ -735,6 +749,11 @@ namespace BlueScreen_Simulator
             //    contextMenuStrip1.Items[1].Visible = true;
             //}
             //else contextMenuStrip1.Items[1].Visible =false;
+        }
+
+        private void win7ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadFile("win7.txt{resource/txt/prop}");
         }
     }
     public static class RichTextBoxExtensions

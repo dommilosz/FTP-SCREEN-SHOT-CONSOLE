@@ -76,32 +76,10 @@ namespace BlueScreen_Simulator.Properties {
         ///0
         ///120
         ///215
+        ///|141*79#1138*193||141*284#1138*141||141*432#502*38||229*496#1138*38||229*540#1138*18||229*565#1138*156|
         ///
         ///
-        ///
-        /////password settings
-        ///33215
-        /////image settings
-        ///default
-        ///True
-        ///18
-        ///9,25
-        ///100
-        ///
-        ///
-        ///
-        ///False
-        ///
-        ///
-        ///
-        ///
-        ///
-        ///
-        ///
-        ///
-        ///
-        ///
-        ///        /// [obcięto pozostałą część ciągu]&quot;;.
+        /////passw [obcięto pozostałą część ciągu]&quot;;.
         /// </summary>
         internal static string _default {
             get {
@@ -122,11 +100,21 @@ namespace BlueScreen_Simulator.Properties {
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu :DEMO:
         ///{p}         - %                                            {width}       - width of this screen{endl}{pass}    - password                                 {height}      - height of this screen{endl}{cmd}     - command to run 100%           {tmin} {tmax} {cmin} {cmax} - percent step time and count{endl}{scale-x} - scale width on this screen        {unsmode} - is unsafemode checked (settings){endl}{scale-y} - scale height on this screen      {closecmd} - is close after execution checked (settings)
-        ///{p} [obcięto pozostałą część ciągu]&quot;;.
+        ///CLI [obcięto pozostałą część ciągu]&quot;;.
         /// </summary>
         internal static string varsdemo {
             get {
                 return ResourceManager.GetString("varsdemo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu 
+        ///A problem has been detect and Windows has been shut down to prevent damage to your computer{endl}{endl}{endl}PAGE_FAULT_IN_MONPAGED_AREA{endl}{endl}{endl}If this is the first time you&apos;ve seen this Stop errror screen,{endl}restart your computer. If this screen appears again, follow these steps:{endl}{endl}Check to make sure any new hardware or software is properly installed.{endl}If this is a new instalation, ask your hardware or software manufacturer{endl}for any Windows updates you might need.{endl}{endl [obcięto pozostałą część ciągu]&quot;;.
+        /// </summary>
+        internal static string win7 {
+            get {
+                return ResourceManager.GetString("win7", resourceCulture);
             }
         }
     }

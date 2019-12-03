@@ -38,6 +38,7 @@
             this.templatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dEMOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.win10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.win7ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cHANGEBACKCOLORToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cHANGEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rESETToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -104,7 +105,7 @@
             this.lOADToolStripMenuItem,
             this.templatesToolStripMenuItem});
             this.fILEToolStripMenuItem.Name = "fILEToolStripMenuItem";
-            this.fILEToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.fILEToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.fILEToolStripMenuItem.Text = "FILE";
             // 
             // sAVEToolStripMenuItem
@@ -125,7 +126,8 @@
             // 
             this.templatesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dEMOToolStripMenuItem,
-            this.win10ToolStripMenuItem});
+            this.win10ToolStripMenuItem,
+            this.win7ToolStripMenuItem});
             this.templatesToolStripMenuItem.Name = "templatesToolStripMenuItem";
             this.templatesToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.templatesToolStripMenuItem.Text = "TEMPLATES";
@@ -144,13 +146,20 @@
             this.win10ToolStripMenuItem.Text = "Win10";
             this.win10ToolStripMenuItem.Click += new System.EventHandler(this.rESETToolStripMenuItem2_Click_1);
             // 
+            // win7ToolStripMenuItem
+            // 
+            this.win7ToolStripMenuItem.Name = "win7ToolStripMenuItem";
+            this.win7ToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.win7ToolStripMenuItem.Text = "Win7";
+            this.win7ToolStripMenuItem.Click += new System.EventHandler(this.win7ToolStripMenuItem_Click);
+            // 
             // cHANGEBACKCOLORToolStripMenuItem
             // 
             this.cHANGEBACKCOLORToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cHANGEToolStripMenuItem,
             this.rESETToolStripMenuItem});
             this.cHANGEBACKCOLORToolStripMenuItem.Name = "cHANGEBACKCOLORToolStripMenuItem";
-            this.cHANGEBACKCOLORToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.cHANGEBACKCOLORToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.cHANGEBACKCOLORToolStripMenuItem.Text = "COLOR (BACK)";
             // 
             // cHANGEToolStripMenuItem
@@ -173,7 +182,7 @@
             this.cHANGEToolStripMenuItem1,
             this.rESETToolStripMenuItem1});
             this.qRToolStripMenuItem.Name = "qRToolStripMenuItem";
-            this.qRToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.qRToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.qRToolStripMenuItem.Text = "QR";
             // 
             // cHANGEToolStripMenuItem1
@@ -194,14 +203,14 @@
             // 
             this.toolStripMenuItem1.CheckOnClick = true;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
             this.toolStripMenuItem1.Text = "DESIGN MODE";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // sETTINGSToolStripMenuItem
             // 
             this.sETTINGSToolStripMenuItem.Name = "sETTINGSToolStripMenuItem";
-            this.sETTINGSToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.sETTINGSToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.sETTINGSToolStripMenuItem.Text = "SETTINGS";
             this.sETTINGSToolStripMenuItem.Click += new System.EventHandler(this.sETTINGSToolStripMenuItem_Click);
             // 
@@ -259,7 +268,7 @@
             this.txt_1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txt_1.ContextMenuStrip = this.contextMenuStrip1;
             this.txt_1.DetectUrls = false;
-            this.txt_1.Font = new System.Drawing.Font("Microsoft YaHei UI", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txt_1.Font = new System.Drawing.Font("Microsoft YaHei UI", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
             this.txt_1.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txt_1.Location = new System.Drawing.Point(124, 69);
             this.txt_1.Multiline = false;
@@ -448,6 +457,7 @@
         private System.Windows.Forms.ToolStripMenuItem templatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dEMOToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem win10ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem win7ToolStripMenuItem;
     }
 }
 
