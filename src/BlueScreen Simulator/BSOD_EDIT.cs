@@ -718,6 +718,7 @@ namespace BlueScreen_Simulator
                 txt_4.Cursor = Cursors.IBeam;
                 txt_5.Cursor = Cursors.IBeam;
                 txt_6.Cursor = Cursors.IBeam;
+                this.CreateGraphics().Clear(this.BackColor);
             }
         }
 

@@ -39,7 +39,14 @@ namespace ControlManager
         {
             Unload(control, control);
         }
-
+        internal static void DrawFrames(Control c)
+        {
+            Form f = c.FindForm();
+            Graphics g = f.CreateGraphics();
+            g.Clear(f.BackColor);
+            g.DrawRectangle(Pens.Red, c.Location.X-1,c.Location.Y-1,c.Size.Width,c.Size.Height);
+            g.DrawRectangle(Pens.Red, c.Location.X, c.Location.Y, c.Size.Width, c.Size.Height);
+        }
         internal static void Init(Control control, Control container)
         {
             _moving = false;
@@ -52,6 +59,7 @@ namespace ControlManager
             MouseIsInTopEdge = false;
             MouseIsInBottomEdge = false;
             WorkType = MoveOrResize.MoveAndResize;
+            DrawFrames(control);
             control.MouseDown += (sender, e) => StartMovingOrResizing(control, e);
             control.MouseUp += (sender, e) => StopDragOrResizing(control);
             control.MouseMove += (sender, e) => MoveControl(container, e);
@@ -157,6 +165,7 @@ namespace ControlManager
         private static void MoveControl(Control control, MouseEventArgs e)
         {
             if (!_enabled) return;
+            DrawFrames(control);
             if (!_resizing && ! _moving)
             {
                 UpdateMouseEdgeProperties(control, new Point(e.X, e.Y));
