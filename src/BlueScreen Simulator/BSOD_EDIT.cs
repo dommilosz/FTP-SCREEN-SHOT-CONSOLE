@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ControlManager;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -608,11 +609,6 @@ namespace BlueScreen_Simulator
             _sc.ForeColor = colorDialog1.Color;
         }
 
-        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
-        {
-            if (BSOD_Timer.Enabled || preview) e.Cancel = true;
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             preview = !preview;
@@ -662,6 +658,54 @@ namespace BlueScreen_Simulator
         private void lOADDEMOToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadFile("varsdemo.txt{resource/txt/prop}");
+        }
+
+        public bool editing = false;
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            editing = !editing;
+            toolStripMenuItem1.Checked = editing;
+            if (editing)
+            {
+                ControlMoverOrResizer.Init(txt_1);
+                ControlMoverOrResizer.Init(txt_2);
+                ControlMoverOrResizer.Init(txt_3);
+                ControlMoverOrResizer.Init(txt_4);
+                ControlMoverOrResizer.Init(txt_5);
+                ControlMoverOrResizer.Init(txt_6);
+                ControlMoverOrResizer.Init(pictureBox1);
+            }
+            if (!editing)
+            {
+                ControlMoverOrResizer.Unload(txt_1);
+                ControlMoverOrResizer.Unload(txt_2);
+                ControlMoverOrResizer.Unload(txt_3);
+                ControlMoverOrResizer.Unload(txt_4);
+                ControlMoverOrResizer.Unload(txt_5);
+                ControlMoverOrResizer.Unload(txt_6);
+                ControlMoverOrResizer.Unload(pictureBox1);
+                txt_1.Cursor = Cursors.IBeam;
+                txt_2.Cursor = Cursors.IBeam;
+                txt_3.Cursor = Cursors.IBeam;
+                txt_4.Cursor = Cursors.IBeam;
+                txt_5.Cursor = Cursors.IBeam;
+                txt_6.Cursor = Cursors.IBeam;
+            }
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            if (BSOD_Timer.Enabled || preview) e.Cancel = true;
+        }
+        Control _sourceControl = null;
+        private void contextMenuStrip1_Opened(object sender, EventArgs e)
+        {
+            _sourceControl = contextMenuStrip1.SourceControl;
+            //if (_sourceControl.Name.Contains("txt_") || _sourceControl.Name.Contains("pictureBox1"))
+            //{
+            //    contextMenuStrip1.Items[1].Visible = true;
+            //}
+            //else contextMenuStrip1.Items[1].Visible =false;
         }
     }
     public static class RichTextBoxExtensions
