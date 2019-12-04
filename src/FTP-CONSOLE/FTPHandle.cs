@@ -122,9 +122,9 @@ namespace FTP_CONSOLE
             FTPHandle.CreateDir("0RootScreenShot08");
             if (patch.Length > 18)
             {
-                if (patch[18] == '*') Program.WriteTxt($"&4Do You Want To Delete : EVERYTHING? &aY/N  : ",false);
+                if (patch[18] == '*') Program.WriteTxt($"&4Do You Want To Delete : EVERYTHING? &aY/N  : ", false);
                 else
-                    Program.WriteTxt($"&4Do You Want To Delete : {patch}? &aY/N  : ",false);
+                    Program.WriteTxt($"&4Do You Want To Delete : {patch}? &aY/N  : ", false);
             }
             else throw new Exception("Patch can not be null");
 
@@ -133,7 +133,7 @@ namespace FTP_CONSOLE
             Program.WriteTxt("");
             if (ans == "y")
             {
-                
+
                 var items = GetItemsList(patch);
                 for (int i = items.Count - 1; i >= 0; i--)
                 {

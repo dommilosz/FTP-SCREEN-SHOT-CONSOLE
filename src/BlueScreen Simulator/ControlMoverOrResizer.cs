@@ -44,7 +44,7 @@ namespace ControlManager
             Form f = c.FindForm();
             Graphics g = f.CreateGraphics();
             g.Clear(f.BackColor);
-            g.DrawRectangle(Pens.Red, c.Location.X-1,c.Location.Y-1,c.Size.Width,c.Size.Height);
+            g.DrawRectangle(Pens.Red, c.Location.X - 1, c.Location.Y - 1, c.Size.Width, c.Size.Height);
             g.DrawRectangle(Pens.Red, c.Location.X, c.Location.Y, c.Size.Width, c.Size.Height);
         }
         internal static void Init(Control control, Control container)
@@ -77,7 +77,7 @@ namespace ControlManager
             MouseIsInTopEdge = false;
             MouseIsInBottomEdge = false;
             WorkType = MoveOrResize.MoveAndResize;
-            control.RemoveEvents("Event"+nameof(control.MouseDown));
+            control.RemoveEvents("Event" + nameof(control.MouseDown));
             control.RemoveEvents("Event" + nameof(control.MouseUp));
             control.RemoveEvents("Event" + nameof(control.MouseMove));
             _enabled = false;
@@ -91,7 +91,7 @@ namespace ControlManager
             }
             MouseIsInLeftEdge = Math.Abs(mouseLocationInControl.X) <= 2;
             MouseIsInRightEdge = Math.Abs(mouseLocationInControl.X - control.Width) <= 2;
-            MouseIsInTopEdge = Math.Abs(mouseLocationInControl.Y ) <= 2;
+            MouseIsInTopEdge = Math.Abs(mouseLocationInControl.Y) <= 2;
             MouseIsInBottomEdge = Math.Abs(mouseLocationInControl.Y - control.Height) <= 2;
         }
 
@@ -101,7 +101,7 @@ namespace ControlManager
             {
                 return;
             }
-            if (MouseIsInLeftEdge )
+            if (MouseIsInLeftEdge)
             {
                 if (MouseIsInTopEdge)
                 {
@@ -143,17 +143,17 @@ namespace ControlManager
 
         private static void StartMovingOrResizing(Control control, MouseEventArgs e)
         {
-            if (_moving || _resizing||!_enabled)
+            if (_moving || _resizing || !_enabled)
             {
                 return;
             }
-            if (WorkType!=MoveOrResize.Move &&
+            if (WorkType != MoveOrResize.Move &&
                 (MouseIsInRightEdge || MouseIsInLeftEdge || MouseIsInTopEdge || MouseIsInBottomEdge))
             {
                 _resizing = true;
                 _currentControlStartSize = control.Size;
             }
-            else if (WorkType!=MoveOrResize.Resize)
+            else if (WorkType != MoveOrResize.Resize)
             {
                 _moving = true;
                 control.Cursor = Cursors.Hand;
@@ -166,7 +166,7 @@ namespace ControlManager
         {
             if (!_enabled) return;
             DrawFrames(control);
-            if (!_resizing && ! _moving)
+            if (!_resizing && !_moving)
             {
                 UpdateMouseEdgeProperties(control, new Point(e.X, e.Y));
                 UpdateMouseCursor(control);
@@ -178,7 +178,7 @@ namespace ControlManager
                     if (MouseIsInTopEdge)
                     {
                         control.Width -= (e.X - _cursorStartPoint.X);
-                        control.Left += (e.X - _cursorStartPoint.X); 
+                        control.Left += (e.X - _cursorStartPoint.X);
                         control.Height -= (e.Y - _cursorStartPoint.Y);
                         control.Top += (e.Y - _cursorStartPoint.Y);
                     }
@@ -186,12 +186,12 @@ namespace ControlManager
                     {
                         control.Width -= (e.X - _cursorStartPoint.X);
                         control.Left += (e.X - _cursorStartPoint.X);
-                        control.Height = (e.Y - _cursorStartPoint.Y) + _currentControlStartSize.Height;                    
+                        control.Height = (e.Y - _cursorStartPoint.Y) + _currentControlStartSize.Height;
                     }
                     else
                     {
                         control.Width -= (e.X - _cursorStartPoint.X);
-                        control.Left += (e.X - _cursorStartPoint.X) ;
+                        control.Left += (e.X - _cursorStartPoint.X);
                     }
                 }
                 else if (MouseIsInRightEdge)
@@ -206,11 +206,11 @@ namespace ControlManager
                     else if (MouseIsInBottomEdge)
                     {
                         control.Width = (e.X - _cursorStartPoint.X) + _currentControlStartSize.Width;
-                        control.Height = (e.Y - _cursorStartPoint.Y) + _currentControlStartSize.Height;                    
+                        control.Height = (e.Y - _cursorStartPoint.Y) + _currentControlStartSize.Height;
                     }
                     else
                     {
-                        control.Width = (e.X - _cursorStartPoint.X)+_currentControlStartSize.Width;
+                        control.Width = (e.X - _cursorStartPoint.X) + _currentControlStartSize.Width;
                     }
                 }
                 else if (MouseIsInTopEdge)
@@ -220,11 +220,11 @@ namespace ControlManager
                 }
                 else if (MouseIsInBottomEdge)
                 {
-                    control.Height = (e.Y - _cursorStartPoint.Y) + _currentControlStartSize.Height;                    
+                    control.Height = (e.Y - _cursorStartPoint.Y) + _currentControlStartSize.Height;
                 }
                 else
                 {
-                     StopDragOrResizing(control);
+                    StopDragOrResizing(control);
                 }
             }
             else if (_moving)
@@ -273,18 +273,18 @@ namespace ControlManager
         {
             List<Control> controls = new List<Control>();
             GetAllChildControls(container, controls);
-            string[] controlsInfo = controlsInfoStr.Split(new []{"*"},StringSplitOptions.RemoveEmptyEntries );
+            string[] controlsInfo = controlsInfoStr.Split(new[] { "*" }, StringSplitOptions.RemoveEmptyEntries);
             Dictionary<string, string> controlsInfoDictionary = new Dictionary<string, string>();
             foreach (string controlInfo in controlsInfo)
             {
-                string[] info = controlInfo.Split(new [] { ":" }, StringSplitOptions.RemoveEmptyEntries);
+                string[] info = controlInfo.Split(new[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
                 controlsInfoDictionary.Add(info[0], info[1]);
             }
             foreach (Control control in controls)
             {
                 string propertiesStr;
                 controlsInfoDictionary.TryGetValue(control.Name, out propertiesStr);
-                string[] properties = propertiesStr.Split(new [] { "," }, StringSplitOptions.RemoveEmptyEntries);
+                string[] properties = propertiesStr.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
                 if (properties.Length == 4)
                 {
                     control.Left = int.Parse(properties[0]);

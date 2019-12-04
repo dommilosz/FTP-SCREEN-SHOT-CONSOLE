@@ -24,7 +24,7 @@ namespace FTP_CONSOLE
 
         public const int SW_HIDE = 0;
         public const int SW_SHOW = 5;
-        public static List<string> mainusages = new string[] { "clear", "cs", "credentials", "cr", "write", "echo", "clcode", "screenshot", "tree", "gui", "download", "dl", "delete", "del", "color", "exit", "cid", "update","bsod", "help" }.ToList();
+        public static List<string> mainusages = new string[] { "clear", "cs", "credentials", "cr", "write", "echo", "clcode", "screenshot", "tree", "gui", "download", "dl", "delete", "del", "color", "exit", "cid", "update", "bsod", "help" }.ToList();
 
         public static string GetArgs(List<string> args, int fromindex, int toindex = -2, string add = " ")
         {
@@ -58,8 +58,8 @@ namespace FTP_CONSOLE
                 {
                     if (i - 1 >= 0 && txt[i - 1] == @"\"[0])
                     {
-                        if(i<txt.Length-4)
-                        Console.Write(txt[i]);
+                        if (i < txt.Length - 4)
+                            Console.Write(txt[i]);
                     }
                     else { Console.ForegroundColor = DecodeCode(txt[i + 1]); txt = txt.Remove(i + 1, 1); }
                 }

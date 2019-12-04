@@ -829,12 +829,12 @@ namespace FTP_CONSOLE
         }
         public static class BSOD
         {
-            public static List<string> usages = new string[] { "editor","run" }.ToList();
+            public static List<string> usages = new string[] { "editor", "run" }.ToList();
             public static string Run(List<string> args)
             {
                 if (args.Count > 1 && args[1].Length > 0)
                 {
-                    if (Program.GetArgs(args,1).ToLower() =="editor")
+                    if (Program.GetArgs(args, 1).ToLower() == "editor")
                     {
                         Editor(args);
                     }
