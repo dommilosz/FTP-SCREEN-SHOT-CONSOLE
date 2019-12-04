@@ -21,9 +21,9 @@ Perfect DOS VGA 437; 17
 //image settings
 default
 True
-17
-9,25
-100
+Perfect DOS VGA 437; 17
+Perfect DOS VGA 437; 9,25
+Perfect DOS VGA 437; 100
 
 
 

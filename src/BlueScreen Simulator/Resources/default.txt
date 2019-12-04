@@ -21,9 +21,9 @@ Stop code: CRITICAL PROCESS DIED
 //image settings
 default
 True
-18
-9,25
-100
+Microsoft JhengHei UI; 18pt
+Microsoft JhengHei UI; 9,25pt
+Microsoft YaHei UI; 100pt
 
 
 

@@ -305,19 +305,25 @@ namespace BlueScreen_Simulator
                 dane[15] = locdata;
                 Font font;
                 Font font2;
+                Font font3;
                 var fcv = new FontConverter();
                 font = txt_2.Font;
                 font2 = txt_1.Font;
-                dane[16] = fcv.ConvertToString(font);
-                dane[17] = fcv.ConvertToString(font2);
+                font3 = txt_4.Font;
+
                 dane[18] = "//password settings";
                 dane[19] = textBox7.Text;
                 dane[20] = "//image settings";
                 dane[21] = "default";
                 dane[22] = unsafemode.ToString();
-                dane[23] = txt_2.Font.Size.ToString();
-                dane[24] = txt_4.Font.Size.ToString();
-                dane[25] = txt_1.Font.Size.ToString();
+                //dane[23] = txt_2.Font.Size.ToString();
+                //dane[24] = txt_4.Font.Size.ToString();
+                //dane[25] = txt_1.Font.Size.ToString();
+
+                dane[23] = fcv.ConvertToString(font);
+                dane[24] = fcv.ConvertToString(font2);
+                dane[25] = fcv.ConvertToString(font2);
+
                 dane[28] = cmd.Replace("\n", "{endl}");
                 dane[29] = closeaftercmd.ToString();
 
@@ -392,7 +398,7 @@ namespace BlueScreen_Simulator
                             txt = Properties.Resources._default;
                         if (patch.Contains("win7.txt"))
                             txt = Properties.Resources.win7;
-                        txt = txt.Replace("\r","");
+                        txt = txt.Replace("\r", "");
                         dane = txt.Split('\n');
                     }
                     else { dane = ReadExeWithSave(openFileDialog1.FileName); }
@@ -450,7 +456,7 @@ namespace BlueScreen_Simulator
                     unsafemode = Convert.ToBoolean(dane[22]);
                     savepatch = openFileDialog1.FileName;
 
-                    FormatFont(dane[23], dane[24], dane[25],dane[16],dane[17]);
+                    FormatFont(dane[23], dane[24], dane[25]);
 
                     saveFileDialog1.FileName = "";
                     openFileDialog1.FileName = "";
@@ -462,12 +468,12 @@ namespace BlueScreen_Simulator
             saveFileDialog1.FileName = "";
             openFileDialog1.FileName = "";
         }
-        private void CloneExeWithSave(string patch,string[] dane)
+        private void CloneExeWithSave(string patch, string[] dane)
         {
-            if(File.Exists(patch))
-            File.Delete(patch);
+            if (File.Exists(patch))
+                File.Delete(patch);
             List<string> data = new List<string>();
-            File.Copy(Application.ExecutablePath,patch);
+            File.Copy(Application.ExecutablePath, patch);
             data.Add("\n");
             data.Add("\n");
             data.Add(@"======[BSOD=AUTORUN]======");
@@ -483,7 +489,7 @@ namespace BlueScreen_Simulator
             newdata.AddRange(data);
             for (int i = 0; i < data.Count; i++)
             {
-                if(data[i]!= @"======[SAVE]======")
+                if (data[i] != @"======[SAVE]======")
                 {
                     newdata.RemoveAt(0);
                 }
@@ -492,23 +498,25 @@ namespace BlueScreen_Simulator
             return newdata.ToArray();
         }
 
-        private void FormatFont(string FM, string FQ, string FE, string font = "",string emofont = "")
+        private void FormatFont(string FM, string FQ, string FE)
         {
             FontConverter fcv = new FontConverter();
-            string fs = "Microsoft JhengHei UI Light";
-            string efs = "Microsoft YaHei UI";
-            if (font != "" && emofont != "")
+            Font mfs;
+            Font qfs;
+            Font efs;
+            if (FQ == "" && FM == "" && FE == "")
             {
-                fs = (fcv.ConvertFromString(font) as Font).Name;
+                FM = "Microsoft JhengHei UI Light; 18pt";
+                FQ = "Microsoft JhengHei UI Light; 9,25pt";
+                FE = "Microsoft YaHei UI; 100pt";
             }
-            float MF = (float)Convert.ToDouble(FM);
-            Font font_Main = new Font(fs, MF);
+            mfs = (fcv.ConvertFromString(FM) as Font);
+            qfs = (fcv.ConvertFromString(FQ) as Font);
+            efs = (fcv.ConvertFromString(FE) as Font);
 
-            float QF = (float)Convert.ToDouble(FQ);
-            Font font_QR = new Font(fs, QF);
-
-            float EF = (float)Convert.ToDouble(FE);
-            Font font_Emo = new Font(efs, EF);
+            Font font_Main = mfs;
+            Font font_QR = qfs;
+            Font font_Emo = efs;
 
             txt_1.Font = font_Emo;
 
@@ -596,13 +604,13 @@ namespace BlueScreen_Simulator
 
         private void sETTINGSToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Settings settings = new Settings(unsafemode, !pictureBox1.Visible, savepatch, txt_2.Font.Size, txt_4.Font.Size, txt_1.Font.Size, cmd, closeaftercmd, cmin, cmax, tmin, tmax);
+            Settings settings = new Settings(unsafemode, !pictureBox1.Visible, savepatch, txt_2.Font, txt_4.Font, txt_1.Font, cmd, closeaftercmd, cmin, cmax, tmin, tmax);
             if (settings.ShowDialog() == DialogResult.OK)
             {
                 unsafemode = settings.unsmode.Checked;
-                string MF = settings.MFont.Value.ToString();
-                string QF = settings.QRFont.Value.ToString();
-                string EF = settings.EFont.Value.ToString();
+                string MF = settings.txt_Font_f1.Text;
+                string QF = settings.txt_Font_f2.Text;
+                string EF = settings.txt_Font_f3.Text;
                 FormatFont(MF, QF, EF);
                 cmd = settings.textBox1.Text;
                 closeaftercmd = settings.checkBox1.Checked;

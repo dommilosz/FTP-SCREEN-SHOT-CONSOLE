@@ -75,7 +75,7 @@
             this.txt_2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txt_2.ContextMenuStrip = this.contextMenuStrip1;
             this.txt_2.DetectUrls = false;
-            this.txt_2.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txt_2.Font = new System.Drawing.Font("Microsoft JhengHei UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txt_2.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txt_2.Location = new System.Drawing.Point(124, 250);
             this.txt_2.Name = "txt_2";
@@ -220,7 +220,7 @@
             this.txt_3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txt_3.ContextMenuStrip = this.contextMenuStrip1;
             this.txt_3.DetectUrls = false;
-            this.txt_3.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 18F);
+            this.txt_3.Font = new System.Drawing.Font("Microsoft JhengHei UI", 18F);
             this.txt_3.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txt_3.Location = new System.Drawing.Point(124, 380);
             this.txt_3.Multiline = false;
@@ -236,7 +236,7 @@
             this.txt_4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txt_4.ContextMenuStrip = this.contextMenuStrip1;
             this.txt_4.DetectUrls = false;
-            this.txt_4.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_4.Font = new System.Drawing.Font("Microsoft JhengHei UI", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_4.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txt_4.Location = new System.Drawing.Point(201, 436);
             this.txt_4.Name = "txt_4";
@@ -252,7 +252,7 @@
             this.txt_5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txt_5.ContextMenuStrip = this.contextMenuStrip1;
             this.txt_5.DetectUrls = false;
-            this.txt_5.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_5.Font = new System.Drawing.Font("Microsoft JhengHei UI", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_5.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txt_5.Location = new System.Drawing.Point(201, 475);
             this.txt_5.Multiline = false;
@@ -345,7 +345,7 @@
             this.txt_6.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txt_6.ContextMenuStrip = this.contextMenuStrip1;
             this.txt_6.DetectUrls = false;
-            this.txt_6.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_6.Font = new System.Drawing.Font("Microsoft JhengHei UI", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_6.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txt_6.Location = new System.Drawing.Point(201, 497);
             this.txt_6.Name = "txt_6";
