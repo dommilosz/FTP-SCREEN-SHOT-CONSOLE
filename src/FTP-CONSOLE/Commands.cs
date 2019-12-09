@@ -428,19 +428,19 @@ namespace FTP_CONSOLE
             }
             public static string ShowGUI(List<string> args)
             {
-                Program.ShowWindow(Program.GetConsoleWindow(), Program.SW_HIDE);
+                Program.WindowSetState(false);
                 var tmp = new FTPScreenShot.MainWindow(true);
                 tmp.ShowDialog();
-                Program.ShowWindow(Program.GetConsoleWindow(), Program.SW_SHOW);
+                Program.WindowSetState(true);
                 return "";
             }
             public static string ShowGUIOld(List<string> args)
             {
-                Program.ShowWindow(Program.GetConsoleWindow(), Program.SW_HIDE);
+                Program.WindowSetState(false);
                 var tmp = new FTPScreenShot.MainWindow(true);
                 tmp.newconsole = false;
                 tmp.ShowDialog();
-                Program.ShowWindow(Program.GetConsoleWindow(), Program.SW_SHOW);
+                Program.WindowSetState(true);
                 return "";
             }
         }
@@ -848,15 +848,27 @@ namespace FTP_CONSOLE
             }
             public static string Editor(List<string> args)
             {
+                Program.WindowSetState(false);
                 BlueScreen_Simulator.BSOD_EDIT b = new BlueScreen_Simulator.BSOD_EDIT();
                 b.ShowDialog();
+                Program.WindowSetState(true);
                 return "";
             }
             public static string ERROR(List<string> args)
             {
+                Program.WindowSetState(false);
                 BlueScreen_Simulator.BSOD_EDIT b = new BlueScreen_Simulator.BSOD_EDIT();
                 b.BSOD_Start();
                 b.ShowDialog();
+                Program.WindowSetState(true);
+                return "";
+            }
+            public static string AUTORUN(List<string> args)
+            {
+                Program.WindowSetState(false);
+                BlueScreen_Simulator.BSOD_EDIT b = new BlueScreen_Simulator.BSOD_EDIT();
+                b.ShowDialog();
+                Program.WindowSetState(true);
                 return "";
             }
         }
